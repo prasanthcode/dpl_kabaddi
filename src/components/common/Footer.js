@@ -24,7 +24,7 @@ export default function Footer() {
         <Box>
           <IconButton
             component={Link}
-            href="https://www.instagram.com/yourprofile"
+            href="https://www.instagram.com/pintuuuuu_2?igsh=bHhwNXozdjN1amc2"
             target="_blank"
             rel="noopener"
             sx={{ color: "#fff" }}
@@ -34,7 +34,7 @@ export default function Footer() {
 
           <IconButton
             component={Link}
-            href="https://www.linkedin.com/in/yourprofile"
+            href="https://www.linkedin.com/in/prasanth-gavvala-442b4327b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
             target="_blank"
             rel="noopener"
             sx={{ color: "#fff" }}
@@ -45,7 +45,7 @@ export default function Footer() {
 
         {/* Credit Section */}
         <Typography variant="body2" sx={{ mt: 1 }}>
-          Developed by <strong>Prasanth Gavvala</strong> & Contributors
+          Developed by <strong>Prasanth Gavvala</strong> and Naveen Yamala
         </Typography>
       </Container>
     </Box>
