@@ -65,8 +65,12 @@ const MatchList = ({ matches = [], status, isAdmin }) => {
                         backgroundColor: status === "completed" ? "rgb(34, 139, 69)" : "white",
                         color: status === "completed" ? "white" : "black",
                       }}
-                    >
-                      {status === "completed" ? "FT" : "VS"}
+                    >{console.log(match.halfTime)}
+                      {status === "completed"
+    ? "FT"
+    : match.halfTime
+    ? "HT"
+    : "VS"}
                     </div>
                     <div className="img_wrap">
                       <img src={match.teamB.logo} alt="" />

@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   // Function: Login
   const login = async (email, password) => {
     try {
-      const res = await axios.post("https://dpl-kabaddi-backend.vercel.app/api/auth/login", { email, password });
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, { email, password });
       setUser(res.data.user);
       setToken(res.data.token);
       

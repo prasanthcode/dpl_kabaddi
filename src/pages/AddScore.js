@@ -80,6 +80,15 @@ export default function AddScore() {
 const [scoreLoading,setScoreLoading] = useState(false);
 
   const handleSubmit = async () => {
+    // Condition 1: If `isTeam` is true and `selectedScore` is null, return
+if (isTeam && selectedScore === null) return;
+
+// Condition 2: If `selectedPlayer` is null and `selectedAction` is also null, return
+if (selectedPlayer && selectedAction === null) return;
+
+// Condition 3: If `selectedAction` is "R" and `selectedScore` is null, return
+if (selectedAction && selectedScore === null) return;
+
     setScoreLoading(true);
     console.log(selectedAction + selectedPlayer + selectedScore);
   
@@ -94,11 +103,11 @@ const [scoreLoading,setScoreLoading] = useState(false);
         type: selectedAction === "R" ? "raid" : "defense",
       };
   
-      if (selectedAction === "D") {
-        requestData.points = 1; // Defense always gets 1 point
-      }
+      // if (selectedAction === "D") {
+      //   requestData.points = 1; // Defense always gets 1 point
+      // }
   
-      endpoint = "https://dpl-kabaddi-backend.vercel.app/api/matches/addPoints";
+      endpoint = `${process.env.REACT_APP_API_URL}/api/matches/addPoints`;
     } else if (isTeam) {
       requestData = {
         matchId: matchId,
@@ -106,7 +115,7 @@ const [scoreLoading,setScoreLoading] = useState(false);
         points: parseInt(selectedScore),
       };
   
-      endpoint = "https://dpl-kabaddi-backend.vercel.app/api/matches/addPointstoteam";
+      endpoint = `${process.env.REACT_APP_API_URL}/api/matches/addPointstoteam`;
     }
   
     if (requestData) {
@@ -140,11 +149,11 @@ const handleUndo = async () => {
   const { endpoint, requestData } = JSON.parse(lastUpdate);
   let undoEndpoint = "";
 
-  if (endpoint === "https://dpl-kabaddi-backend.vercel.app/api/matches/addPoints") {
-    undoEndpoint = "https://dpl-kabaddi-backend.vercel.app/api/matches/undoPointstoplayer";
+  if (endpoint === `${process.env.REACT_APP_API_URL}/api/matches/addPoints`) {
+    undoEndpoint = `${process.env.REACT_APP_API_URL}/api/matches/undoPointstoplayer`;
     delete requestData.points; // Undo doesn't need points, it pops the last one
-  } else if (endpoint === "https://dpl-kabaddi-backend.vercel.app/api/matches/addPointstoteam") {
-    undoEndpoint = "https://dpl-kabaddi-backend.vercel.app/api/matches/undoPointstoteam";
+  } else if (endpoint === `${process.env.REACT_APP_API_URL}/api/matches/addPointstoteam`) {
+    undoEndpoint = `${process.env.REACT_APP_API_URL}/api/matches/undoPointstoteam`;
   }
 
   try {
@@ -179,7 +188,7 @@ const handleUndo = async () => {
   const [loading2, setLoading2] = useState(true);
   const fetchScores = async () => {
     try {
-      const response = await axios.get(`https://dpl-kabaddi-backend.vercel.app/api/matches/matchscores/${matchId}`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/matches/matchscores/${matchId}`);
       setScore(response.data);
     } catch (error) {
       console.error("Error fetching Players:", error);
@@ -193,7 +202,7 @@ const handleUndo = async () => {
   useEffect(() => {
     const fetchPlayers = async () => {
       try {
-        const response = await fetch(`https://dpl-kabaddi-backend.vercel.app/api/matches/players/${matchId}`);
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/matches/players/${matchId}`);
         // 67c8502b790b94747f117705
         if (!response.ok) throw new Error("Failed to fetch players");
 
@@ -321,9 +330,14 @@ const handleUndo = async () => {
 
           {/* Score Selection */}
           <Box>
-            <ToggleButtonGroup value={selectedScore} exclusive onChange={handleScoreChange} aria-label="Select Score" disabled={selectedAction === "D"} >
+            <ToggleButtonGroup value={selectedScore} exclusive onChange={handleScoreChange} aria-label="Select Score" 
+    
+             >
               {["1", "2", "3", "4"].map((score) => (
-                <ToggleButton key={score} value={score} sx={scoreButtonStyle(selectedScore, score)} >
+                <ToggleButton key={score} value={score} sx={scoreButtonStyle(selectedScore, score)}
+                disabled={selectedAction === "D" && (score === "3" || score === "4")}
+                
+                >
                   {score}
                 </ToggleButton>
               ))}

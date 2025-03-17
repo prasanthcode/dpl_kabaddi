@@ -40,20 +40,26 @@ export default function TimeSelection({ matchId }) {
   const handleSubmit = async () => {
     if (!matchId) {
       alert("Match ID is missing!");
-
       return;
     }
-
+  
     try {
-      await axios.put(`https://dpl-kabaddi-backend.vercel.app/api/matches/${matchId}/complete`);
-      alert("Match status updated to Completed!");
-      navigate("/"); 
+      if (selectedTime === "HT") {
+        // Update Live Match status in Redis
+        await axios.put(`${process.env.REACT_APP_API_URL}/api/matches/${matchId}/halftime`);
+        alert("Match status updated to Half Time!");
+      } else if (selectedTime === "FT") {
+        // Mark match as completed
+        await axios.put(`${process.env.REACT_APP_API_URL}/api/matches/${matchId}/complete`);
+        alert("Match status updated to Completed!");
+        navigate("/");
+      }
     } catch (error) {
       console.error("Error updating match status:", error);
       alert("Failed to update match status.");
     }
   };
-
+  
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       <TimeSelectionRadio
@@ -68,7 +74,7 @@ export default function TimeSelection({ matchId }) {
         variant="contained"
         color="primary"
         onClick={handleSubmit}
-        disabled={selectedTime !== "FT"} // Only allow submission for FT
+        // disabled={selectedTime !== "FT"} // Only allow submission for FT
       >
         Submit
       </Button>

@@ -17,7 +17,7 @@ export default function Matches({ isAdmin, url = "live", limit=null }) {
     if (!url) return;
   
     try {
-      const response = await axios.get(`https://dpl-kabaddi-backend.vercel.app/api/matches/${url}?limit=${limit}`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/matches/${url}?limit=${limit}`);
       const newMatches = Array.isArray(response.data) ? response.data : []; // Ensure it's an array
   
       setMatches((prevMatches) => {
@@ -77,7 +77,7 @@ export default function Matches({ isAdmin, url = "live", limit=null }) {
     <MatchListSkeleton isHomePage={isHomePage} />
 ) : matches.length === 0 ? (
     <p style={{ textAlign: "center", padding: "20px", fontSize: "18px", color: "gray" }}>
-        No match data found
+        {/* No match data found */}
     </p>
 ) : (
     <MatchList matches={matches} status={url} isAdmin={isAdmin} />

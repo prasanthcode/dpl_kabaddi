@@ -8,7 +8,7 @@ export default function Footer() {
     <Box
       component="footer"
       sx={{
-        backgroundColor: "#333",
+        backgroundColor: "var(--primary-dark)",
         color: "#fff",
         py: 3,
         mt: 4,
@@ -17,7 +17,7 @@ export default function Footer() {
     >
       <Container>
         <Typography variant="body2" sx={{ mb: 1 }}>
-          © {new Date().getFullYear()} Your Website Name. All rights reserved.
+          © {new Date().getFullYear()} DPL Kabaddi. All rights reserved.
         </Typography>
 
         {/* Social Media Links */}
