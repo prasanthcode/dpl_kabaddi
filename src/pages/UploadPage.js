@@ -50,7 +50,7 @@ export default function UploadPage() {
 
     setUploading(true);
     try {
-      const response = await axios.post("/api/upload", { image: base64Image });
+      const response = await axios.post("https://dpl-kabaddi-backend.vercel.app/api/upload", { image: base64Image });
       setCloudinaryUrl(response.data.secure_url);
 
       // After uploading, update the player's profile picture
@@ -67,7 +67,7 @@ export default function UploadPage() {
   const updatePlayerProfilePic = async (playerId, imageUrl) => {
     setUpdatingProfile(true);
     try {
-      await axios.put("/api/players/setprofilepic", {
+      await axios.put("https://dpl-kabaddi-backend.vercel.app/api/players/setprofilepic", {
         playerId,
         profilePic: imageUrl,
       });

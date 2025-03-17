@@ -11,7 +11,7 @@ export const PointsTableProvider = ({ children }) => {
     const fetchPoints = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`/api/matches/pointstable`);
+        const response = await axios.get(`https://dpl-kabaddi-backend.vercel.app/api/matches/pointstable`);
         setPointsTable(response.data);
       } catch (error) {
         console.error("Error fetching points:", error);

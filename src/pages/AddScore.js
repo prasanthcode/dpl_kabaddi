@@ -98,7 +98,7 @@ const [scoreLoading,setScoreLoading] = useState(false);
         requestData.points = 1; // Defense always gets 1 point
       }
   
-      endpoint = "/api/matches/addPoints";
+      endpoint = "https://dpl-kabaddi-backend.vercel.app/api/matches/addPoints";
     } else if (isTeam) {
       requestData = {
         matchId: matchId,
@@ -106,7 +106,7 @@ const [scoreLoading,setScoreLoading] = useState(false);
         points: parseInt(selectedScore),
       };
   
-      endpoint = "/api/matches/addPointstoteam";
+      endpoint = "https://dpl-kabaddi-backend.vercel.app/api/matches/addPointstoteam";
     }
   
     if (requestData) {
@@ -140,11 +140,11 @@ const handleUndo = async () => {
   const { endpoint, requestData } = JSON.parse(lastUpdate);
   let undoEndpoint = "";
 
-  if (endpoint === "/api/matches/addPoints") {
-    undoEndpoint = "/api/matches/undoPointstoplayer";
+  if (endpoint === "https://dpl-kabaddi-backend.vercel.app/api/matches/addPoints") {
+    undoEndpoint = "https://dpl-kabaddi-backend.vercel.app/api/matches/undoPointstoplayer";
     delete requestData.points; // Undo doesn't need points, it pops the last one
-  } else if (endpoint === "/api/matches/addPointstoteam") {
-    undoEndpoint = "/api/matches/undoPointstoteam";
+  } else if (endpoint === "https://dpl-kabaddi-backend.vercel.app/api/matches/addPointstoteam") {
+    undoEndpoint = "https://dpl-kabaddi-backend.vercel.app/api/matches/undoPointstoteam";
   }
 
   try {
@@ -179,7 +179,7 @@ const handleUndo = async () => {
   const [loading2, setLoading2] = useState(true);
   const fetchScores = async () => {
     try {
-      const response = await axios.get(`/api/matches/matchscores/${matchId}`);
+      const response = await axios.get(`https://dpl-kabaddi-backend.vercel.app/api/matches/matchscores/${matchId}`);
       setScore(response.data);
     } catch (error) {
       console.error("Error fetching Players:", error);
@@ -193,7 +193,7 @@ const handleUndo = async () => {
   useEffect(() => {
     const fetchPlayers = async () => {
       try {
-        const response = await fetch(`/api/matches/players/${matchId}`);
+        const response = await fetch(`https://dpl-kabaddi-backend.vercel.app/api/matches/players/${matchId}`);
         // 67c8502b790b94747f117705
         if (!response.ok) throw new Error("Failed to fetch players");
 

@@ -12,7 +12,7 @@ export const TeamProvider = ({ children }) => {
     const fetchTeams = async () => {
       setLoading(true);
       try {
-        const response = await axios.get("/api/teams");
+        const response = await axios.get("https://dpl-kabaddi-backend.vercel.app/api/teams");
         setTeams(response.data);
         
       } catch (error) {

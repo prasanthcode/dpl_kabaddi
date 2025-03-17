@@ -45,7 +45,7 @@ export default function TimeSelection({ matchId }) {
     }
 
     try {
-      await axios.put(`/api/matches/${matchId}/complete`);
+      await axios.put(`https://dpl-kabaddi-backend.vercel.app/api/matches/${matchId}/complete`);
       alert("Match status updated to Completed!");
       navigate("/"); 
     } catch (error) {

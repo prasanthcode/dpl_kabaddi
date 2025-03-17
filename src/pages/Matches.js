@@ -17,7 +17,7 @@ export default function Matches({ isAdmin, url = "live", limit=null }) {
     if (!url) return;
   
     try {
-      const response = await axios.get(`/api/matches/${url}?limit=${limit}`);
+      const response = await axios.get(`https://dpl-kabaddi-backend.vercel.app/api/matches/${url}?limit=${limit}`);
       const newMatches = Array.isArray(response.data) ? response.data : []; // Ensure it's an array
   
       setMatches((prevMatches) => {

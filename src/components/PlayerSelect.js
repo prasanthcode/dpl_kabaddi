@@ -9,7 +9,7 @@ export default function PlayerSelect({ value, onChange, label = "Select Player" 
   useEffect(() => {
     const fetchPlayers = async () => {
       try {
-        const response = await axios.get("/api/players");
+        const response = await axios.get("https://dpl-kabaddi-backend.vercel.app/api/players");
         setPlayers(response.data);
       } catch (error) {
         console.error("Error fetching players:", error);

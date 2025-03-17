@@ -13,7 +13,7 @@ export default function Home() {
     useEffect(() => {
         const checkLiveMatches = async () => {
             try {
-                const response = await axios.get(`/api/matches/live`);
+                const response = await axios.get(`https://dpl-kabaddi-backend.vercel.app/api/matches/live`);
                 if (Array.isArray(response.data) && response.data.length === 0) {
                     setShowLive(false); // No live matches, switch to completed
                 }

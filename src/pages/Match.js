@@ -23,7 +23,7 @@ export default function Match({ enablePolling = false }) {
 
   const fetchMatches = async () => {
     try {
-      const response = await axios.get(`/api/matches/matchscores/${matchId}`);
+      const response = await axios.get(`https://dpl-kabaddi-backend.vercel.app/api/matches/matchscores/${matchId}`);
       setMatches(response.data);
     } catch (error) {
       console.error("Error fetching matches:", error);
@@ -35,7 +35,7 @@ export default function Match({ enablePolling = false }) {
   const fetchTotalPoints = async () => {
     setTotalLoading(true);
     try {
-      const response = await axios.get(`/api/matches/matchstattotal/${matchId}`);
+      const response = await axios.get(`https://dpl-kabaddi-backend.vercel.app/api/matches/matchstattotal/${matchId}`);
       if (JSON.stringify(response.data) !== JSON.stringify(totalPoints)) {
         setTotalPoints(response.data);
       }
@@ -49,7 +49,7 @@ export default function Match({ enablePolling = false }) {
   const fetchTeamStats = async (teamStat) => {
     setStatError(null);
     try {
-      const response = await axios.get(`/api/matches/matchstatlive/${matchId}`, {
+      const response = await axios.get(`https://dpl-kabaddi-backend.vercel.app/api/matches/matchstatlive/${matchId}`, {
         params: { team: teamStat },
       });
   

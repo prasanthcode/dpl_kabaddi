@@ -68,8 +68,8 @@ export default function PlayersStats() {
     const fetchData = async () => {
       try {
         const [raidersRes, defendersRes] = await Promise.all([
-          axios.get("/api/players/topraiders"), // Endpoint for top raiders
-          axios.get("/api/players/topdefenders"), // Endpoint for top defenders
+          axios.get("https://dpl-kabaddi-backend.vercel.app/api/players/topraiders"), // Endpoint for top raiders
+          axios.get("https://dpl-kabaddi-backend.vercel.app/api/players/topdefenders"), // Endpoint for top defenders
         ]);
 
         setRaiders(raidersRes.data.map(player => ({ ...player, points: player.totalRaidPoints }))); // Map field
