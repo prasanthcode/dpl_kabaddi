@@ -2,8 +2,7 @@ import React from "react";
 import CountUp from "react-countup";
 import { Link } from "react-router-dom";
 
-const MatchList = ({ matches, status, isAdmin }) => {
-  
+const MatchList = ({ matches = [], status, isAdmin }) => {
   const matchesByDate = matches.reduce((acc, match) => {
     const date = new Date(match.date).toLocaleDateString("en-US", {
       year: "numeric",
@@ -14,7 +13,6 @@ const MatchList = ({ matches, status, isAdmin }) => {
     acc[date].push(match);
     return acc;
   }, {});
-
   return (
     <div className="match_container">
       {Object.entries(matchesByDate).map(([date, matches]) => (
