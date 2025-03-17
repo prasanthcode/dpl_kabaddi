@@ -2,51 +2,41 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const MatchList = ({ matches = [], status, isAdmin }) => {
-  // Create an object to store matches grouped by date
-  const matchesByDate = {};
+  // Ensure matches is an array before using forEach
+  const validMatches = Array.isArray(matches) ? matches : [];
 
-  // Loop through each match and group them by date
-  matches.forEach((match) => {
+  // Create an object to store matches grouped by date
+  const matchesByDate = validMatches.reduce((acc, match) => {
     const date = new Date(match.date).toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
       day: "numeric",
     });
-    // If the date doesn't exist in the object, create it
-    if (!matchesByDate[date]) {
-      matchesByDate[date] = [];
-    }
-    // Push the match to the corresponding date group
-    matchesByDate[date].push(match);
-  });
+
+    if (!acc[date]) acc[date] = [];
+    acc[date].push(match);
+    return acc;
+  }, {});
 
   return (
     <div className="match_container">
       {Object.entries(matchesByDate).map(([date, matches]) => (
         <div className="d_match" key={date}>
           <h2>
-            {status !== "live" ? (
-              date
-            ) : (
-              <>
-                Live <span className="live-dot"></span>
-              </>
-            )}
+            {status !== "live" ? date : <>Live <span className="live-dot"></span></>}
           </h2>
           {matches.map((match, index) => (
             <div className="single_match_wrapper" key={index}>
-              {/* Admin Edit Button at the top of each match */}
               {isAdmin && (
                 <Link
                   to={`/addscore/${match.matchId}`}
-                  style={{ textDecoration: "none", color: "white" }}
                   className="edit_button"
+                  style={{ textDecoration: "none", color: "white" }}
                 >
                   📝 Edit Match
                 </Link>
               )}
 
-              {/* Clickable Match */}
               <Link
                 to={
                   status === "upcoming"
@@ -72,8 +62,7 @@ const MatchList = ({ matches = [], status, isAdmin }) => {
                     <div
                       className="time"
                       style={{
-                        backgroundColor:
-                          status === "completed" ? "rgb(34, 139, 69)" : "white",
+                        backgroundColor: status === "completed" ? "rgb(34, 139, 69)" : "white",
                         color: status === "completed" ? "white" : "black",
                       }}
                     >
