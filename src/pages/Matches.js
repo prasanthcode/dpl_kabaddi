@@ -15,31 +15,30 @@ export default function Matches({ isAdmin, url = "live", limit=null }) {
   // Fetch matches based on the provided URL
   const fetchMatches = async () => {
     if (!url) return;
-
+  
     try {
       const response = await axios.get(`/api/matches/${url}?limit=${limit}`);
-      const newMatches = response.data;
-
+      const newMatches = Array.isArray(response.data) ? response.data : []; // Ensure it's an array
+  
       setMatches((prevMatches) => {
         if (prevMatches.length === 0) {
-          // First fetch: Set the matches directly
           return newMatches;
         }
-
-        // Otherwise, update scores only
+  
         return newMatches.map((newMatch) => {
           const existingMatch = prevMatches.find((m) => m._id === newMatch._id);
           return existingMatch ? { ...existingMatch, ...newMatch } : newMatch;
         });
       });
-
+  
       setLoading(false);
     } catch (error) {
       console.error("Error fetching matches:", error);
+      setMatches([]); // Set empty array on error to prevent crashes
       setLoading(false);
     }
   };
-
+  
   useEffect(() => {
     fetchMatches(); // Initial fetch
 
