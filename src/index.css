@@ -1,13 +1,394 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+:root {
+  /* Primary Theme Colors */
+  --primary-color: #063a7e;  /* Deep Dark Blue */
+  --primary-dark: #121c2d;   /* Almost Black Blue */
+  --primary-light: #2c5282;  /* Medium Blue */
+
+  /* Secondary Theme Colors */
+  --secondary-color: #1abc9c;  /* Teal Green */
+  --secondary-dark: #16a085;   /* Dark Teal */
+  --secondary-light: #48c9b0;  /* Light Teal */
+
+  /* Accent Colors */
+  --accent-color: #f39c12;    /* Warm Orange */
+  --accent-dark: #e67e22;     /* Dark Orange */
+  --accent-light: #f5b041;    /* Light Yellow-Orange */
+
+  /* Background and Surface */
+  --background-color: #0b0f19;  /* Deep Navy Blue */
+  --surface-color: #1a2536;     /* Dark Surface Blue */
+  --surface-dark: #121a26;      /* Even Darker Surface */
+  
+  /* Text Colors */
+  --text-color: #dfe6e9;        /* Light Grayish Blue */
+  --text-light: #b2bec3;        /* Muted Gray */
+  --text-inverted: #ffffff;     /* Pure White for Contrast */
+
+  /* Border and Shadows */
+  --border-color: #2c3e50;      /* Darker Blue Border */
+  --shadow-color: rgba(0, 0, 0, 0.3); /* Stronger Shadow */
+}
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Poppins', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Hide scrollbar for Chrome, Safari, and Edge */
+::-webkit-scrollbar {
+  display: none;
 }
+
+/* Hide scrollbar for Firefox */
+html {
+  scrollbar-width: none;
+}
+
+/* Prevent content from shifting */
+body {
+  overflow: -moz-scrollbars-none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+body {
+  width: 100%;
+  margin: 0;
+  /* background-color: rgb(0, 0, 0); */
+  background-color: var(--primary-dark);
+  color: white;
+}
+.banner  {
+  width: 100%;
+  text-align: center;
+ }
+.banner img {
+  margin: 20px 0;
+ width: 90%;
+ height: 100px;
+ object-fit: cover;
+ border-radius: 5%;
+ box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+.buttons {
+  width: 100%;
+  padding: 15px;
+  box-sizing: border-box;
+  /* background-color: rgb(8, 43, 109); */
+  background-color: var(--primary-color);
+
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  
+}
+.g_container{
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+}
+.g_container h3{
+  text-align: left;
+}
+.gallery img{
+  width: 300px;
+  border-radius: 5%;
+  box-shadow: rgba(16, 8, 54, 0.8) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  
+
+}
+.buttons a {
+  color: white;
+  text-decoration: none;
+}
+
+.matches a{
+ width: 30%;
+ text-align: center;
+}
+
+.match_container .d_match{
+  
+  /* background-color: rgb(0, 0, 0); */
+
+}
+.match_container .d_match .single_match{
+  
+  background-color: var(--primary-color);
+  /* background-color: rgb(21, 28, 121); */
+  position: relative;
+  
+}
+.match_container .d_match  h2{
+  font-size: 15px;
+}
+.img_wrap{
+  /* background-color: aqua; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* display: flex; */
+}
+.img_wrap img{
+  box-shadow: rgba(51, 53, 61, 0.8) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+
+  width: 80px;
+  border-radius: 50%;
+}
+.single_match h4{
+  text-align: center;
+}
+.single_match .teama_score{
+  position: absolute;
+  left: 35%;
+  top:20%;
+
+}
+.single_match .teamb_score{
+  position: absolute;
+  right:35%;
+  top:20%;
+}
+.vs_container{
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+  align-items: center;
+  }
+.team_1{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.team_1 h3{
+  font-size: 14px;
+  font-weight: 600;
+  height:40px;
+  width: 100px;
+  text-align: center;
+  
+  /* word-wrap: wrap; */
+
+  /* background-color: antiquewhite; */
+  
+}
+.left {
+  text-align: end;
+}
+.team_1 span{
+  font-size: 24px;
+  font-weight: 600;
+  padding: 10px;
+}
+.time{
+  color: black;
+  padding: 10px;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  background-color: rgb(255, 255, 255);
+}
+.teams .single_match{
+  margin: 20px 0;
+  padding-top: 20px;
+
+}
+.teams .single_match img{
+  width: 100px;
+}
+.teams .single_match .team_1 h3{
+  font-size: 16px;
+  height: fit-content;
+  width: fit-content;
+}
+/* 
+.player_container img{
+  width: 150px;
+  border-radius: 50%;
+
+}
+.player_wrapper{
+  margin: 10px;
+  background-color: rgb(17, 11, 107);
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+}
+.player_container{
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+
+
+}
+.player_container h3{
+  width: 100px;
+  text-align: center;
+} */
+ .team_wrapper{
+  display: flex;
+  background-color: rgb(88, 88, 88);
+ }
+ .score_btn{
+  background-color: rgb(141, 141, 141);
+ }
+
+.view_recent{
+  height: 35vh;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.705) !important; /* Black overlay with 50% opacity */
+  
+}
+
+.view_recent .teama_score{
+  position: absolute;
+
+  left: 35%;
+  top:10%;
+
+}
+.bg-container{
+  background: url('https://res.cloudinary.com/dzwksifmb/image/upload/v1741453514/e6pxyo9owby0scca3zj5.jpg') center/cover no-repeat;
+
+}
+
+.view_recent .teamb_score{
+  position: absolute;
+  right:35%;
+  top:10%;
+}
+
+
+/* /////////////////////////////////////// */
+
+.match-stats-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  max-width: 700px;
+  margin: auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #363636;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.team {
+  width: 40%;
+  padding: 15px;
+}
+
+.team-left {
+  text-align: right;
+}
+
+.team-right {
+  text-align: left;
+}
+
+.team-logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.team h2 {
+  margin: 5px 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.team-stats p {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+.vs {
+  width: 20%;
+}
+
+.vs h1 {
+  font-size: 30px;
+  color: #ff4500;
+  font-weight: bold;
+}
+.stats_wrap{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--primary-color);
+
+}
+.stats_row{
+  display: flex;
+  justify-content: space-between;
+  padding:10px  60px;
+}
+
+.player{
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  color: black;
+  padding: 10px 50px;
+}
+.p_info{
+  display: flex;
+  flex-direction: column;
+}
+.live-dot {
+  display: inline-block;
+  width: 8px;  /* Adjust size as needed */
+  height: 8px;
+  background-color: rgb(99, 255, 99); /* Green color */
+  border-radius: 50%; /* Makes it circular */
+  margin-left: 5px; /* Space between text and dot */
+  animation: blink 1.5s infinite alternate; /* Optional blinking effect */
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+.mat{
+  display: flex;
+  width: 90%;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+.mat .live-dot{
+  width: 6px;  /* Adjust size as needed */
+  height: 6px;
+  padding: 2px;
+  animation: none;
+}
+.mat_a{
+  text-align: right;
+  width: 45%;
+}
+/* .mat_a .live-dot:first-child{
+  animation: blink 1.5s infinite alternate; 
+
+}
+.mat_b .live-dot:last-child{
+  animation: blink 1.5s infinite alternate; 
+
+} */
+.mat_b{
+  text-align: left;
+  width: 45%;
+
+}
+
+
+
+
