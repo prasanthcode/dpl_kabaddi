@@ -1,13 +1,17 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { Box } from "@mui/material";
 import axios from "axios";
+import { AuthContext } from "../context/AuthContext";
+
 import { useParams } from "react-router-dom";
 import TeamsMat from "../components/TeamsMat";
 import TimeSelection from "../components/TimeSelection";
 
 export default function AddScore() {
+    const { login, token } = useContext(AuthContext);
+  
   const { matchId } = useParams();
 
   const [selectedPlayer, setSelectedPlayer] = useState(null);
@@ -81,13 +85,13 @@ const [scoreLoading,setScoreLoading] = useState(false);
 
   const handleSubmit = async () => {
     // Condition 1: If `isTeam` is true and `selectedScore` is null, return
-if (isTeam && selectedScore === null) return;
+// if (isTeam && selectedScore === null) return;
 
-// Condition 2: If `selectedPlayer` is null and `selectedAction` is also null, return
-if (selectedPlayer && selectedAction === null) return;
+// // Condition 2: If `selectedPlayer` is null and `selectedAction` is also null, return
+// if (selectedPlayer && selectedAction === null) return;
 
-// Condition 3: If `selectedAction` is "R" and `selectedScore` is null, return
-if (selectedAction && selectedScore === null) return;
+// // Condition 3: If `selectedAction` is "R" and `selectedScore` is null, return
+// if (selectedAction && selectedScore === null) return;
 
     setScoreLoading(true);
     console.log(selectedAction + selectedPlayer + selectedScore);

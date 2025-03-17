@@ -7,6 +7,7 @@ import Stats from '../components/Stats';
 import LineUp from '../components/LineUp';
 import Navbar from '../components/common/Navbar';
 import MatchSkeleton from '../components/MatchSkeleton';
+import Mat from '../components/Mat';
 
 export default function Match({ enablePolling = false }) {
   const { matchId } = useParams();
@@ -116,7 +117,7 @@ export default function Match({ enablePolling = false }) {
                 </div>
               </div>
               <div className="time" style={{ backgroundColor: "rgb(34, 139, 69)", color: "white" }}>
-                FT
+              {enablePolling ? (matches.halfTime ? "HT" : "VS") : matches.halfTime ? "FT" : "FT"}
               </div>
               <div className="img_wrap">
                 <img src={matches.teamB?.logo} alt={matches.teamB?.name || "Team B"} />
@@ -134,24 +135,8 @@ export default function Match({ enablePolling = false }) {
     `${matches.teamB?.name} beats ${matches.teamA?.name} (${matches.teamB?.score}-${matches.teamA?.score})`}
 
             </h3>}
-            <div className="mat">
-
-            <div className="mat_a">
-            <span className="live-dot"></span>
-            <span className="live-dot"></span>
-            <span className="live-dot"></span>
-            <span className="live-dot"></span>
-            </div>
-            <div className="mat_b">
-            <span className="live-dot"></span>
-            <span className="live-dot"></span>
-            <span className="live-dot"></span>
-            <span className="live-dot"></span>
-            <span className="live-dot"></span>
-            <span className="live-dot"></span>
-            <span className="live-dot"></span>
-            </div>
-            </div>
+           
+            {/* <Mat matchId={matchId}/> */}
 
             
          </div> </div>
