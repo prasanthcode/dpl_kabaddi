@@ -8,6 +8,8 @@ import LineUp from '../components/LineUp';
 import Navbar from '../components/common/Navbar';
 import MatchSkeleton from '../components/MatchSkeleton';
 import Mat from '../components/Mat';
+import Footer from '../components/common/Footer';
+import { Typography } from '@mui/material';
 
 export default function Match({ enablePolling = false }) {
   const { matchId } = useParams();
@@ -102,9 +104,28 @@ export default function Match({ enablePolling = false }) {
    
      
      <div className="match_container">
+     {enablePolling && (
+  <Typography
+    variant="subtitle1" 
+    sx={{ 
+      fontWeight: "bold", 
+      color: "white", 
+      backgroundColor: "var(--primary-dark)", 
+      padding: "5px 10px",
+      fontSize:"15px", 
+      borderRadius: "5px",
+      display: "inline-block"
+    }}
+  >
+    ⚡ Score updates automatically, no need to refresh! 
+  </Typography>
+)}
      {!matches ? <MatchSkeleton/> :<div className="d_match">
+      
         <div className="single_match_wrapper">
+          
             <div className="bg-container">
+              
           <div className="single_match view_recent">
             
           <h4>Match 1</h4>
@@ -152,7 +173,7 @@ export default function Match({ enablePolling = false }) {
   aria-label="Match View"
   sx={{
     width: "100%",
-    backgroundColor: "rgb(21, 28, 121)",
+    backgroundColor: "var(--primary-color)",
     padding:"8px 0",
     "& .MuiToggleButton-root": {
       flex: 1,
@@ -160,13 +181,13 @@ export default function Match({ enablePolling = false }) {
       backgroundColor: "transparent",
       border:"none",
       "&.Mui-selected": {
-        backgroundColor: "orange !important",
+        backgroundColor: "white !important",
         color: "black !important",
         fontWeight: "bold",
         borderRadius:"10px",
       },
       "&:hover": {
-        backgroundColor: "rgba(255, 165, 0, 0.8)",
+        backgroundColor: "white",
       },
     },
   }}
@@ -185,7 +206,7 @@ export default function Match({ enablePolling = false }) {
     aria-label="Team Selection"
     sx={{
       width: "100%",
-      backgroundColor: "rgb(21, 28, 121)",
+      backgroundColor: "var(--primary-color)",
       padding:"8px 0",
       "& .MuiToggleButton-root": {
         flex: 1,
@@ -193,13 +214,13 @@ export default function Match({ enablePolling = false }) {
         backgroundColor: "transparent",
         border:"none",
         "&.Mui-selected": {
-          backgroundColor: "orange !important",
+          backgroundColor: "white !important",
           color: "black !important",
           fontWeight: "bold",
           borderRadius:"10px",
         },
         "&:hover": {
-          backgroundColor: "rgba(255, 165, 0, 0.8)",
+          backgroundColor: "white",
         },
       },
     }}
@@ -224,8 +245,11 @@ export default function Match({ enablePolling = false }) {
 
 
       </>)}
+    
+
     </div>
    
+                  <Footer/>
 
     </>
   );

@@ -1,7 +1,8 @@
+import { Typography } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 
-const MatchList = ({ matches = [], status, isAdmin }) => {
+const MatchList = ({ matches = [], status, isAdmin,isHomePage }) => {
   // Ensure matches is an array before using forEach
   const validMatches = Array.isArray(matches) ? matches : [];
 
@@ -19,7 +20,7 @@ const MatchList = ({ matches = [], status, isAdmin }) => {
   }, {});
 
   return (
-    <div className="match_container">
+    <div className="match_container" style={{minHeight: !isHomePage ? "100vh":""}}>
       {Object.entries(matchesByDate).map(([date, matches]) => (
         <div className="d_match" key={date}>
           <h2>
@@ -87,6 +88,22 @@ const MatchList = ({ matches = [], status, isAdmin }) => {
                     </div>
                   </div>
                 </div>
+                {status==="live" && (
+  <Typography
+    variant="subtitle1" 
+    sx={{ 
+      fontWeight: "bold", 
+      color: "white", 
+      backgroundColor: "var(--primary-dark)", 
+      padding: "5px 10px",
+      fontSize:"15px", 
+      borderRadius: "5px",
+      display: "inline-block"
+    }}
+  >
+    ⚡ Score updates automatically, no need to refresh! 
+  </Typography>
+)}
               </Link>
             </div>
           ))}

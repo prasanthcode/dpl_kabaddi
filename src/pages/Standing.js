@@ -10,6 +10,7 @@ import Navbar from "../components/common/Navbar";
 import PointsTableInfo from "../components/PointsTableInfo";
 import { PointsTableContext } from "../context/PointsTableContext";
 import { Link } from "react-router-dom";
+import Footer from "../components/common/Footer";
 
 export default function Standing() {
   const { pointsTable, loading } = useContext(PointsTableContext);
@@ -78,6 +79,8 @@ export default function Standing() {
         </Table>
       </TableContainer>
       <PointsTableInfo />
+            <Footer/>
+      
     </>
   );
 }

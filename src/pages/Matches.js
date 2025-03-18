@@ -4,6 +4,7 @@ import axios from "axios";
 import MatchList from "../components/MatchList";
 import MatchListSkeleton from "../components/MatchListSkeleton";
 import Navbar from "../components/common/Navbar";
+import Footer from "../components/common/Footer";
 
 export default function Matches({ isAdmin, url = "live", limit=null }) {
   const [matches, setMatches] = useState([]);
@@ -76,12 +77,13 @@ export default function Matches({ isAdmin, url = "live", limit=null }) {
 {loading ? (
     <MatchListSkeleton isHomePage={isHomePage} />
 ) : matches.length === 0 ? (
-    <p style={{ textAlign: "center", padding: "20px", fontSize: "18px", color: "gray" }}>
-        {/* No match data found */}
+    <p style={{ textAlign: "center", padding: "20px", fontSize: "18px", color: "gray" ,minHeight:"100vh" }}>
+        No match data found
     </p>
 ) : (
-    <MatchList matches={matches} status={url} isAdmin={isAdmin} />
+    <MatchList matches={matches} status={url} isAdmin={isAdmin} isHomePage={isHomePage}/>
 )}
+      {!isHomePage &&  <Footer />}
 
     </div>
   );

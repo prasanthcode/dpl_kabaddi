@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Navbar from "../components/common/Navbar";
 import TeamSkeleton from "../components/TeamSkeleton";
 import { useTeams } from "../context/TeamContext"; // Import context hook
+import Footer from "../components/common/Footer";
 
 export default function Teams() {
   const { teams, loading } = useTeams(); // Use context instead of state
@@ -37,6 +38,7 @@ export default function Teams() {
               ))}
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }

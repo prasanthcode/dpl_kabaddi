@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import profilePic from '../assets/pngegg (30).png';
 import Navbar from '../components/common/Navbar';
 import TeamInfoSkeleton from '../components/TeamInfoSkeleton';
+import Footer from '../components/common/Footer';
 export default function TeamInfo() {
     const { id } = useParams();
     
@@ -52,6 +53,7 @@ export default function TeamInfo() {
             </div>
         </div></>)}
 
+                       <Footer/>
      
 
         </div>

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 
@@ -85,13 +85,18 @@ const [scoreLoading,setScoreLoading] = useState(false);
 
   const handleSubmit = async () => {
     // Condition 1: If `isTeam` is true and `selectedScore` is null, return
-// if (isTeam && selectedScore === null) return;
+// if ( isTeam && selectedScore === null && selectedAction !== null) return;
 
 // // Condition 2: If `selectedPlayer` is null and `selectedAction` is also null, return
 // if (selectedPlayer && selectedAction === null) return;
 
 // // Condition 3: If `selectedAction` is "R" and `selectedScore` is null, return
 // if (selectedAction && selectedScore === null) return;
+// If it's a team and no score is selected, return
+if (isTeam && selectedScore === null) return;
+
+// If it's a player and either action or score is missing, return
+if (!isTeam && (selectedAction === null || selectedScore === null)) return;
 
     setScoreLoading(true);
     console.log(selectedAction + selectedPlayer + selectedScore);
@@ -173,7 +178,13 @@ const handleUndo = async () => {
     console.error("Error undoing last action:", error);
   }
 };
+const handleCloseSubmit = () =>{
+  setSelectedPlayer(null);
+    setSelectedAction(null);
+    setSelectedScore(null);
+  setBtnPosition({ top: 0, left: 0, visible: false, align: "right" });
 
+}
 
   
 
@@ -339,7 +350,7 @@ const handleUndo = async () => {
              >
               {["1", "2", "3", "4"].map((score) => (
                 <ToggleButton key={score} value={score} sx={scoreButtonStyle(selectedScore, score)}
-                disabled={selectedAction === "D" && (score === "3" || score === "4")}
+                disabled={selectedAction === "D" && (score === "2" || score === "3" || score === "4")}
                 
                 >
                   {score}
@@ -354,15 +365,54 @@ const handleUndo = async () => {
           </Box>
         </Box>
       )}
-      {score ? score.teamA.score : ""}
-      {score ? score.teamB.score : ""}
+   
+
+<Box
+
+onClick={handleCloseSubmit}
+  sx={{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 2,
+    backgroundColor: "rgba(211, 211, 211, 0.34)",
+    padding: "10px 20px",
+    borderRadius: "8px",
+    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)"
+  }}
+>
+  <Typography
+    variant="h5"
+    sx={{ fontWeight: "bold", color: "white" }}
+  >
+     {score ? score.teamA.score : "0"}
+  </Typography>
+
+  <Typography
+    variant="h6"
+    sx={{
+      fontWeight: "bold",
+      color: "#555",
+      mx: 1
+    }}
+  >
+    VS
+  </Typography>
+
+  <Typography
+    variant="h5"
+    sx={{ fontWeight: "bold", color: "white" }}
+  >
+     {score ? score.teamB.score : "0"}
+  </Typography>
+</Box>
       <Box mt={1}>
         <button onClick={handleUndo} style={buttonStyle} disabled={!localStorage.getItem("lastScoreUpdate")}>
       Undo
     </button>
 
       </Box>
-<TeamsMat/>
+{/* <TeamsMat/> */}
 <TimeSelection matchId={matchId}/>
     </Box>
 

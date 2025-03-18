@@ -13,15 +13,33 @@ export default function Footer() {
         py: 3,
         mt: 4,
         textAlign: "center",
+        
       }}
     >
       <Container>
-        <Typography variant="body2" sx={{ mb: 1 }}>
-          © {new Date().getFullYear()} DPL Kabaddi. All rights reserved.
-        </Typography>
-
+       
         {/* Social Media Links */}
         <Box>
+          Follow DPL Masters Edition 
+          <IconButton
+            component={Link}
+            href="https://www.instagram.com/dpl_masters_edition?igsh=MTF6dm9tbzZsZXp6bA=="
+            target="_blank"
+            rel="noopener"
+            sx={{ color: "#fff" }}
+          >
+            <InstagramIcon />
+          </IconButton>
+
+          
+        </Box>
+
+        {/* Credit Section */}
+        <Typography variant="body2" sx={{ mt: 1 }}>
+          Developed by <strong>Prasanth Gavvala</strong> and Naveen Yamala
+        </Typography>
+         {/* Social Media Links */}
+         <Box>
           <IconButton
             component={Link}
             href="https://www.instagram.com/pintuuuuu_2?igsh=bHhwNXozdjN1amc2"
@@ -42,11 +60,10 @@ export default function Footer() {
             <LinkedInIcon />
           </IconButton>
         </Box>
-
-        {/* Credit Section */}
-        <Typography variant="body2" sx={{ mt: 1 }}>
-          Developed by <strong>Prasanth Gavvala</strong> and Naveen Yamala
+        <Typography variant="body2" sx={{ mb: 1 }}>
+          © {new Date().getFullYear()} DPL Kabaddi. All rights reserved.
         </Typography>
+
       </Container>
     </Box>
   );

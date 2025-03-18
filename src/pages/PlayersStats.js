@@ -10,11 +10,12 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { TableVirtuoso } from 'react-virtuoso';
 import Navbar from '../components/common/Navbar';
+import Footer from '../components/common/Footer';
 
 const columns = [
-  { width: 150, label: 'Name', dataKey: 'name' },
-  { width: 150, label: 'Team', dataKey: 'teamName' },
-  { width: 100, label: 'Points', dataKey: 'points' }, // Shared field for raid & defense points
+  { width: 100, label: 'Name', dataKey: 'name' },
+  { width: 100, label: 'Team', dataKey: 'teamName' },
+  { width: 50, label: 'Points', dataKey: 'points' }, // Shared field for raid & defense points
 ];
 
 const VirtuosoTableComponents = {
@@ -118,6 +119,8 @@ export default function PlayersStats() {
           />
         )}
       </Paper>
+                  <Footer/>
+      
     </>
   );
 }
