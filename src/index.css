@@ -390,5 +390,98 @@ body {
 }
 
 
+/* player info */
+
+.main_player{
+  text-align: center;
+}
+.player_info{
+  padding: 20px 0;
+  align-items: flex-end;
+  display: flex;
+  width: 90%;
+  margin: 20px auto;
+box-shadow: rgba(31, 31, 31, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+background-color: white;
+color: black;
+  padding:20px 10px;
+  border-radius: 10px;
+  justify-content: space-between;
+}
+.player_info img{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+box-shadow: rgba(31, 31, 31, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+
+}
+
+.name_team_info{
+  display: flex;
+  min-width: 50%;
+  flex-direction: column;
+}
+.name_team_info h3{
+  /* background-color: red; */
+  text-align: center;
+
+
+}
+.name_team_info img{
+  width: 60px;
+  height: 60px;
+}
+.team_info{
+  /* display: flex; */
+  text-align: center;
+}
+.total_player_stats
+{
+  display: flex;
+  margin: 20px auto;
+  width: 90%;
+justify-content: space-between;
+gap: 10px;
+box-shadow: rgba(34, 34, 34, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+border-radius: 10px;
+padding: 10px;
+  flex-wrap: wrap;
+  background-color: white;
+color: black;
+  
+}
+.stat_type{
+  flex: 1 1 calc(33.33% - 10px); /* Adjust width for equal spacing */
+  text-align: center;
+  font-size: 14px;
+  /* padding: 20px; */
+}
+.stat_type h1{
+  margin: 0;
+ 
+}
+.stat_type span{
+  font-size: 16px;
+  margin: 0;
+
+
+}
+.opponent{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #063a7e;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+box-shadow: rgba(250, 250, 250, 0.3) 0px 19px 38px, rgba(85, 85, 85, 0.22) 0px 15px 12px;
+
+}
+.opponent img{
+  border-radius: 50%;
+  width: 60px;
+
+}
 
 

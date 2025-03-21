@@ -10,6 +10,7 @@ import Paper from "@mui/material/Paper";
 import { TableVirtuoso } from "react-virtuoso";
 import Navbar from "../components/common/Navbar";
 import Footer from "../components/common/Footer";
+import { Link } from "react-router-dom";
 
 // Function to determine column labels dynamically
 const getColumns = (categoryKey) => {
@@ -130,7 +131,13 @@ export default function PlayersStats() {
                               />
                             ) : column.dataKey === "name" ? (
                               <>
-                                {row[column.dataKey]} {row.points === topScore ? "🔥" : ""}
+                              <Link style={{textDecoration:"underline",color:"var(lightblue)"}} to={`/player/${row.playerId}`} >
+    {row[column.dataKey]} 
+  </Link>{row.points === topScore ? "🔥" : ""}
+                                {/* {
+                                  
+                                row[column.dataKey]
+                                } {row.points === topScore ? "🔥" : ""} */}
                               </>
                             ) : (
                               row[column.dataKey]

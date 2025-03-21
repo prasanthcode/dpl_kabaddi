@@ -12,6 +12,7 @@ import UploadPage from "./pages/UploadPage";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Logout from "./pages/Logout";
+import PlayerInfo from "./pages/PlayerInfo";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           </ProtectedRoute>
           } />
         <Route path="/team/:id" element={<TeamInfo />} />
+        <Route path="/player/:playerId" element={<PlayerInfo />} />
 
 
         <Route path="/completed" element={
