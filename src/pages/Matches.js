@@ -65,7 +65,11 @@ export default function Matches({ isAdmin, url = "live", limit=null }) {
               to={`/${type}`}
               style={{
                 backgroundColor: path === `/${type}` ? "orange" : "",
+                color: path === `/${type}` ? "black" : "",
                 padding: "10px 20px",
+                minWidth:"20%",
+                textAlign:"center",
+                borderRadius:"5px",
               }}
             >
               {type.charAt(0).toUpperCase() + type.slice(1)}
@@ -78,7 +82,7 @@ export default function Matches({ isAdmin, url = "live", limit=null }) {
     <MatchListSkeleton isHomePage={isHomePage} />
 ) : matches.length === 0 ? (
     <p style={{ textAlign: "center", padding: "20px", fontSize: "18px", color: "gray" ,minHeight:"100vh" }}>
-        No match data found
+        No {`${url}`} Matches
     </p>
 ) : (
     <MatchList matches={matches} status={url} isAdmin={isAdmin} isHomePage={isHomePage}/>

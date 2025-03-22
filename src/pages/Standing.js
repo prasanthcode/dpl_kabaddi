@@ -11,18 +11,17 @@ import PointsTableInfo from "../components/PointsTableInfo";
 import { PointsTableContext } from "../context/PointsTableContext";
 import { Link } from "react-router-dom";
 import Footer from "../components/common/Footer";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 export default function Standing() {
   const { pointsTable, loading } = useContext(PointsTableContext);
 
-  if (loading) return "Loading...";
-  if (!pointsTable.length) return "No data available.";
 
   return (
     <>
       <Navbar />
-      <h4>Department Premier League Points Table</h4>
-      <TableContainer component={Paper}>
+      <h4 style={{textAlign:"center"}}>DPL Boys Kabaddi Points Table</h4>
+      {loading ?<LoadingSpinner/>:<TableContainer component={Paper}>
         <Table
           sx={{
             minWidth: 400,
@@ -47,7 +46,7 @@ export default function Standing() {
           >
             <TableRow>
               <TableCell>Po</TableCell>
-              <TableCell align="right">Team</TableCell>
+              <TableCell align="right" sx={{width:"50px"}}>Team</TableCell>
               <TableCell align="right">P</TableCell>
               <TableCell align="right">W</TableCell>
               <TableCell align="right">L</TableCell>
@@ -56,14 +55,14 @@ export default function Standing() {
               <TableCell align="right">Pd</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody sx={{backgroundColor:"var(--primary-color)","& td, & th ,& a": { color: "white" },}}>
+          <TableBody sx={{"& td, & th ,& a": { color: "black" }}}>
             {pointsTable.map((row, index) => (
-              <TableRow key={row.teamId}>
-                <TableCell>{row.wins >= 3 ? "Q" : index + 1}</TableCell>
+              <TableRow key={row.teamId} sx={{backgroundColor:index===4?"rgb(255, 210, 210)":""}}>
+                <TableCell>{index + 1}</TableCell>
                 <TableCell align="right">
-                  <Link to={`/team/${row.teamId}`}>
+                  <Link to={`/team/${row.teamId}`} style={{textDecoration:"none"}}>
                   
-                  {row.teamName}
+                  {row.teamName}{row.wins >= 3 ? "(Q)" :""}
                   </Link>
 
                 </TableCell>
@@ -77,7 +76,7 @@ export default function Standing() {
             ))}
           </TableBody>
         </Table>
-      </TableContainer>
+      </TableContainer>}
       <PointsTableInfo />
             <Footer/>
       

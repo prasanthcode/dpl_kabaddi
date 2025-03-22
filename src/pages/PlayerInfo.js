@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../components/common/Navbar';
 import Footer from '../components/common/Footer';
 import { useParams } from 'react-router-dom';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 export default function PlayerInfo() {
     const { playerId } = useParams();
@@ -36,7 +37,7 @@ export default function PlayerInfo() {
     return (
         <>
         <Navbar/>
-        {loading ? <p>Loading player info...</p>: <div className='main_player'>
+        {loading ? <LoadingSpinner/>: <div className='main_player'>
             <div className="player_info">
                 <img src={player.profilePic || "https://avatar.iran.liara.run/public/47"} alt={player.name} />
                 <div className="name_team_info">

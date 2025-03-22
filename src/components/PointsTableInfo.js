@@ -11,7 +11,7 @@ const PointsTableInfo = () => {
         { label: "Pd", description: "Points scored minus conceded" },
       ];
   return (
-    <Card sx={{ maxWidth: 600, margin: "0px auto", padding: "10px" ,backgroundColor:"var(--primary-color)",color:"var(--text-inverted)"}}>
+    <Card sx={{ maxWidth: 600, margin: "0px auto", padding: "10px" ,backgroundColor:"var(--primary-dark)",color:"var(--text-inverted)"}}>
       <CardContent>
         <h3>Points Table Column Descriptions</h3>
         <ul>

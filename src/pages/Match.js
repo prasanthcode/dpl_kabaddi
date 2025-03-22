@@ -10,6 +10,7 @@ import MatchSkeleton from '../components/MatchSkeleton';
 import Mat from '../components/Mat';
 import Footer from '../components/common/Footer';
 import { Typography } from '@mui/material';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 export default function Match({ enablePolling = false }) {
   const { matchId } = useParams();
@@ -128,7 +129,7 @@ export default function Match({ enablePolling = false }) {
               
           <div className="single_match view_recent">
             
-          <h4>Match 1</h4>
+          <h5 style={{backgroundColor:"rgb(247, 150, 39)",width:"40%",margin:"0 auto  20px auto" , borderRadius:"5px" ,textAlign:"center", fontWeight:"600"}}>Match {enablePolling?"Live":"Completed"}</h5>
             <div className="vs_container">
               <div className="img_wrap">
                 <img src={matches.teamA?.logo} alt={matches.teamA?.name || "Team A"} />
@@ -163,7 +164,7 @@ export default function Match({ enablePolling = false }) {
          </div> </div>
         </div>
       </div>}
-{loading ?"Loading..." : (      <>
+{loading ?<LoadingSpinner/> : (      <>
 
       <ToggleButtonGroup
   color="primary"
@@ -235,12 +236,12 @@ export default function Match({ enablePolling = false }) {
       {alignment === "line_up" && stats?.topRaiders && stats?.topDefenders && (
   <>
     <LineUp stats={stats} statLoading={statLoading} />
-    {statLoading && <p>Updating stats...</p>}
+    {statLoading && <LoadingSpinner/>}
   </>
 )}
 
 
-      {statLoading && <p>Loading stats...</p>}
+      {statLoading && <LoadingSpinner/>}
       {statError && <p style={{ color: "red" }}>Error: {statError}</p>}
 
 
