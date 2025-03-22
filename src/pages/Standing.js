@@ -62,7 +62,7 @@ export default function Standing() {
                 <TableCell align="right">
                   <Link to={`/team/${row.teamId}`} style={{textDecoration:"none"}}>
                   
-                  {row.teamName}{row.wins >= 3 ? "(Q)" :""}
+                  {row.teamName}{index < 4 ? "(Q)" :""}
                   </Link>
 
                 </TableCell>
