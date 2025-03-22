@@ -49,7 +49,7 @@ const MatchList = ({ matches = [], status, isAdmin,isHomePage }) => {
                 style={{ textDecoration: "none", color: "white" }}
               >
                 <div className="single_match">
-                  <h4>{`Match ${match.matchNumber}`}</h4>
+                  <h4>{match.matchNumber<11?`Match ${match.matchNumber}`:""}{match.matchNumber===11?"Qualifier 1":""}{match.matchNumber===12?"Eliminator":""}</h4>
                   <div className="vs_container">
                     <div className="img_wrap">
                       <img src={match.teamA.logo} alt="" />
