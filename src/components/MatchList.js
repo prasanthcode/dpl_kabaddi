@@ -2,17 +2,20 @@ import { Typography } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 
-const MatchList = ({ matches = [], status, isAdmin,isHomePage }) => {
-  // Ensure matches is an array before using forEach
+const MatchList = ({ matches = [], status, isAdmin, isHomePage }) => {
   const validMatches = Array.isArray(matches) ? matches : [];
-console.log(matches);
-  // Create an object to store matches grouped by date
+
+  // Group matches by date
   const matchesByDate = validMatches.reduce((acc, match) => {
-    const date = new Date(match.date).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+    // Handle cases where the date is missing (dummy matches)
+    const date =
+      match.date && match.date !== "TBA"
+        ? new Date(match.date).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })
+        : "To Be Announced";
 
     if (!acc[date]) acc[date] = [];
     acc[date].push(match);
@@ -20,7 +23,7 @@ console.log(matches);
   }, {});
 
   return (
-    <div className="match_container" style={{minHeight: !isHomePage ? "100vh":""}}>
+    <div className="match_container" style={{ minHeight: !isHomePage ? "100vh" : "" }}>
       {Object.entries(matchesByDate).map(([date, matches]) => (
         <div className="d_match" key={date}>
           <h2>
@@ -49,16 +52,15 @@ console.log(matches);
                 style={{ textDecoration: "none", color: "white" }}
               >
                 <div className="single_match">
-                  <h4>{match.matchType  ? match.matchType : `Match ${match.matchNumber}`}</h4>
+                  <h4>{match.matchType ? match.matchType : `Match ${match.matchNumber}`}</h4>
 
-                  {/* <h4>{match.matchNumber<11?`Match ${match.matchNumber}`:""}{match.matchNumber===11?"Qualifier 1":""} {match.matchNumber===12?"Eliminator":""}</h4> */}
                   <div className="vs_container">
                     <div className="img_wrap">
-                      <img src={match.teamA.logo} alt="" />
+                      <img src={match.teamA?.logo || "https://dummyimage.com/100"} alt="" />
                       <div className="team_1">
-                        <h3>{match.teamA.name}</h3>
+                        <h3>{match.teamA?.name || "TBD"}</h3>
                         {status !== "upcoming" && (
-                          <span className="teama_score">{match.teamA.score}</span>
+                          <span className="teama_score">{match.teamA?.score || ""}</span>
                         )}
                       </div>
                     </div>
@@ -69,43 +71,41 @@ console.log(matches);
                         color: status === "completed" ? "white" : "black",
                       }}
                     >
-                     {
-  status === "completed" 
-    ? "FT" 
-    : status === "upcoming" 
-      ? "VS" 
-      : match.halfTime 
-        ? "HT" 
-        : "VS"
-}
+                      {status === "completed" 
+                        ? "FT" 
+                        : status === "upcoming" 
+                        ? "VS" 
+                        : match.halfTime 
+                        ? "HT" 
+                        : "VS"}
                     </div>
                     <div className="img_wrap">
-                      <img src={match.teamB.logo} alt="" />
+                      <img src={match.teamB?.logo || "https://dummyimage.com/100"} alt="" />
                       <div className="team_1">
                         {status !== "upcoming" && (
-                          <span className="teamb_score">{match.teamB.score}</span>
+                          <span className="teamb_score">{match.teamB?.score || ""}</span>
                         )}
-                        <h3>{match.teamB.name}</h3>
+                        <h3>{match.teamB?.name || "TBD"}</h3>
                       </div>
                     </div>
                   </div>
                 </div>
-                {status==="live" && (
-  <Typography
-    variant="subtitle1" 
-    sx={{ 
-      fontWeight: "bold", 
-      color: "white", 
-      backgroundColor: "var(--primary-dark)", 
-      padding: "5px 10px",
-      fontSize:"15px", 
-      borderRadius: "5px",
-      display: "inline-block"
-    }}
-  >
-    ⚡ Score updates automatically, no need to refresh! 
-  </Typography>
-)}
+                {status === "live" && (
+                  <Typography
+                    variant="subtitle1"
+                    sx={{
+                      fontWeight: "bold",
+                      color: "white",
+                      backgroundColor: "var(--primary-dark)",
+                      padding: "5px 10px",
+                      fontSize: "15px",
+                      borderRadius: "5px",
+                      display: "inline-block",
+                    }}
+                  >
+                    ⚡ Score updates automatically, no need to refresh!
+                  </Typography>
+                )}
               </Link>
             </div>
           ))}
@@ -116,3 +116,123 @@ console.log(matches);
 };
 
 export default MatchList;
+
+
+// import { Typography } from "@mui/material";
+// import React from "react";
+// import { Link } from "react-router-dom";
+
+// const MatchList = ({ matches = [], status, isAdmin,isHomePage }) => {
+//   // Ensure matches is an array before using forEach
+//   const validMatches = Array.isArray(matches) ? matches : [];
+// console.log(matches);
+//   // Create an object to store matches grouped by date
+//   const matchesByDate = validMatches.reduce((acc, match) => {
+//     const date = new Date(match.date).toLocaleDateString("en-US", {
+//       year: "numeric",
+//       month: "long",
+//       day: "numeric",
+//     });
+
+//     if (!acc[date]) acc[date] = [];
+//     acc[date].push(match);
+//     return acc;
+//   }, {});
+
+//   return (
+//     <div className="match_container" style={{minHeight: !isHomePage ? "100vh":""}}>
+//       {Object.entries(matchesByDate).map(([date, matches]) => (
+//         <div className="d_match" key={date}>
+//           <h2>
+//             {status !== "live" ? date : <>Live <span className="live-dot"></span></>}
+//           </h2>
+//           {matches.map((match, index) => (
+//             <div className="single_match_wrapper" key={index}>
+//               {isAdmin && (
+//                 <Link
+//                   to={`/addscore/${match.matchId}`}
+//                   className="edit_button"
+//                   style={{ textDecoration: "none", color: "white" }}
+//                 >
+//                   📝 Edit Match
+//                 </Link>
+//               )}
+
+//               <Link
+//                 to={
+//                   status === "upcoming"
+//                     ? "/upcoming"
+//                     : status === "completed"
+//                     ? `/recent/${match.matchId}`
+//                     : `/live/${match.matchId}`
+//                 }
+//                 style={{ textDecoration: "none", color: "white" }}
+//               >
+//                 <div className="single_match">
+//                   <h4>{match.matchType  ? match.matchType : `Match ${match.matchNumber}`}</h4>
+
+//                   {/* <h4>{match.matchNumber<11?`Match ${match.matchNumber}`:""}{match.matchNumber===11?"Qualifier 1":""} {match.matchNumber===12?"Eliminator":""}</h4> */}
+//                   <div className="vs_container">
+//                     <div className="img_wrap">
+//                       <img src={match.teamA.logo} alt="" />
+//                       <div className="team_1">
+//                         <h3>{match.teamA.name}</h3>
+//                         {status !== "upcoming" && (
+//                           <span className="teama_score">{match.teamA.score}</span>
+//                         )}
+//                       </div>
+//                     </div>
+//                     <div
+//                       className="time"
+//                       style={{
+//                         backgroundColor: status === "completed" ? "rgb(34, 139, 69)" : "white",
+//                         color: status === "completed" ? "white" : "black",
+//                       }}
+//                     >
+//                      {
+//   status === "completed" 
+//     ? "FT" 
+//     : status === "upcoming" 
+//       ? "VS" 
+//       : match.halfTime 
+//         ? "HT" 
+//         : "VS"
+// }
+//                     </div>
+//                     <div className="img_wrap">
+//                       <img src={match.teamB.logo} alt="" />
+//                       <div className="team_1">
+//                         {status !== "upcoming" && (
+//                           <span className="teamb_score">{match.teamB.score}</span>
+//                         )}
+//                         <h3>{match.teamB.name}</h3>
+//                       </div>
+//                     </div>
+//                   </div>
+//                 </div>
+//                 {status==="live" && (
+//   <Typography
+//     variant="subtitle1" 
+//     sx={{ 
+//       fontWeight: "bold", 
+//       color: "white", 
+//       backgroundColor: "var(--primary-dark)", 
+//       padding: "5px 10px",
+//       fontSize:"15px", 
+//       borderRadius: "5px",
+//       display: "inline-block"
+//     }}
+//   >
+//     ⚡ Score updates automatically, no need to refresh! 
+//   </Typography>
+// )}
+//               </Link>
+//             </div>
+//           ))}
+//         </div>
+//       ))}
+//     </div>
+//   );
+// };
+
+// export default MatchList;
