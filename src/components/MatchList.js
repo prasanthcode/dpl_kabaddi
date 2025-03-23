@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const MatchList = ({ matches = [], status, isAdmin,isHomePage }) => {
   // Ensure matches is an array before using forEach
   const validMatches = Array.isArray(matches) ? matches : [];
-
+console.log(matches);
   // Create an object to store matches grouped by date
   const matchesByDate = validMatches.reduce((acc, match) => {
     const date = new Date(match.date).toLocaleDateString("en-US", {
@@ -49,7 +49,9 @@ const MatchList = ({ matches = [], status, isAdmin,isHomePage }) => {
                 style={{ textDecoration: "none", color: "white" }}
               >
                 <div className="single_match">
-                  <h4>{match.matchNumber<11?`Match ${match.matchNumber}`:""}{match.matchNumber===11?"Qualifier 1":""}{match.matchNumber===12?"Eliminator":""}</h4>
+                  <h4>{match.matchType  ? match.matchType : `Match ${match.matchNumber}`}</h4>
+
+                  {/* <h4>{match.matchNumber<11?`Match ${match.matchNumber}`:""}{match.matchNumber===11?"Qualifier 1":""} {match.matchNumber===12?"Eliminator":""}</h4> */}
                   <div className="vs_container">
                     <div className="img_wrap">
                       <img src={match.teamA.logo} alt="" />
