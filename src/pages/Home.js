@@ -5,6 +5,8 @@ import axios from 'axios';
 import MatchListSkeleton from '../components/MatchListSkeleton';
 import Footer from '../components/common/Footer';
 import AutoCarousel from '../components/AutoCarousel';
+import Playoff from '../components/Playoff';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
     const [showLive, setShowLive] = useState(true); // Initially try live matches
@@ -40,6 +42,10 @@ export default function Home() {
             ) : (
                 <Matches url={"completed"} limit={1} />
             )}
+            <Link to={"/standings"} style={{textDecoration:"none",color:"white"}}>
+            
+            <Playoff/>
+            </Link>
              <div className='gallery'>
                 <div className="g_container">
                     <img src="https://res.cloudinary.com/dzvhvgifb/image/upload/v1742019784/Snapinsta.app_484531088_17896190013177542_6012630088360014573_n_1080_vocuxj.webp" alt="" width={"100%"} style={{ margin: "20px auto" }} />

@@ -12,6 +12,7 @@ import { PointsTableContext } from "../context/PointsTableContext";
 import { Link } from "react-router-dom";
 import Footer from "../components/common/Footer";
 import LoadingSpinner from "../components/LoadingSpinner";
+import Playoff from "../components/Playoff";
 
 export default function Standing() {
   const { pointsTable, loading } = useContext(PointsTableContext);
@@ -77,6 +78,8 @@ export default function Standing() {
           </TableBody>
         </Table>
       </TableContainer>}
+                  <Playoff/>
+      
       <PointsTableInfo />
             <Footer/>
       
