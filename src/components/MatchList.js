@@ -144,8 +144,9 @@ console.log(matches);
       {Object.entries(matchesByDate).map(([date, matches]) => (
         <div className="d_match" key={date}>
           <h2>
-            {status !== "live" ? date : <>Live <span className="live-dot"></span></>}
-          </h2>
+  {status !== "live" ? (date && !isNaN(new Date(date)) ? date : "To be Announced") : <>Live <span className="live-dot"></span></>}
+</h2>
+
           {matches.map((match, index) => (
             <div className="single_match_wrapper" key={index}>
               {isAdmin && (
@@ -169,7 +170,8 @@ console.log(matches);
                 style={{ textDecoration: "none", color: "white" }}
               >
                 <div className="single_match">
-                  <h4>{ `Match `}</h4>
+                  <h4>{ match.matchType ? match.matchType :`Match ${match.matchNumber}`}</h4>
+                  {/* <h4>{ `Match `}</h4> */}
 
                   {/* <h4>{match.matchNumber<11?`Match ${match.matchNumber}`:""}{match.matchNumber===11?"Qualifier 1":""} {match.matchNumber===12?"Eliminator":""}</h4> */}
                   <div className="vs_container">

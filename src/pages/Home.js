@@ -40,7 +40,7 @@ export default function Home() {
             ) : (
                 <Matches url={"completed"} limit={1} />
             )}
-            <div className='gallery'>
+             <div className='gallery'>
                 <div className="g_container">
                     <img src="https://res.cloudinary.com/dzvhvgifb/image/upload/v1742019784/Snapinsta.app_484531088_17896190013177542_6012630088360014573_n_1080_vocuxj.webp" alt="" width={"100%"} style={{ margin: "20px auto" }} />
                 </div>
