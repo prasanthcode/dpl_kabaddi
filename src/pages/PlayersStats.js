@@ -25,6 +25,7 @@ const getColumns = (categoryKey) => {
   }
 
   return [
+    { width: 20, label: "", dataKey: "rank" },
     { width: 50, label: "Profile", dataKey: "profilePic" },
     { width: 80, label: "Name", dataKey: "name" },
     { width: 30, label: pointsLabel, dataKey: "points" }, // Dynamic label
@@ -76,10 +77,10 @@ export default function PlayersStats() {
   const categories = [
     { key: "top10RaidPoints", title: "Player Raid Points" },
     { key: "top10Tackles", title: "Player Tackle Points" },
-    { key: "top10TotalPoints", title: "Player Total Points" },
-    { key: "top5High5s", title: "Player High 5s" },
     { key: "top5Super10s", title: "Player Super 10s" },
+    { key: "top5High5s", title: "Player High 5s" },
     { key: "top10SuperRaids", title: "Player Super Raids" },
+    { key: "top10TotalPoints", title: "Player Total Points" },
   ];
 
   return (
@@ -95,13 +96,22 @@ export default function PlayersStats() {
           const columns = getColumns(key); // Get dynamic columns based on category
 
           return (
-            <div key={key} style={{ marginBottom: "30px" }}>
-              <h4 style={{ textAlign: "center" }}>{title}</h4>
-              <Paper style={{ height: "50vh", width: "100%", margin: "20px auto" }}>
+            <div key={key} style={{ marginBottom: "30px",
+              border:"1px solid #5c5c5c" ,
+              borderRadius:"20px",
+              margin:"10px 10px"
+
+
+             }}>
+              <h4 style={{ textAlign: "left",margin:"10px 0 0 10px" ,color:"var(--text-light)"}}>{title}</h4>
+              <Paper style={{ height: "50vh", width: "100%", margin: "20px auto",backgroundColor:"var(--primary-dark)", color:"var(--text-light)"}} >
                 {loading ? (
                   <p style={{ textAlign: "center" }}>Loading...</p>
                 ) : (
                   <TableVirtuoso
+                  sx={{
+                    backgroundColor:"var(--primary-dark)",
+                  }}
                     data={sortedData}
                     components={VirtuosoTableComponents}
                     fixedHeaderContent={() => (
@@ -112,7 +122,7 @@ export default function PlayersStats() {
                             variant="head"
                             align="left"
                             style={{ width: column.width }}
-                            sx={{ backgroundColor: "background.paper", fontWeight: "bold" }}
+                            sx={{    color:"var(--text-light)",border:"none",backgroundColor:"var(--primary-dark)",padding:"0",textAlign:"center"}}
                           >
                             {column.label}
                           </TableCell>
@@ -122,16 +132,22 @@ export default function PlayersStats() {
                     itemContent={(index, row) => (
                       <>
                         {columns.map((column) => (
-                          <TableCell key={column.dataKey} align="left">
+                          <TableCell key={column.dataKey} align="left"
+                          sx={{  color:"var(--text-light)",borderColor:"#373f4e"}}
+                          
+                          >
                             {column.dataKey === "profilePic" ? (
-                              <img
-                                src={row[column.dataKey] || "https://via.placeholder.com/50"}
-                                alt={row.name}
-                                style={{ width: 40, height: 40, borderRadius: "50%" }}
-                              />
+                                <Link style={{textDecoration:"none",color:"var(--text-light)"}}  to={`/player/${row.playerId}`} >
+
+                                  <img
+                                    src={row[column.dataKey] || "https://via.placeholder.com/50"}
+                                    alt={row.name}
+                                    style={{ width: 40, height: 40, borderRadius: "50%" }}
+                                  />
+                                </Link>
                             ) : column.dataKey === "name" ? (
                               <>
-                              <Link style={{textDecoration:"underline",color:"var(lightblue)"}} to={`/player/${row.playerId}`} >
+                              <Link style={{textDecoration:"none",color:"var(--text-light)"}} to={`/player/${row.playerId}`} >
     {row[column.dataKey]} 
   </Link>{row.points === topScore ? "🔥" : ""}
                                 {/* {

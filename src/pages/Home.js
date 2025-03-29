@@ -7,6 +7,8 @@ import Footer from '../components/common/Footer';
 import AutoCarousel from '../components/AutoCarousel';
 import Playoff from '../components/Playoff';
 import { Link } from 'react-router-dom';
+import TributeCelebration from '../components/TributeCelebration';
+
 
 export default function Home() {
     const [showLive, setShowLive] = useState(true); // Initially try live matches
@@ -33,7 +35,9 @@ export default function Home() {
         <>
             <Navbar />
             <AutoCarousel />
-
+            <TributeCelebration/>
+     
+         
             {/* Wait for the check before rendering */}
             {isChecking ? (
                 <MatchListSkeleton isHomePage={true}/>

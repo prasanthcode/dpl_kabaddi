@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Stats from '../components/Stats';
@@ -97,6 +97,15 @@ export default function Match({ enablePolling = false }) {
       }
     }
   }, [alignment, matchId, enablePolling]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (matches?.status === "Completed" && enablePolling) {
+      navigate(`/recent/${matchId}`);
+    }
+  }, [matches, navigate]); // Runs when match changes
+
+  
 
   
   return (

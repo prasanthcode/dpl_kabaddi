@@ -18,19 +18,24 @@ export default function Matches({ isAdmin, url = "live", limit=null }) {
     if (!url) return;
   
     try {
+      if(url!=="live"){
+
+        setLoading(true);
+      }
       const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/matches/${url}?limit=${limit}`);
       const newMatches = Array.isArray(response.data) ? response.data : []; // Ensure it's an array
   
-      setMatches((prevMatches) => {
-        if (prevMatches.length === 0) {
-          return newMatches;
-        }
+      // setMatches((prevMatches) => {
+      //   if (prevMatches.length === 0) {
+      //     return newMatches;
+      //   }
   
-        return newMatches.map((newMatch) => {
-          const existingMatch = prevMatches.find((m) => m._id === newMatch._id);
-          return existingMatch ? { ...existingMatch, ...newMatch } : newMatch;
-        });
-      });
+      //   return newMatches.map((newMatch) => {
+      //     const existingMatch = prevMatches.find((m) => m._id === newMatch._id);
+      //     return existingMatch ? { ...existingMatch, ...newMatch } : newMatch;
+      //   });
+      // });
+      setMatches(newMatches);
   
       setLoading(false);
     } catch (error) {
@@ -51,7 +56,7 @@ export default function Matches({ isAdmin, url = "live", limit=null }) {
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [url]);
+  }, [path]);
 
   return (
     <div>
@@ -80,7 +85,7 @@ export default function Matches({ isAdmin, url = "live", limit=null }) {
 
 {loading ? (
     <MatchListSkeleton isHomePage={isHomePage} />
-) : matches.length === 0 ? (
+) : matches.length === 0  ? (
     <p style={{ textAlign: "center", padding: "20px", fontSize: "18px", color: "gray" ,minHeight:"100vh" }}>
         No {`${url}`} Matches
     </p>
