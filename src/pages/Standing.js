@@ -61,10 +61,16 @@ export default function Standing() {
               <TableRow key={row.teamId} sx={{backgroundColor:index===4?"rgb(255, 210, 210)":""}}>
                 <TableCell>{index + 1}</TableCell>
                 <TableCell align="right">
-                  <Link to={`/team/${row.teamId}`} style={{textDecoration:"none"}}>
-                  
-                  {row.teamName}{index < 4 ? "(Q)" :""}
-                  </Link>
+                <Link to={`/team/${row.teamId}`} style={{ textDecoration: "none", color: "inherit" }}>
+  {row.teamName}
+  {index < 4 ? "(Q)" : ""}
+  {index === 0 && (
+    <span style={{ fontWeight: "bold", color: "orange", marginLeft: "5px" }}>
+      🏆 Winner
+    </span>
+  )}
+</Link>
+
 
                 </TableCell>
                 <TableCell align="right">{row.matchesPlayed}</TableCell>

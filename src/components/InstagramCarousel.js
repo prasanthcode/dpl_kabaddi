@@ -1,26 +1,37 @@
 import React from "react";
 import Slider from "react-slick";
-import { Box, Typography, IconButton } from "@mui/material";
-import { Favorite, Share, MoreHoriz } from "@mui/icons-material";
+import { Box, Typography } from "@mui/material";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const images = [
   {
-    img: "https://images.unsplash.com/photo-1574169208507-84376144848b",
-    title: "Beautiful Nature",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1519608487953-e999c86e7455",
-    title: "Ocean Waves",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0",
-    title: "City Lights",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc",
-    title: "Deep Forest",
+    img: "https://res.cloudinary.com/dzwksifmb/image/upload/v1743488847/IMG-20250329-WA0003_xfyquc.jpg",
+    title: "Champions",
+  },{
+    img: "https://res.cloudinary.com/dzwksifmb/image/upload/v1743488892/IMG-20250329-WA0010_grubtt.jpg",
+    title: "",
+  },{
+    img: "https://res.cloudinary.com/dzwksifmb/image/upload/v1743488913/IMG-20250329-WA0099_v2qjow.jpg",
+    title: "",
+  },{
+    img: "https://res.cloudinary.com/dzwksifmb/image/upload/v1743488914/IMG-20250329-WA0101_dbvpqc.jpg",
+    title: "",
+  },{
+    img: "https://res.cloudinary.com/dzwksifmb/image/upload/v1743488914/WhatsApp_Image_2025-03-31_at_3.15.21_PM_du1nzj.jpg",
+    title: "",
+  },{
+    img: "https://res.cloudinary.com/dzwksifmb/image/upload/v1743488916/WhatsApp_Image_2025-03-31_at_3.15.22_PM_ygpph0.jpg",
+    title: "",
+  },{
+    img: "https://res.cloudinary.com/dzwksifmb/image/upload/v1743570864/WhatsApp_Image_2025-04-01_at_1.01.21_PM_jbdpj0.jpg",
+    title: "",
+  },{
+    img: "https://res.cloudinary.com/dzwksifmb/image/upload/v1743488913/WhatsApp_Image_2025-03-29_at_10.06.54_PM_qqws2x.jpg",
+    title: "",
+  },{
+    img: "https://res.cloudinary.com/dzwksifmb/image/upload/v1743488915/WhatsApp_Image_2025-03-29_at_11.10.34_PM_a6hqb8.jpg",
+    title: "",
   },
 ];
 
@@ -33,7 +44,7 @@ export default function InstagramCarousel() {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
-    arrows: false,
+    arrows: true,
   };
 
   return (
@@ -41,9 +52,10 @@ export default function InstagramCarousel() {
       sx={{
         maxWidth: 350,
         mx: "auto",
-        borderRadius: 2,
+        my: "20px",
+        borderRadius: 3,
         overflow: "hidden",
-        boxShadow: 3,
+        boxShadow: 5,
         border: "1px solid #ddd",
         bgcolor: "white",
       }}
@@ -53,66 +65,28 @@ export default function InstagramCarousel() {
         sx={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
-          px: 2,
-          py: 1,
-          bgcolor: "white",
+          justifyContent: "center",
+          px: 3,
+          py: 2,
+          bgcolor: "#f5f5f5",
         }}
       >
-        <Typography variant="body1" fontWeight="bold" color="black">
-          Photo Gallery
+        <Typography variant="h6" fontWeight="bold" color="black">
+          Highlights
         </Typography>
-       
       </Box>
 
       <Slider {...settings}>
         {images.map((item, index) => (
-          <Box key={index} sx={{ width: "100%", height: 400, position: "relative" }}>
+          <Box key={index} sx={{ width: "100%", height: 430, position: "relative", borderRadius: 3 }}>
             <img
               src={`${item.img}?w=350&h=400&fit=crop`}
               alt={item.title}
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "3px" }}
             />
-            <Typography
-              variant="body2"
-              sx={{
-                position: "absolute",
-                bottom: 0,
-                left: 0,
-                width: "100%",
-                bgcolor: "rgba(0, 0, 0, 0.5)",
-                color: "white",
-                p: 1,
-                textAlign: "center",
-              }}
-            >
-              {item.title}
-            </Typography>
           </Box>
         ))}
       </Slider>
-
-      {/* Footer - Like & Share Buttons */}
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          px: 2,
-          py: 1,
-          bgcolor: "white",
-        }}
-      >
-        <Box>
-        
-          <IconButton color="primary">
-            <Share />
-          </IconButton>
-        </Box>
-        <Typography variant="body2" color="text.secondary">
-          Swipe for more →
-        </Typography>
-      </Box>
     </Box>
   );
 }
