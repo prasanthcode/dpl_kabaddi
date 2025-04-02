@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; 
 import Home from "./pages/Home";
 import Matches from "./pages/Matches";
@@ -13,11 +13,15 @@ import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Logout from "./pages/Logout";
 import PlayerInfo from "./pages/PlayerInfo";
-
+import PageTracker from "./PageTracker";
+import { initGA } from "./analytics";
 function App() {
+  useEffect(() => {
+    initGA(); // Initialize Google Analytics when app loads
+  }, []);
   return (
     <Router>
-
+      <PageTracker/>
       <Routes> 
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login/>} />
