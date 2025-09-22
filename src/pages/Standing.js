@@ -6,89 +6,106 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import Navbar from "../components/common/Navbar";
 import PointsTableInfo from "../components/PointsTableInfo";
 import { PointsTableContext } from "../context/PointsTableContext";
 import { Link } from "react-router-dom";
-import Footer from "../components/common/Footer";
 import LoadingSpinner from "../components/LoadingSpinner";
 import Playoff from "../components/Playoff";
 
 export default function Standing() {
   const { pointsTable, loading } = useContext(PointsTableContext);
 
-
   return (
     <>
-      <Navbar />
-      <h4 style={{textAlign:"center"}}>DPL Boys Kabaddi Points Table</h4>
-      {loading ?<LoadingSpinner/>:<TableContainer component={Paper}>
-        <Table
-          sx={{
-            minWidth: 400,
-            "& .MuiTableCell-root": {
-              fontSize: "14px",
-              padding: "30px 10px",
-              textAlign: "left",
-              fontWeight: "500",
-            },
-          }}
-          aria-label="points table"
-        >
-          <TableHead
+      <h4 style={{ textAlign: "center", margin: "20px 0", fontSize: "18px" }}>
+        DPL Boys Kabaddi Points Table
+      </h4>
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <TableContainer component={Paper} sx={{ maxWidth: 1200, margin: "0 auto" }}>
+          <Table
             sx={{
-              "& .MuiTableCell-head": {
-                padding: "4px 8px",
-                fontWeight: "600",
-                fontSize: "14px",
-                backgroundColor: "rgb(197, 197, 197)",
+              minWidth: 400,
+              "& .MuiTableCell-root": {
+                fontSize: { xs: "12px", sm: "14px", md: "16px" },
+                padding: { xs: "10px 5px", sm: "20px 10px", md: "25px 15px" },
+                textAlign: "left",
+                fontWeight: 500,
               },
             }}
+            aria-label="points table"
           >
-            <TableRow>
-              <TableCell>Po</TableCell>
-              <TableCell align="right" sx={{width:"50px"}}>Team</TableCell>
-              <TableCell align="right">P</TableCell>
-              <TableCell align="right">W</TableCell>
-              <TableCell align="right">L</TableCell>
-              <TableCell align="right">T</TableCell>
-              <TableCell align="right">Pts</TableCell>
-              <TableCell align="right">Pd</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody sx={{"& td, & th ,& a": { color: "black" }}}>
-            {pointsTable.map((row, index) => (
-              <TableRow key={row.teamId} sx={{backgroundColor:index===4?"rgb(255, 210, 210)":""}}>
-                <TableCell>{index + 1}</TableCell>
-                <TableCell align="right">
-                <Link to={`/team/${row.teamId}`} style={{ textDecoration: "none", color: "inherit" }}>
-  {row.teamName}
-  {index < 4 ? "(Q)" : ""}
-  {index === 0 && (
-    <span style={{ fontWeight: "bold", color: "orange", marginLeft: "5px" }}>
-      🏆 Winner
-    </span>
-  )}
-</Link>
-
-
+            <TableHead
+              sx={{
+                "& .MuiTableCell-head": {
+                  padding: { xs: "4px 4px", sm: "6px 8px", md: "8px 12px" },
+                  fontWeight: 600,
+                  fontSize: { xs: "12px", sm: "14px", md: "16px" },
+                  backgroundColor: "rgb(197, 197, 197)",
+                },
+              }}
+            >
+              <TableRow>
+                <TableCell>Po</TableCell>
+                <TableCell align="right" sx={{ width: { xs: "40px", md: "80px" } }}>
+                  Team
                 </TableCell>
-                <TableCell align="right">{row.matchesPlayed}</TableCell>
-                <TableCell align="right">{row.wins}</TableCell>
-                <TableCell align="right">{row.losses}</TableCell>
-                <TableCell align="right">{row.ties}</TableCell>
-                <TableCell align="right">{row.points}</TableCell>
-                <TableCell align="right">{row.pointsDifference}</TableCell>
+                <TableCell align="right">P</TableCell>
+                <TableCell align="right">W</TableCell>
+                <TableCell align="right">L</TableCell>
+                <TableCell align="right">T</TableCell>
+                <TableCell align="right">Pts</TableCell>
+                <TableCell align="right">Pd</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>}
-                  <Playoff/>
-      
+            </TableHead>
+            <TableBody
+              sx={{
+                "& td, & th, & a": { color: "black" },
+                "& tr": { transition: "background 0.3s ease" },
+              }}
+            >
+              {pointsTable.map((row, index) => (
+                <TableRow
+                  key={row.teamId}
+                  sx={{
+                    backgroundColor: row.qualifier === false ? "rgb(255, 210, 210)" : "",
+                    "&:hover": { backgroundColor: "rgba(255, 235, 59, 0.2)" },
+                  }}
+                >
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell align="right">
+                    <Link
+                      to={`/team/${row.teamId}`}
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      {row.teamName}
+                      {row.qualifier === true ? " (Q)" : ""}
+                      <span
+                        style={{
+                          fontWeight: "bold",
+                          color: "orange",
+                          marginLeft: "5px",
+                        }}
+                      >
+                        {row.finalWinner === true ? "🏆 Winner" : ""}
+                      </span>
+                    </Link>
+                  </TableCell>
+                  <TableCell align="right">{row.matchesPlayed}</TableCell>
+                  <TableCell align="right">{row.wins}</TableCell>
+                  <TableCell align="right">{row.losses}</TableCell>
+                  <TableCell align="right">{row.ties}</TableCell>
+                  <TableCell align="right">{row.points}</TableCell>
+                  <TableCell align="right">{row.pointsDifference}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+      <Playoff />
       <PointsTableInfo />
-            <Footer/>
-      
     </>
   );
 }
