@@ -1,34 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
-const images = [
-  {
-    src: "https://res.cloudinary.com/dbs1mjd6b/image/upload/c_crop,w_4000,h_1800/v1742194038/Cse_Team_sivhtb.jpg",
-    title: "CSE STRIKERS",
-  },
-  {
-    src: "https://res.cloudinary.com/dbs1mjd6b/image/upload/c_crop,w_4000,h_1800/v1742194038/Eee_dhuqbh.jpg",
-    title: "EEE THUNDERS",
-  },
-  {
-    src: "https://res.cloudinary.com/dbs1mjd6b/image/upload/c_crop,w_4000,h_1800,g_auto/v1742194035/Mech_crsdoo.jpg",
-    title: "MIGHTY MECHANICAL",
-  },
-  {
-    src: "https://res.cloudinary.com/dzwksifmb/image/upload/c_crop,w_4000,h_1800/v1742194985/Ece_ludmbz.jpg",
-    title: "ECE CHALLENGERS",
-  },
-  {
-    src: "https://res.cloudinary.com/dzwksifmb/image/upload/c_crop,w_4000,h_1800/v1742194985/Civil_mnloyr.jpg",
-    title: "ROYAL CIVIL",
-  },
-];
+import SwiperSkeleton from "./SwiperSkeleton";
 
 export default function AutoCarousel() {
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchGallery = async () => {
+      try {
+        const res = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/gallery?type=teams`
+        );
+        setImages(res.data);
+      } catch (err) {
+        console.error("Error fetching gallery:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchGallery();
+  }, []);
+
+  if (loading) {
+    return <SwiperSkeleton />;
+  }
+
   return (
     <Swiper
       modules={[Autoplay, Pagination, Navigation]}
@@ -43,8 +46,8 @@ export default function AutoCarousel() {
       {images.map((item, index) => (
         <SwiperSlide key={index} style={{ position: "relative" }}>
           <img
-            src={item.src}
-            alt={`Slide ${index}`}
+            src={item.url}
+            alt={item.caption || `Slide ${index}`}
             style={{
               width: "100%",
               borderRadius: "10px",
@@ -58,8 +61,9 @@ export default function AutoCarousel() {
               bottom: 0,
               left: 0,
               width: "100%",
-              height: "30%", // Adjust gradient height
-              background: "linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0))",
+              height: "30%",
+              background:
+                "linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0))",
               borderBottomLeftRadius: "10px",
               borderBottomRightRadius: "10px",
             }}
@@ -76,7 +80,7 @@ export default function AutoCarousel() {
               zIndex: 2,
             }}
           >
-            {item.title}
+            {item.caption}
           </div>
         </SwiperSlide>
       ))}
