@@ -1,71 +1,58 @@
-import React, { useState, useEffect } from 'react';
-import Navbar from '../components/common/Navbar';
-import Matches from './Matches';
-import axios from 'axios';
-import MatchListSkeleton from '../components/MatchListSkeleton';
-import Footer from '../components/common/Footer';
-import AutoCarousel from '../components/AutoCarousel';
-import Playoff from '../components/Playoff';
-import { Link } from 'react-router-dom';
-import TributeCelebration from '../components/TributeCelebration';
-import InstagramCarousel from '../components/InstagramCarousel';
-import InstagramFeed from '../components/InstagramFeed';
-
+import React, { useEffect, useState } from "react";
+import Matches from "./Matches";
+import MatchListSkeleton from "../components/MatchListSkeleton";
+import AutoCarousel from "../components/AutoCarousel";
+import TributeCelebration from "../components/TributeCelebration";
+import InstagramCarousel from "../components/InstagramCarousel";
+import useLiveMatchesCheck from "../hooks/useLiveMatchesCheck";
+import axios from "axios";
 
 export default function Home() {
-    const [showLive, setShowLive] = useState(true); // Initially try live matches
-    const [isChecking, setIsChecking] = useState(true);
+  const { showLive, isChecking } = useLiveMatchesCheck();
+  const [posts, setPosts] = useState([]);
 
-    useEffect(() => {
-        const checkLiveMatches = async () => {
-            try {
-                const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/matches/live`);
-                if (Array.isArray(response.data) && response.data.length === 0) {
-                    setShowLive(false); // No live matches, switch to completed
-                }
-            } catch (error) {
-                console.error("Error fetching live matches:", error);
-            } finally {
-                setIsChecking(false);
-            }
-        };
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const res = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/gallery?type=post`
+        );
+        setPosts(res.data);
+      } catch (err) {
+        console.error("Error fetching post gallery:", err);
+      }
+    };
 
-        checkLiveMatches();
-    }, []);
+    fetchPosts();
+  }, []);
 
-    return (
-        <>
-            <Navbar />
-            <AutoCarousel />
-            <TributeCelebration/>
-            {/* Wait for the check before rendering */}
-            {isChecking ? (
-                <MatchListSkeleton isHomePage={true}/>
-            ) : showLive ? (
-                <Matches url={"live"} />
-            ) : (
-                <Matches url={"completed"} limit={1} />
-            )}
-            {/* <InstagramFeed/> */}
-         <InstagramCarousel/>
+  return (
+    <>
+      <AutoCarousel />
+      <TributeCelebration />
 
-             <div className='gallery'>
-               
-                <div className="g_container">
-                    <img src="https://res.cloudinary.com/dzvhvgifb/image/upload/v1742019784/Snapinsta.app_484531088_17896190013177542_6012630088360014573_n_1080_vocuxj.webp" alt="" width={"100%"} style={{ margin: "20px auto" }} />
-                </div>
-                <div className="g_container">
-                    <img src="https://res.cloudinary.com/dzvhvgifb/image/upload/v1741931076/main_dpl_poster_Document_A4__11zon_qx9qar.jpg" alt="" width={350} style={{ margin: "0 auto" }} />
-                </div>
-                 <div className="g_container">
+      {isChecking ? (
+        <MatchListSkeleton isHomePage={true} />
+      ) : showLive ? (
+        <Matches url={"live"} />
+      ) : (
+        <Matches url={"completed"} limit={1} />
+      )}
 
-            <Link to={"/standings"} style={{textDecoration:"none",color:"white"}}>
-            
-            <Playoff/>
-            </Link>
-                </div>
-            </div>
-            <Footer/>
-        </>
-    );
+      <InstagramCarousel />
+
+      <div className="gallery">
+        {posts.map((item, idx) => (
+          <div key={idx} className="g_container">
+            <img
+              src={item.url}
+              alt={item.caption || "Post image"}
+              width={"100%"}
+              style={{ margin: "20px auto", borderRadius: "10px" }}
+            />
+          </div>
+        ))}
+      </div>
+    </>
+  );
 }
