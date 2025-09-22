@@ -1,36 +1,16 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import axios from "axios";
+import { createContext, useContext } from "react";
+import { useTeams as useTeamsHook } from "../hooks/useTeams";
 
 const TeamContext = createContext();
 
 export const TeamProvider = ({ children }) => {
-  const [teams, setTeams] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-   
-    const fetchTeams = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/teams`);
-        setTeams(response.data);
-        
-      } catch (error) {
-        console.error("Error fetching Teams:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (teams.length === 0) fetchTeams(); // Fetch only if teams are not loaded
-  }, [teams]);
+  const { teams, loading, setTeams } = useTeamsHook();
 
   return (
-    <TeamContext.Provider value={{ teams, loading }}>
+    <TeamContext.Provider value={{ teams, loading, setTeams }}>
       {children}
     </TeamContext.Provider>
   );
 };
 
-// Custom hook for using TeamContext
 export const useTeams = () => useContext(TeamContext);
