@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
-import { Dialog, DialogContent, Typography, Button, Box } from "@mui/material";
+import { Dialog, DialogContent, Typography, Box } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -21,11 +21,12 @@ export default function TributeCelebration() {
 
   const fetchWinner = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/matches/final`);
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/matches/final`
+      );
       const data = await response.json();
-
-      if (data.length > 0) {
-        setWinner(data[0]); // Assuming only one final match winner
+      if (data) {
+        setWinner(data);
         setOpen(true);
       }
     } catch (error) {
@@ -35,18 +36,16 @@ export default function TributeCelebration() {
 
   const handleClose = () => {
     setOpen(false);
-    setTimeout(() => setWinner(null), 500); // Delay to smoothly remove Confetti
+    setTimeout(() => setWinner(null), 500);
     localStorage.setItem("tributeCelebrationDismissed", "true");
   };
 
   return (
     <Box textAlign="center">
-      {/* Confetti Effect Only When Open */}
       <AnimatePresence>
         {winner && open && <Confetti width={width} height={height} />}
       </AnimatePresence>
 
-      {/* Pop-up with Animation */}
       <Dialog open={open} onClose={handleClose}>
         <DialogContent
           sx={{
@@ -92,15 +91,6 @@ export default function TributeCelebration() {
                 <Typography variant="h6" mt={2} color="black">
                   {winner?.name}
                 </Typography>
-{/* 
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleClose}
-                  sx={{ mt: 3 }}
-                >
-                  Close
-                </Button> */}
               </motion.div>
             )}
           </AnimatePresence>
