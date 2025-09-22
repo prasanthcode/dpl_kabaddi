@@ -1,0 +1,146 @@
+.teams-card {
+  padding-top: 20px;
+  background-color: var(--primary-color);
+  position: relative;
+  border-radius: 10px;
+}
+
+.teams-card img {
+  width: 100px;
+  border-radius: 50%;
+  box-shadow: rgba(51, 53, 61, 0.8) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+.teams-img-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.teams-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.teams-name h3 {
+  font-size: 16px;
+  font-weight: 600;
+  height: fit-content;
+  width: fit-content;
+  text-align: center;
+  margin: 10px 0 0 0;
+}
+
+.teams-arrow {
+  font-size: 15px;
+  margin-top: 5px;
+  text-align: center;
+  color: var(--text-inverted);
+}
+
+.teams-skeleton-card {
+  background-color: rgb(8, 43, 109);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.teams-skeleton-img-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.teams-skeleton-name {
+  margin-top: 10px;
+}
+
+.teams-skeleton-short {
+  margin-top: 5px;
+}
+.teams-container {
+  margin: 20px auto;
+  padding-top: 20px;
+  width: 90%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .teams-card {
+    margin: 0;
+  }
+  .teams-container {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.teams-card {
+  background-color: var(--primary-color);
+  position: relative;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.teams-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.teams-card img {
+  width: 100px;
+  border-radius: 50%;
+  box-shadow: rgba(51, 53, 61, 0.8) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+.teams-img-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.teams-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.teams-name h3 {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  margin: 10px 0 0 0;
+}
+
+.teams-arrow {
+  font-size: 15px;
+  margin-top: 5px;
+  text-align: center;
+  color: var(--text-inverted);
+}
+
+.teams-skeleton-card {
+  background-color: rgb(8, 43, 109);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.teams-skeleton-img-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.teams-skeleton-name {
+  margin-top: 10px;
+}
+
+.teams-skeleton-short {
+  margin-top: 5px;
+}
