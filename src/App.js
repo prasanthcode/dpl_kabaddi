@@ -1,59 +1,106 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; 
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Matches from "./pages/Matches";
 import Teams from "./pages/Teams";
 import TeamInfo from "./pages/TeamInfo";
 import Standing from "./pages/Standing";
-import AddScore from "./pages/AddScore";
+import AddScore from "./admin/pages/AddScore";
 import Match from "./pages/Match";
 import PlayersStats from "./pages/PlayersStats";
-import UploadPage from "./pages/UploadPage";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Logout from "./pages/Logout";
 import PlayerInfo from "./pages/PlayerInfo";
 import PageTracker from "./PageTracker";
-import { initGA } from "./analytics";
+import { initGA } from "./config/analytics";
+import DashBoard from "./admin/pages/DashBoard";
+import AdminMatches from "./admin/pages/Matches";
+import AdminTeams from "./admin/pages/Teams";
+import AdminPlayers from "./admin/pages/Players";
+import PublicLayout from "./layouts/PublicLayout";
+import AdminLayout from "./layouts/AdminLayout";
+import Gallery from "./admin/pages/Gallery";
 function App() {
   useEffect(() => {
-    initGA(); // Initialize Google Analytics when app loads
+    initGA(); 
   }, []);
   return (
     <Router>
-      <PageTracker/>
-      <Routes> 
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/logout" element={<Logout/>} />
+      <PageTracker />
 
-          <Route path="/admin/matches" element={
-            <ProtectedRoute>
-               <Matches url={"live"} isAdmin={true} />
-            </ProtectedRoute>
-          } />
-        <Route path="/addscore/:matchId" element={
-          <ProtectedRoute>
+      <Routes>
+        {/* ---------------- PUBLIC LAYOUT ---------------- */}
+        <Route element={<PublicLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/completed" element={<Matches url="completed" />} />
+          <Route path="/live" element={<Matches url="live" />} />
+          <Route path="/upcoming" element={<Matches url="upcoming" />} />
+          <Route path="/live/:matchId" element={<Match enablePolling />} />
+          <Route
+            path="/recent/:matchId"
+            element={<Match enablePolling={false} />}
+          />
+          <Route path="/teams" element={<Teams />} />
+          <Route path="/team/:id" element={<TeamInfo />} />
+          <Route path="/player/:playerId" element={<PlayerInfo />} />
+          <Route path="/playerstats" element={<PlayersStats />} />
+          <Route path="/standings" element={<Standing />} />
+        </Route>
 
-            <AddScore />
-          </ProtectedRoute>
-          } />
-        <Route path="/team/:id" element={<TeamInfo />} />
-        <Route path="/player/:playerId" element={<PlayerInfo />} />
+        {/* ---------------- AUTH (NO NAV/FOOTER) ---------------- */}
+        <Route path="/login" element={<Login />} />
 
-
-        <Route path="/completed" element={
-        
-        <Matches url={"completed"} />} />
-        <Route path="/live" element={<Matches url={"live"} />} />
-        <Route path="/upload" element={<UploadPage/>} />
-        <Route path="/upcoming" element={<Matches url={"upcoming"} />} />
-        <Route path="/standings" element={<Standing />} />
-        <Route path="/teams" element={<Teams />} />
-       
-        <Route path="/live/:matchId" element={<Match enablePolling={true} />} />
-        <Route path="/recent/:matchId" element={<Match enablePolling={false} />} />
-        <Route path="/playerstats" element={<PlayersStats />} />
+        {/* ---------------- ADMIN ROUTES ---------------- */}
+        <Route element={<AdminLayout />}>
+          <Route
+            path="/admin/dashboard"
+            element={
+              <ProtectedRoute>
+                <DashBoard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/gallery"
+            element={
+              <ProtectedRoute>
+                <Gallery />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/matches"
+            element={
+              <ProtectedRoute>
+                <AdminMatches />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/teams"
+            element={
+              <ProtectedRoute>
+                <AdminTeams />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/players"
+            element={
+              <ProtectedRoute>
+                <AdminPlayers />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/addscore/:matchId"
+            element={
+              <ProtectedRoute>
+                <AddScore />
+              </ProtectedRoute>
+            }
+          />
+        </Route>
       </Routes>
     </Router>
   );
