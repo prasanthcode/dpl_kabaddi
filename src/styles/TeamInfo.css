@@ -1,0 +1,101 @@
+.teaminfo-container {
+  padding: 10px;
+  color: white;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: "Inter", "Roboto", Arial, sans-serif;
+}
+
+.teaminfo-title {
+  margin: 10px 0;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.teaminfo-list {
+  margin-top: 20px;
+}
+
+.teaminfo-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.teaminfo-card {
+  background-color: var(--primary-color);
+  margin: 10px 0;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.teaminfo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 10px 20px;
+}
+
+.teaminfo-img-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.teaminfo-img-wrap img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: rgba(51, 53, 61, 0.8) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  transition: transform 0.2s;
+}
+
+.teaminfo-img-wrap img:hover {
+  transform: scale(1.05);
+}
+
+.teaminfo-name h3 {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.teaminfo-empty {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 16px;
+  color: #ccc;
+}
+
+.skeleton-card {
+  background-color: rgb(8, 43, 109);
+  height: 150px;
+  border-radius: 10px;
+}
+
+@media (min-width: 768px) {
+  .teaminfo-items {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 30px; /* spacing between cards */
+    justify-content: center; /* center the items */
+  }
+
+  .teaminfo-card {
+    width: 300px;
+  }
+
+  .teaminfo-name h3 {
+    font-size: 18px;
+  }
+
+  .teaminfo-img-wrap img {
+    width: 120px;
+    height: 120px;
+  }
+}
