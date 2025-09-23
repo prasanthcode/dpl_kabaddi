@@ -25,7 +25,7 @@ export default function TributeCelebration() {
         `${process.env.REACT_APP_API_URL}/api/matches/final`
       );
       const data = await response.json();
-      if (data) {
+      if (data?.matchId) {
         setWinner(data);
         setOpen(true);
       }
