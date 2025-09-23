@@ -1,8 +1,5 @@
-import axios from "axios";
+import { API } from "./apiClient";
 
-const API = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || "http://localhost:5000",
-});
 
 export const fetchPlayers = () => API.get("/api/players");
 export const fetchPlayersByTeam = (teamId) =>

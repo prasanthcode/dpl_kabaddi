@@ -1,8 +1,4 @@
-import axios from "axios";
-
-const API = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || "http://localhost:5000",
-});
+import { API } from "./apiClient";
 
 export const fetchMatches = () => API.get("/api/matches");
 export const addMatch = (matchData) => API.post("/api/matches", matchData);

@@ -1,8 +1,5 @@
-import axios from "axios";
+import { API } from "./apiClient";
 
-const API = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || "http://localhost:5000",
-});
 export const fetchTeams = () => API.get("/api/teams");
 export const addTeam = (teamData) => {
   if (teamData instanceof FormData) {
