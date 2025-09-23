@@ -122,6 +122,38 @@
   font-size: 16px;
   margin-top: 60px;
 }
+
+.match_last_action {
+  font-size: 14px;
+  width: 90%;
+  text-align: center;
+  font-weight: 500;
+  width: 100%;
+  display: inline-block;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.match_last_action p {
+  margin: 10px auto;
+  width: 90%;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: var(--primary-color); /* near-white */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .toggle_cover {
   text-align: center;
   background-color: rgb(255, 255, 255);

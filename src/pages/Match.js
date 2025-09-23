@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import { Typography } from "@mui/material";
-
 import MatchSkeleton from "../components/MatchSkeleton";
 import LoadingSpinner from "../components/LoadingSpinner";
 import Stats from "../components/Stats";
@@ -30,23 +28,24 @@ export default function Match() {
       navigate(`/recent/${matchId}`);
     }
   }, [matches, navigate, matchId]);
-
   if (loading) return <MatchSkeleton />;
   if (error) return <p className="match_error">Error: {error}</p>;
 
   return (
     <div className="match_page">
-
-
       <div className="match_wrapper">
         <div className="match_bg">
           <div className="match_card">
             <h5 className="match_type">
-              {matches.status==="Ongoing"? (<>
-                Live <span className="matches-live-dot"></span>
-              </>):matches?.matchType
-                ? matches.matchType
-                : matches?.matchNumber && `Match - #${matches.matchNumber}`}
+              {matches.status === "Ongoing" ? (
+                <>
+                  Live <span className="matches-live-dot"></span>
+                </>
+              ) : matches?.matchType ? (
+                matches.matchType
+              ) : (
+                matches?.matchNumber && `Match - #${matches.matchNumber}`
+              )}
             </h5>
 
             <div className="match_vs_container">
@@ -66,7 +65,12 @@ export default function Match() {
               <div
                 className="matches-time"
                 style={{
-                  borderColor: matches.status === "Completed" ? "green" : matches.halfTime && matches.status==="Ongoing" ? "red" :"white",
+                  borderColor:
+                    matches.status === "Completed"
+                      ? "green"
+                      : matches.halfTime && matches.status === "Ongoing"
+                      ? "red"
+                      : "white",
                 }}
               >
                 {matches.status === "Completed"
@@ -91,52 +95,81 @@ export default function Match() {
                 </div>
               </div>
             </div>
+            {matches && (
+              <>
+                {/* Ongoing match after half-time → show who leads */}
+                {matches.status === "Ongoing" && matches.halfTime && (
+                  <h3 className="match_result">
+                    {matches.teamA?.score === matches.teamB?.score
+                      ? "Match Tied at Half-time"
+                      : matches.teamA?.score > matches.teamB?.score
+                      ? `Half-time Over: ${matches.teamA?.name} leads ${matches.teamB?.name}`
+                      : `Half-time Over: ${matches.teamB?.name} leads ${matches.teamA?.name}`}
+                  </h3>
+                )}
 
-            {!(matches?.status === "Ongoing") && (
-              <h3 className="match_result">
-                {matches.teamA?.score === matches.teamB?.score
-                  ? "Match Tied"
-                  : matches.teamA?.score > matches.teamB?.score
-                  ? `${matches.teamA?.name} beats ${matches.teamB?.name} (${matches.teamA?.score}-${matches.teamB?.score})`
-                  : `${matches.teamB?.name} beats ${matches.teamA?.name} (${matches.teamB?.score}-${matches.teamA?.score})`}
-              </h3>
+                {/* Finished match → show result */}
+                {matches.status !== "Ongoing" && (
+                  <h3 className="match_result">
+                    {matches.teamA?.score === matches.teamB?.score
+                      ? "Match Tied"
+                      : matches.teamA?.score > matches.teamB?.score
+                      ? `${matches.teamA?.name} beats ${matches.teamB?.name} (${matches.teamA?.score}-${matches.teamB?.score})`
+                      : `${matches.teamB?.name} beats ${matches.teamA?.name} (${matches.teamB?.score}-${matches.teamA?.score})`}
+                  </h3>
+                )}
+              </>
             )}
           </div>
         </div>
       </div>
+      {lastAction && (
+        <div className="match_last_action">
+          <p>
+            {lastAction.type === "raid" || lastAction.type === "defense"
+              ? `${lastAction.playerName} scored ${lastAction.points} point${
+                  lastAction.points > 1 ? "s" : ""
+                } in a ${lastAction.type} for ${lastAction.teamName}`
+              : `${lastAction.teamName} scored ${lastAction.points} point${
+                  lastAction.points > 1 ? "s" : ""
+                }`}
+          </p>
+        </div>
+      )}
 
-     {/* Toggle Buttons */}
-<div className="toggle_cover">
-  <ToggleButtonGroup
-    value={alignment}
-    exclusive
-    onChange={(e, newAlignment) => newAlignment && setAlignment(newAlignment)}
-    className="match_toggle_main"
-  >
-    <ToggleButton value="line_up" className="custom-toggle">
-      Line Up
-    </ToggleButton>
-    <ToggleButton value="team_stats" className="custom-toggle">
-      Team Stats
-    </ToggleButton>
-  </ToggleButtonGroup>
+      <div className="toggle_cover">
+        <ToggleButtonGroup
+          value={alignment}
+          exclusive
+          onChange={(e, newAlignment) =>
+            newAlignment && setAlignment(newAlignment)
+          }
+          className="match_toggle_main"
+        >
+          <ToggleButton value="line_up" className="custom-toggle">
+            Line Up
+          </ToggleButton>
+          <ToggleButton value="team_stats" className="custom-toggle">
+            Team Stats
+          </ToggleButton>
+        </ToggleButtonGroup>
 
-  {alignment === "line_up" && stats && (
-    <ToggleButtonGroup
-      value={team}
-      exclusive
-      onChange={(e, newTeam) => newTeam && setTeam(newTeam)}
-      className="match_toggle_team"
-    >
-      <ToggleButton value="A" className="custom-toggle">
-        {matches.teamA?.name}
-      </ToggleButton>
-      <ToggleButton value="B" className="custom-toggle">
-        {matches.teamB?.name}
-      </ToggleButton>
-    </ToggleButtonGroup>
-  )}
-</div>
+        {alignment === "line_up" && stats && (
+          <ToggleButtonGroup
+            value={team}
+            exclusive
+            onChange={(e, newTeam) => newTeam && setTeam(newTeam)}
+            className="match_toggle_team"
+          >
+            <ToggleButton value="A" className="custom-toggle">
+              {matches.teamA?.name}
+            </ToggleButton>
+            <ToggleButton value="B" className="custom-toggle">
+              {matches.teamB?.name}
+            </ToggleButton>
+          </ToggleButtonGroup>
+        )}
+      </div>
 
       {alignment === "team_stats" && totalPoints && (
         <Stats total={totalPoints} />

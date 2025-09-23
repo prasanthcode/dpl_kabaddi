@@ -57,7 +57,7 @@ export function useMatchStats(matchId) {
       });
     }
 
-    if (data.lastAction) {
+    if (data?.lastAction?.points) {
       setLastAction(data.lastAction);
     }
   };
