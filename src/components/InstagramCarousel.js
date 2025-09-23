@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { Box, Typography } from "@mui/material";
-import axios from "axios";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { fetchCarouselGalleries } from "../services/galleryApi";
 
 export default function InstagramCarousel() {
   const [images, setImages] = useState([]);
@@ -11,9 +11,7 @@ export default function InstagramCarousel() {
   useEffect(() => {
     const fetchCarousel = async () => {
       try {
-        const res = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/gallery?type=carousel`
-        );
+        const res = await fetchCarouselGalleries();
         setImages(res.data);
       } catch (err) {
         console.error("Error fetching carousel gallery:", err);

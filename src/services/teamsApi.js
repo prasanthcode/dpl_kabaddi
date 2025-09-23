@@ -18,3 +18,4 @@ export const updateTeam = (id, teamData) => {
   return API.patch(`/api/teams/${id}`, teamData);
 };
 export const deleteTeam = (id) => API.delete(`/api/teams/${id}`);
+export const fetchTeamStats = (teamId) => API.get(`/api/teams/${teamId}/stats`);

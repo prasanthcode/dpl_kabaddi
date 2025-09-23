@@ -11,5 +11,18 @@ export const getMatches = (url, limit) =>
 
 export const getMatchStats = (matchId) =>
   API.get(`/api/matches/${matchId}/fullstats`);
+
 export const getLiveConnectionsCount = () =>
   API.get(`/api/matches/active-connections`);
+
+export const setMatchHalftime = (matchId) =>
+  API.patch(`/api/matches/${matchId}/halftime`);
+
+export const setMatchComplete = (matchId) =>
+  API.patch(`/api/matches/${matchId}/complete`);
+
+export const getFinalWinner = () => API.get(`/api/matches/final`);
+
+export const getPointsTable = () => API.get(`/api/matches/pointstable`);
+
+export const getLiveMatches = () => API.get(`/api/matches/live`);

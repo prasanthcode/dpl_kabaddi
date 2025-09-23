@@ -4,6 +4,7 @@ import { useWindowSize } from "react-use";
 import { Dialog, DialogContent, Typography, Box } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { getFinalWinner } from "../services/matchesApi";
 
 export default function TributeCelebration() {
   const { width, height } = useWindowSize();
@@ -21,9 +22,7 @@ export default function TributeCelebration() {
 
   const fetchWinner = async () => {
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/matches/final`
-      );
+      const response = await getFinalWinner();
       const data = await response.json();
       if (data?.matchId) {
         setWinner(data);

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import LoadingSpinner from "./LoadingSpinner";
+import { fetchTeamStats } from "../services/teamsApi";
 export default function TeamStats({ teamId }) {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -7,11 +8,8 @@ export default function TeamStats({ teamId }) {
   useEffect(() => {
     async function fetchStats() {
       try {
-        const res = await fetch(
-          `${process.env.REACT_APP_API_URL}/api/teams/${teamId}/stats`
-        );
-        const data = await res.json();
-        setStats(data);
+        const res = await fetchTeamStats(teamId);
+        setStats(res.data);
       } catch (err) {
         console.error("Error fetching team stats:", err);
       } finally {

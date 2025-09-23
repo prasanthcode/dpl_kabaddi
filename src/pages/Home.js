@@ -5,7 +5,7 @@ import AutoCarousel from "../components/AutoCarousel";
 import TributeCelebration from "../components/TributeCelebration";
 import InstagramCarousel from "../components/InstagramCarousel";
 import useLiveMatchesCheck from "../hooks/useLiveMatchesCheck";
-import axios from "axios";
+import { fetchPostGalleries } from "../services/galleryApi";
 
 export default function Home() {
   const { showLive, isChecking } = useLiveMatchesCheck();
@@ -14,9 +14,7 @@ export default function Home() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/gallery?type=post`
-        );
+        const res = await fetchPostGalleries();
         setPosts(res.data);
       } catch (err) {
         console.error("Error fetching post gallery:", err);

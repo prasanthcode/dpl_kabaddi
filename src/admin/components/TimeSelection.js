@@ -6,8 +6,8 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { setMatchComplete, setMatchHalftime } from "../../services/matchesApi";
 
 const TimeSelectionRadio = ({ label, options, onChange }) => {
   const [selectedValue, setSelectedValue] = useState("");
@@ -84,14 +84,10 @@ export default function TimeSelection({ matchId }) {
 
     try {
       if (selectedTime === "HT") {
-        await axios.patch(
-          `${process.env.REACT_APP_API_URL}/api/matches/${matchId}/halftime`
-        );
+        await setMatchHalftime(matchId);
         alert("Match status updated to Half Time!");
       } else if (selectedTime === "FT") {
-        await axios.patch(
-          `${process.env.REACT_APP_API_URL}/api/matches/${matchId}/complete`
-        );
+        await setMatchComplete(matchId);
         alert("Match status updated to Completed!");
         navigate("/admin/matches");
       }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { getLiveMatches } from "../services/matchesApi";
 
 export default function useLiveMatchesCheck() {
   const [showLive, setShowLive] = useState(true);
@@ -8,9 +8,7 @@ export default function useLiveMatchesCheck() {
   useEffect(() => {
     const checkLiveMatches = async () => {
       try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/matches/live`
-        );
+        const response = await getLiveMatches();
         if (Array.isArray(response.data) && response.data.length === 0) {
           setShowLive(false);
         }

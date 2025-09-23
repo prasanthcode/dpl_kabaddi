@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import axios from "axios";
+import { getPointsTable } from "../services/matchesApi";
 
 export const PointsTableContext = createContext();
 
@@ -11,7 +11,7 @@ export const PointsTableProvider = ({ children }) => {
     const fetchPoints = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/matches/pointstable`);
+        const response = await getPointsTable();
         setPointsTable(response.data);
       } catch (error) {
         console.error("Error fetching points:", error);

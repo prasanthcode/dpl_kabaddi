@@ -22,3 +22,12 @@ export const updateGallery = (id, galleryData) => {
 };
 
 export const deleteGallery = (id) => API.delete(`/api/gallery/${id}`);
+
+export const fetchTeamGalleries = () =>
+  API.get("/api/gallery", { params: { type: "teams" } });
+
+export const fetchCarouselGalleries = () =>
+  API.get("/api/gallery", { params: { type: "carousel" } });
+
+export const fetchPostGalleries = () =>
+  API.get("/api/gallery", { params: { type: "post" } });

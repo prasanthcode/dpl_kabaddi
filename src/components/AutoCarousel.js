@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import SwiperSkeleton from "./SwiperSkeleton";
+import { fetchTeamGalleries } from "../services/galleryApi";
 
 export default function AutoCarousel() {
   const [images, setImages] = useState([]);
@@ -14,9 +14,7 @@ export default function AutoCarousel() {
   useEffect(() => {
     const fetchGallery = async () => {
       try {
-        const res = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/gallery?type=teams`
-        );
+        const res = await fetchTeamGalleries();
         setImages(res.data);
       } catch (err) {
         console.error("Error fetching gallery:", err);
