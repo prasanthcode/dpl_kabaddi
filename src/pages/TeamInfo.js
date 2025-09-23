@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { usePlayers } from "../hooks/usePlayers";
 import "../styles/TeamInfo.css";
+import TeamStats from "../components/TeamStats";
 
 export default function TeamInfo() {
   const { id } = useParams();
@@ -13,13 +14,15 @@ export default function TeamInfo() {
 
   return (
     <div className="teaminfo-container">
+      <TeamStats teamId={id} />
+
       {loading ? (
         <TeamInfoSkeleton />
       ) : (
         <>
           {players.length > 0 ? (
             <>
-              <h2 className="teaminfo-title">{players[0].team.name}</h2>
+              <h2 className="teaminfo-title">Squad</h2>
 
               <div className="teaminfo-list">
                 <div className="teaminfo-items">

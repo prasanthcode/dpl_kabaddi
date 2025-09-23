@@ -76,6 +76,82 @@
   height: 150px;
   border-radius: 10px;
 }
+.teamstats-card {
+  color: #484848;
+  background-color: white;
+  border-radius: 6px;
+  padding: 10px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.teamstats-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.teamstats-header img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.teamstats-header h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.teamstats-grid div {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(210, 210, 210);
+  padding: 10px 5px;
+  align-items: center;
+}
+
+.teamstats-grid span {
+  font-weight: 600;
+}
+
+.match-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 12px;
+}
+
+.teamstats-grid .team {
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  justify-content: flex-start;
+  position: relative;
+}
+.team p {
+  margin: 0;
+}
+.teamstats-grid img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.vs {
+  position: absolute;
+  top: 125%;
+  left: 50%;
+  background-color: white;
+  transform: translate(-50%, -50%);
+}
 
 @media (min-width: 768px) {
   .teaminfo-items {
