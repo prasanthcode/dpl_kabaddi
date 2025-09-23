@@ -16,7 +16,7 @@ export default function LineUp({ stats }) {
                           process.env.REACT_APP_CLOUDINARY_FILE_BASE_URL +
                           raider.profilePic
                         }.jpg`
-                      : "https://www.gravatar.com/avatar/?d=mp"
+                      : `${process.env.REACT_APP_CLOUDINARY_FILE_BASE_URL}g2xafebqt6zkwwuzdaiy.png`
                   }
                   alt="No Pic"
                 />
@@ -42,7 +42,7 @@ export default function LineUp({ stats }) {
                           process.env.REACT_APP_CLOUDINARY_FILE_BASE_URL +
                           defender.profilePic
                         }.jpg`
-                      : "https://www.gravatar.com/avatar/?d=mp"
+                      : `${process.env.REACT_APP_CLOUDINARY_FILE_BASE_URL}g2xafebqt6zkwwuzdaiy.png`
                   }
                   alt="No Pic"
                 />

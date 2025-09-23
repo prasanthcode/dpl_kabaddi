@@ -17,7 +17,10 @@ export default function PlayerInfo() {
         <div className="main_player">
           <div className="player_info">
             <img
-              src={player.profilePic || "https://www.gravatar.com/avatar/?d=mp"}
+              src={
+                player.profilePic ||
+                `${process.env.REACT_APP_CLOUDINARY_FILE_BASE_URL}g2xafebqt6zkwwuzdaiy.png`
+              }
               alt={player.name}
             />
             <div className="name_team_info">

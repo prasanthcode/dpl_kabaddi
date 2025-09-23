@@ -164,7 +164,7 @@ function LeaderboardSection({ category, title }) {
                         <img
                           src={
                             row[col.dataKey] ||
-                            "https://www.gravatar.com/avatar/?d=mp"
+                            `${process.env.REACT_APP_CLOUDINARY_FILE_BASE_URL}g2xafebqt6zkwwuzdaiy.png`
                           }
                           alt={row.name}
                           style={{
