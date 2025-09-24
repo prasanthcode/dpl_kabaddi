@@ -43,13 +43,13 @@ export default function TeamStats({ teamId }) {
           <span>Highest Score</span> {stats.highestScore}
         </div>
         <div>
-          <span>Highest Win Margin</span> {stats.highestWinMargin}
-        </div>
-        <div>
           <span>Total Raid Points</span> {stats.totalRaidPoints}
         </div>
         <div>
           <span>Total Tackle Points</span> {stats.totalTacklePoints}
+        </div>
+        <div>
+          <span>Highest Win Margin</span> {stats.highestWinMargin}
         </div>
         {stats.highestMarginWinMatch && (
           <>
