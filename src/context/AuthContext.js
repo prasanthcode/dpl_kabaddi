@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
     () => JSON.parse(localStorage.getItem("user")) || null
   );
   const [token, setToken] = useState(
-    () => localStorage.getItem("token") || null
+    () => localStorage.getItem("accessToken") || null
   );
 
   const login = async (email, password) => {
@@ -17,9 +17,9 @@ export const AuthProvider = ({ children }) => {
       const res = await getAuthToken({ email, password })
       setUser(res.data.user);
       setToken(res.data.accessToken);
-
       localStorage.setItem("user", JSON.stringify(res.data.user));
-      localStorage.setItem("token", res.data.accessToken);
+      localStorage.setItem("accessToken", res.data.accessToken);
+      localStorage.setItem("refreshToken", res.data.refreshToken);
     } catch (error) {
       console.error(
         "Login failed:",
@@ -33,7 +33,8 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     setToken(null);
     localStorage.removeItem("user");
-    localStorage.removeItem("token");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
   };
 
   return (
