@@ -11,7 +11,7 @@ import PlayersStats from "./pages/PlayersStats";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PlayerInfo from "./pages/PlayerInfo";
-import PageTracker from "./PageTracker";
+import PageTracker from "./components/PageTracker";
 import { initGA } from "./config/analytics";
 import DashBoard from "./admin/pages/DashBoard";
 import AdminMatches from "./admin/pages/Matches";
@@ -20,6 +20,7 @@ import AdminPlayers from "./admin/pages/Players";
 import PublicLayout from "./layouts/PublicLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import Gallery from "./admin/pages/Gallery";
+import NotFound from "./pages/NotFound";
 function App() {
   useEffect(() => {
     initGA(); 
@@ -27,7 +28,6 @@ function App() {
   return (
     <Router>
       <PageTracker />
-
       <Routes>
         {/* ---------------- PUBLIC LAYOUT ---------------- */}
         <Route element={<PublicLayout />}>
@@ -49,7 +49,9 @@ function App() {
 
         {/* ---------------- AUTH (NO NAV/FOOTER) ---------------- */}
         <Route path="/login" element={<Login />} />
+        {/* ---------------- NOT FOUND (NO NAV/FOOTER) ---------------- */}
 
+        <Route path="*" element={<NotFound />} />
         {/* ---------------- ADMIN ROUTES ---------------- */}
         <Route element={<AdminLayout />}>
           <Route
