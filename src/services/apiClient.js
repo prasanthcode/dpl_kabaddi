@@ -43,8 +43,15 @@ API.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
+    const status = error.response?.status;
+    const message = error.response?.data?.message;
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    // Invalid or expired token
+    if (
+      error.response?.status === 401 &&
+      message === "Invalid or expired token" &&
+      !originalRequest._retry
+    ) {
       originalRequest._retry = true;
       try {
         const newAccessToken = await refreshAccessToken();
@@ -55,6 +62,9 @@ API.interceptors.response.use(
         window.location.href = "/login";
         return Promise.reject(_err);
       }
+    }
+    if (status === 401 && message === "Invalid credentials") {
+      return Promise.reject(new Error("Invalid credentials"));
     }
 
     return Promise.reject(error);

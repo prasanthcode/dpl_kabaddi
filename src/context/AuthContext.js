@@ -26,8 +26,7 @@ export const AuthProvider = ({ children }) => {
       setAccessToken(res.data.accessToken);
       setRefreshToken(res.data.refreshToken);
     } catch (error) {
-      console.error(error.response?.data?.message || error.message);
-      throw new Error(error.response?.data?.message || "Login failed");
+      throw new Error(error.response?.data?.message || error.message);
     }
   };
 
