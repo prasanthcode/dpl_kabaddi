@@ -10,6 +10,7 @@ import Paper from "@mui/material/Paper";
 import { TableVirtuoso } from "react-virtuoso";
 import { Link } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
+import { getPlayerStats } from "../services/statsApi";
 
 const getColumns = (categoryKey) => {
   let pointsLabel = "Points";
@@ -64,9 +65,7 @@ function LeaderboardSection({ category, title }) {
       try {
         setLoading(true);
         setError(null);
-        const res = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/stats/top5?category=${category}`
-        );
+        const res = await getPlayerStats(category);
         setPlayers(res.data[category] || []);
       } catch (err) {
         console.error("Error fetching leaderboard:", err);
