@@ -26,3 +26,6 @@ export const getFinalWinner = () => API.get(`/api/matches/final`);
 export const getPointsTable = () => API.get(`/api/matches/pointstable`);
 
 export const getLiveMatches = () => API.get(`/api/matches/live`);
+
+export const getPlayerPointsOfMatch = (matchId, playerId, type) =>
+  API.get(`/api/matches/${matchId}/player/${playerId}/sequence?type=${type}`);

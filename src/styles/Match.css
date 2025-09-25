@@ -142,7 +142,32 @@
   background-color: #ffffff;
   color: var(--primary-color); /* near-white */
 }
-
+.points-container {
+  background-color: white;
+  color: #333;
+  padding: 10px;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.point-badge {
+  display: inline-flex; /* inline but can center content */
+  align-items: center; /* vertically center number */
+  justify-content: center; /* horizontally center number */
+  width: 20px; /* fixed width */
+  height: 20px; /* fixed height */
+  background-color: #113191; /* green color */
+  color: white; /* text color */
+  border-radius: 50%; /* makes it round */
+  font-weight: bold;
+  margin-right: 4px; /* small spacing */
+  margin-bottom: 4px; /* spacing in wrap */
+  font-size: 14px;
+}
+.points-container {
+  display: flex;
+  flex-wrap: wrap; /* wrap points if too long */
+  margin-top: 8px;
+}
 @keyframes fadeIn {
   from {
     opacity: 0;

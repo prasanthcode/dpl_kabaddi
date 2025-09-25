@@ -1,17 +1,21 @@
 import { useCallback, useEffect, useState } from "react";
 import * as api from "../services/matchesApi";
 
-export function useMatches(teams = []) {
+export function useMatches() {
   const [matches, setMatches] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [matchesLoading, setMatchesLoading] = useState(true);
+  const [pointsLoading, setPointsLoading] = useState(false);
+  const [pointSequences, setPointSequences] = useState({}); // { "playerId-type": { points, type } }
+
   const loadMatches = useCallback(async () => {
+    setMatchesLoading(true);
     try {
       const res = await api.fetchMatches();
       setMatches(res.data || []);
     } catch (err) {
       console.error("Load matches failed", err);
     } finally {
-      setLoading(false);
+      setMatchesLoading(false);
     }
   }, []);
 
@@ -27,7 +31,6 @@ export function useMatches(teams = []) {
     status = "Upcoming",
   }) => {
     const res = await api.addMatch({ teamA, teamB, date, matchType, status });
-
     await loadMatches();
     return res.data;
   };
@@ -47,5 +50,31 @@ export function useMatches(teams = []) {
     setMatches((prev) => prev.filter((m) => m._id !== id));
   };
 
-  return { loading, matches, setMatches, addMatch, updateMatch, deleteMatch };
+  // Player points per player + type
+  const getPlayerPointsOfMatch = async (matchId, playerId, type) => {
+    setPointsLoading(true);
+    try {
+      const res = await api.getPlayerPointsOfMatch(matchId, playerId, type);
+      setPointSequences((prev) => ({
+        ...prev,
+        [`${playerId}-${type}`]: res.data, // store by playerId + type
+      }));
+    } catch (err) {
+      console.error("Load player points failed", err);
+    } finally {
+      setPointsLoading(false);
+    }
+  };
+
+  return {
+    matches,
+    matchesLoading,
+    setMatches,
+    addMatch,
+    updateMatch,
+    deleteMatch,
+    pointSequences,
+    pointsLoading,
+    getPlayerPointsOfMatch,
+  };
 }

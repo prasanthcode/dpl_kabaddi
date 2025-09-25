@@ -176,6 +176,7 @@ export default function Match() {
       )}
       {alignment === "line_up" && stats && (
         <LineUp
+          matchId={matchId}
           stats={{
             topRaiders: stats[`team${team}`].topRaiders,
             topDefenders: stats[`team${team}`].topDefenders,
