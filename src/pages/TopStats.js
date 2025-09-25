@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import PlayersStats from "./PlayersStats";
-import TeamsStats from "./TeamStats";
+import PlayersStats from "../components/TopPlayers";
+import TeamsStats from "../components/TopTeams";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
