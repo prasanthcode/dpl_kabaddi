@@ -5,7 +5,7 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 export default function TopStats() {
-  const [view, setView] = useState("players"); // default is players
+  const [view, setView] = useState("players");
 
   const handleChange = (event, newView) => {
     if (newView !== null) {
@@ -22,40 +22,62 @@ export default function TopStats() {
         onChange={handleChange}
         aria-label="stats toggle"
         sx={{
-          margin: "20px 0",
-          backgroundColor: "var(--primary-dark)",
-          borderRadius: "12px",
+          padding: "4px",
+          margin: "10px",
+          backgroundColor: "#f5f5f5",
+          display: "inline-flex",
         }}
       >
         <ToggleButton
           value="players"
           aria-label="players stats"
           sx={{
-            color: "var(--text-light)",
+            textTransform: "none",
+            fontWeight: 600,
+
+            px: 3,
+            py: 1,
             "&.Mui-selected": {
-              backgroundColor: "#1976d2",
+              backgroundColor: "var(--primary-light)",
               color: "#fff",
+            },
+            "&.Mui-selected:hover": {
+              backgroundColor: "#2461acff",
+            },
+            "&:not(.Mui-selected)": {
+              backgroundColor: "#fff",
+              color: "#000",
             },
           }}
         >
-          Players
+          Player
         </ToggleButton>
         <ToggleButton
           value="teams"
           aria-label="teams stats"
           sx={{
-            color: "var(--text-light)",
+            textTransform: "none",
+            fontWeight: 600,
+
+            px: 3,
+            py: 1,
             "&.Mui-selected": {
-              backgroundColor: "#1976d2",
+              backgroundColor: "var(--primary-light)",
               color: "#fff",
+            },
+            "&.Mui-selected:hover": {
+              backgroundColor: "#2461acff",
+            },
+            "&:not(.Mui-selected)": {
+              backgroundColor: "#fff",
+              color: "#000",
             },
           }}
         >
-          Teams
+          Team
         </ToggleButton>
       </ToggleButtonGroup>
 
-      {/* Conditional Render */}
       {view === "players" ? <PlayersStats /> : <TeamsStats />}
     </div>
   );

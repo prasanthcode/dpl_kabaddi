@@ -8,7 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { TableVirtuoso } from "react-virtuoso";
 import { useInView } from "react-intersection-observer";
-import { getTopTeams } from "../services/statsApi"; // <-- new service for teams
+import { getTopTeams } from "../services/statsApi";
 
 // Pick correct column label depending on stat
 const getColumns = (categoryKey) => {
@@ -24,8 +24,8 @@ const getColumns = (categoryKey) => {
   else if (categoryKey === "avgTotalPoints") pointsLabel = "Avg Total Points";
 
   return [
-    { width: 60, label: "Logo", dataKey: "logo" },
-    { width: 150, label: "Team", dataKey: "name" },
+    { width: 10, label: "Logo", dataKey: "logo" },
+    { width: 60, label: "Team", dataKey: "name" },
     { width: 60, label: pointsLabel, dataKey: categoryKey },
   ];
 };
@@ -63,7 +63,7 @@ function TeamLeaderboardSection({ category, title }) {
       try {
         setLoading(true);
         setError(null);
-        const res = await getTopTeams(category); // hit /api/stats/top-teams?category=xxx
+        const res = await getTopTeams(category);
         setTeams(res.data || []);
       } catch (err) {
         console.error("Error fetching team leaderboard:", err);
@@ -111,63 +111,62 @@ function TeamLeaderboardSection({ category, title }) {
           <div style={{ textAlign: "center", color: "red" }}>{error}</div>
         ) : (
           <TableVirtuoso
-  sx={{ backgroundColor: "var(--primary-dark)" }}   // ensures dark background for the whole table
-  data={teams}
-  components={VirtuosoTableComponents}
-  fixedHeaderContent={() => (
-    <TableRow>
-      {columns.map((col) => (
-        <TableCell
-          key={col.dataKey}
-          variant="head"
-          align="center"
-          style={{ width: col.width }}
-          sx={{
-            color: "var(--text-light)",              // header text color
-            border: "none",
-            backgroundColor: "var(--primary-dark)",  // header bg color
-          }}
-        >
-          {col.label}
-        </TableCell>
-      ))}
-    </TableRow>
-  )}
-  itemContent={(index, row) => (
-    <>
-      {columns.map((col) => (
-        <TableCell
-          key={col.dataKey}
-          align="center"
-          sx={{
-            color: "var(--text-light)",               // ✅ row text color
-            borderColor: "#373f4e",
-            backgroundColor: "var(--primary-dark)",   // ✅ row bg matches PlayerStats
-          }}
-        >
-          {col.dataKey === "logo" ? (
-            <img
-              src={row.logo}
-              alt={row.name}
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: "50%",
-              }}
-            />
-          ) : typeof row[col.dataKey] === "number" ? (
-            row[col.dataKey].toLocaleString(undefined, {
-              maximumFractionDigits: 2,
-            })
-          ) : (
-            row[col.dataKey]
-          )}
-        </TableCell>
-      ))}
-    </>
-  )}
-/>
-
+            sx={{ backgroundColor: "var(--primary-dark)" }}
+            data={teams}
+            components={VirtuosoTableComponents}
+            fixedHeaderContent={() => (
+              <TableRow>
+                {columns.map((col) => (
+                  <TableCell
+                    key={col.dataKey}
+                    variant="head"
+                    align="center"
+                    style={{ width: col.width }}
+                    sx={{
+                      color: "var(--text-light)",
+                      border: "none",
+                      backgroundColor: "var(--primary-dark)",
+                    }}
+                  >
+                    {col.label}
+                  </TableCell>
+                ))}
+              </TableRow>
+            )}
+            itemContent={(index, row) => (
+              <>
+                {columns.map((col) => (
+                  <TableCell
+                    key={col.dataKey}
+                    align="center"
+                    sx={{
+                      color: "var(--text-light)",
+                      borderColor: "#373f4e",
+                      backgroundColor: "var(--primary-dark)",
+                    }}
+                  >
+                    {col.dataKey === "logo" ? (
+                      <img
+                        src={row.logo}
+                        alt={row.name}
+                        style={{
+                          width: 40,
+                          height: 40,
+                          borderRadius: "50%",
+                        }}
+                      />
+                    ) : typeof row[col.dataKey] === "number" ? (
+                      row[col.dataKey].toLocaleString(undefined, {
+                        maximumFractionDigits: 2,
+                      })
+                    ) : (
+                      row[col.dataKey]
+                    )}
+                  </TableCell>
+                ))}
+              </>
+            )}
+          />
         )}
       </Paper>
     </div>
