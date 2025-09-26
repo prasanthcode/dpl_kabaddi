@@ -18,7 +18,7 @@ export default function Standing() {
   return (
     <>
       <h4 style={{ textAlign: "center", margin: "20px 0", fontSize: "18px" }}>
-        DPL Boys Kabaddi Points Table
+        DPL Boys Kabaddi League Points Table
       </h4>
       {loading ? (
         <LoadingSpinner />
@@ -47,7 +47,8 @@ export default function Standing() {
               }}
             >
               <TableRow>
-                <TableCell>Po</TableCell>
+                <TableCell sx={{ width: { xs: "10px", md: "10px" } }}>Po</TableCell>
+                <TableCell align="right"sx={{ width: { xs: "10px", md: "10px" } }}></TableCell>
                 <TableCell align="right" sx={{ width: { xs: "40px", md: "80px" } }}>
                   Team
                 </TableCell>
@@ -73,14 +74,16 @@ export default function Standing() {
                     "&:hover": { backgroundColor: "rgba(255, 235, 59, 0.2)" },
                   }}
                 >
-                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>{row.qualifier === true ? `Q${index + 1}` : index + 1}</TableCell>
+                  <TableCell align="right">
+                    <img src={row.logo} alt="" style={{width:"30px",borderRadius:"50%"}}/></TableCell>
+                  
                   <TableCell align="right">
                     <Link
                       to={`/team/${row.teamId}`}
                       style={{ textDecoration: "none", color: "inherit" }}
                     >
                       {row.teamName}
-                      {row.qualifier === true ? " (Q)" : ""}
                       <span
                         style={{
                           fontWeight: "bold",
@@ -92,6 +95,7 @@ export default function Standing() {
                       </span>
                     </Link>
                   </TableCell>
+
                   <TableCell align="right">{row.matchesPlayed}</TableCell>
                   <TableCell align="right">{row.wins}</TableCell>
                   <TableCell align="right">{row.losses}</TableCell>
