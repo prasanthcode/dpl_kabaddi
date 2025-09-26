@@ -7,7 +7,6 @@ import TeamInfo from "./pages/TeamInfo";
 import Standing from "./pages/Standing";
 import AddScore from "./admin/pages/AddScore";
 import Match from "./pages/Match";
-import PlayersStats from "./pages/PlayersStats";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PlayerInfo from "./pages/PlayerInfo";
@@ -21,6 +20,7 @@ import PublicLayout from "./layouts/PublicLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import Gallery from "./admin/pages/Gallery";
 import NotFound from "./pages/NotFound";
+import TopStats from "./pages/TopStats";
 function App() {
   useEffect(() => {
     initGA(); 
@@ -43,7 +43,7 @@ function App() {
           <Route path="/teams" element={<Teams />} />
           <Route path="/team/:id" element={<TeamInfo />} />
           <Route path="/player/:playerId" element={<PlayerInfo />} />
-          <Route path="/playerstats" element={<PlayersStats />} />
+          <Route path="/playerstats" element={<TopStats />} />
           <Route path="/standings" element={<Standing />} />
         </Route>
 
