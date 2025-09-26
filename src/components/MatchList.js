@@ -1,10 +1,53 @@
-import React from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Matches.css";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 const MatchList = ({ matches = [], status, isHomePage }) => {
-  const validMatches = Array.isArray(matches) ? matches : [];
-  const matchesByDate = validMatches.reduce((acc, match) => {
+  const validMatches = useMemo(
+    () => (Array.isArray(matches) ? matches : []),
+    [matches]
+  );
+
+  const allTeams = useMemo(() => {
+    const teamSet = new Set();
+    validMatches.forEach((match) => {
+      teamSet.add(match.teamA.name);
+      teamSet.add(match.teamB.name);
+    });
+    return Array.from(teamSet);
+  }, [validMatches]);
+
+  const [selectedTeam, setSelectedTeam] = useState("");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const toggleDropdown = () => setDropdownOpen((prev) => !prev);
+
+  const handleTeamSelect = (team) => {
+    setSelectedTeam(team);
+    setDropdownOpen(false);
+  };
+
+  // Close dropdown if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const filteredMatches = selectedTeam
+    ? validMatches.filter(
+        (match) =>
+          match.teamA.name === selectedTeam || match.teamB.name === selectedTeam
+      )
+    : validMatches;
+
+  const matchesByDate = filteredMatches.reduce((acc, match) => {
     const date = new Date(match.date).toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
@@ -21,6 +64,82 @@ const MatchList = ({ matches = [], status, isHomePage }) => {
       className="matches-container"
       style={{ minHeight: !isHomePage ? "100vh" : "" }}
     >
+      {/* Custom Dropdown */}
+      {!isHomePage&&<div
+        className="custom-dropdown"
+        ref={dropdownRef}
+        style={{
+          marginBottom: "20px",
+          position: "relative",
+          width: "250px",
+        }}
+      >
+        <div
+          className="dropdown-selected"
+          onClick={toggleDropdown}
+          style={{
+            padding: "10px",
+            backgroundColor: "var(--primary-color)",
+            color: "white",
+            cursor: "pointer",
+            borderRadius: "4px",
+            userSelect: "none",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          {selectedTeam || "All Teams"} <ArrowDropDownIcon />
+        </div>
+        {dropdownOpen && (
+          <div
+            className="dropdown-options"
+            style={{
+              position: "absolute",
+              top: "100%",
+              left: 0,
+              right: 0,
+              backgroundColor: "var(--primary-color)",
+              color: "white",
+              borderRadius: "4px",
+              marginTop: "4px",
+              zIndex: 1000,
+              boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
+            }}
+          >
+            <div
+              className="dropdown-option"
+              onClick={() => handleTeamSelect("")}
+              style={{
+                padding: "10px",
+                cursor: "pointer",
+                backgroundColor:
+                  selectedTeam === "" ? "#10226cff" : "transparent",
+              }}
+            >
+              All Teams
+            </div>
+            {allTeams.map((team) => (
+              <div
+                key={team}
+                className="dropdown-option"
+                onClick={() => handleTeamSelect(team)}
+                style={{
+                  padding: "10px",
+                  cursor: "pointer",
+                  backgroundColor:
+                    selectedTeam === team ? "#10226cff" : "transparent",
+                  "&:hover": { backgroundColor: "#10226cff" },
+                }}
+              >
+                {team}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>}
+
+      {/* Matches grouped by date */}
       {Object.entries(matchesByDate).map(([date, matches]) => (
         <div className="matches-date-group" key={date}>
           <h2>
