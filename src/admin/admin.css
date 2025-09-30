@@ -112,7 +112,7 @@
 .stats-row{
     flex-direction: column;
   }
-/* ===== Responsive ===== */
+
 @media (min-width: 900px) {
   .admin-sidebar {
     position: relative;
@@ -132,6 +132,16 @@
   }
   .menu-button{
     display:none !important;
+  }
+  .addscore_container{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .score_ht_undo{
+    text-align: center;
   }
   
 }
