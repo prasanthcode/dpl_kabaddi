@@ -1,5 +1,5 @@
-export default function UndoButton({ handleUndo, lastAction }) {
-  const disabled = !localStorage.getItem("lastScoreUpdate");
+export default function UndoButton({ handleUndo, lastAction, loading }) {
+  const disabled = loading || !localStorage.getItem("lastScoreUpdate");
   return (
     <button
       onClick={handleUndo}
@@ -18,8 +18,8 @@ export default function UndoButton({ handleUndo, lastAction }) {
         marginRight: "10px",
       }}
     >
-      Undo
-      {lastAction ? (
+      {loading ? "Undoing..." : "Undo"}
+      {!loading && lastAction ? (
         <span style={{ marginLeft: 8, fontWeight: 400, fontSize: "14px" }}>
           ({lastAction.name} {lastAction.type}+{lastAction.points})
         </span>

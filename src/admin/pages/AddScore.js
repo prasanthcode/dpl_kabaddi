@@ -122,13 +122,17 @@ export default function AddScore() {
 
     resetSelection();
   };
+  const [undoLoading, setUndoLoading] = useState(false);
 
   const handleUndo = async () => {
+    setUndoLoading(true);
     try {
       await undoLastAction();
       setLastAction(null); // Clear after undo
     } catch (err) {
       console.error("Undo failed:", err);
+    } finally {
+      setUndoLoading(false);
     }
   };
 
@@ -191,7 +195,7 @@ export default function AddScore() {
         />
         {/* Undo */}
         <Box mt={1}>
-          <UndoButton handleUndo={handleUndo} lastAction={lastAction} />
+          <UndoButton handleUndo={handleUndo} lastAction={lastAction} loading={undoLoading}/>
         </Box>
 
         {/* Timer */}

@@ -17,6 +17,7 @@ export default function DataTable({
   rows = [],
   onEdit,
   onDelete,
+  loading,
 }) {
   return (
     <TableContainer component={Paper} sx={{ maxHeight: "70vh" }}>
@@ -33,7 +34,7 @@ export default function DataTable({
           {rows.length === 0 ? (
             <TableRow>
               <TableCell colSpan={columns.length + 1} align="center">
-                No data
+                {loading ? "Loading..." : "No data"}
               </TableCell>
             </TableRow>
           ) : (

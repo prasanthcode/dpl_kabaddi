@@ -167,6 +167,7 @@ export default function Matches() {
         {!isMobile ? (
           <DataTable
             columns={columns}
+            loading={isLoading}
             rows={isLoading ? [] : matches}
             onEdit={handleEdit}
             onDelete={handleDelete}

@@ -121,6 +121,7 @@ export default function Players() {
         rows={isLoading ? [] : players}
         onEdit={handleEdit}
         onDelete={handleDelete}
+        loading={isLoading}
       />
     </>
   );

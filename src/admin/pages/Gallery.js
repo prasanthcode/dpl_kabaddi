@@ -113,6 +113,7 @@ export default function Gallery() {
         rows={loading ? [] : galleries}
         onEdit={handleEdit}
         onDelete={handleDelete}
+        loading={loading}
       />
     </>
   );

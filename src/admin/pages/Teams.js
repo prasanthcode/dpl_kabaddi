@@ -105,6 +105,7 @@ export default function Teams() {
         rows={loading ? [] : teams}
         onEdit={handleEdit}
         onDelete={handleDelete}
+        loading={loading}
       />
     </>
   );
