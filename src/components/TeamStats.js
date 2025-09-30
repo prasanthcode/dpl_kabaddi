@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import LoadingSpinner from "./LoadingSpinner";
 import { fetchTeamStats } from "../services/teamsApi";
+import TeamStatsSkeleton from "./TeamStatsSkeleton";
 export default function TeamStats({ teamId }) {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -19,7 +19,7 @@ export default function TeamStats({ teamId }) {
     fetchStats();
   }, [teamId]);
 
-  if (loading) return <LoadingSpinner />;
+  if (loading) return <TeamStatsSkeleton />;
   if (!stats) return <div className="teamstats-error">No stats available.</div>;
 
   return (

@@ -3,7 +3,6 @@
   color: white;
   max-width: 1200px;
   margin: 0 auto;
-  font-family: "Inter", "Roboto", Arial, sans-serif;
 }
 
 .teaminfo-title {
@@ -71,11 +70,87 @@
   color: #ccc;
 }
 
-.skeleton-card {
-  background-color: rgb(8, 43, 109);
-  height: 150px;
-  border-radius: 10px;
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(220, 220, 220, 0.2) 25%,
+    rgba(220, 220, 220, 0.4) 50%,
+    rgba(220, 220, 220, 0.2) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 8px;
 }
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.teaminfo-skeleton-container {
+  padding: 10px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.teaminfo-skeleton-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.teaminfo-skeleton-card {
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+.skeleton-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: auto;
+}
+
+.skeleton-name {
+  height: 16px;
+  margin-top: 12px;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.teamstats-skeleton-card {
+  background-color: white;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.skeleton-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.skeleton-title {
+  width: 120px;
+  height: 20px;
+  margin-bottom: 15px;
+}
+
+.skeleton-line {
+  height: 14px;
+  margin: 8px 0;
+  width: 100%;
+}
+
 .teamstats-card {
   color: #484848;
   background-color: white;
@@ -136,9 +211,11 @@
   justify-content: flex-start;
   position: relative;
 }
+
 .team p {
   margin: 0;
 }
+
 .teamstats-grid img {
   width: 30px;
   height: 30px;
@@ -154,16 +231,25 @@
 }
 
 @media (min-width: 768px) {
+  .teaminfo-container {
+    display: flex;
+    flex-direction: row-reverse;
+    max-width: 90%;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
   .teaminfo-items {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    gap: 30px; /* spacing between cards */
-    justify-content: center; /* center the items */
+    gap: 30px;
+    justify-content: center;
   }
 
-  .teaminfo-card {
-    width: 300px;
+  .teaminfo-card,
+  .teaminfo-skeleton-card {
+    width: 280px;
   }
 
   .teaminfo-name h3 {
@@ -173,5 +259,18 @@
   .teaminfo-img-wrap img {
     width: 120px;
     height: 120px;
+  }
+
+  .teaminfo-list,
+  .teaminfo-skeleton-list {
+    width: 60%;
+  }
+
+  .teamstats-card,
+  .teamstats-skeleton-card {
+    width: 30%;
+    min-width: 250px;
+    margin-top: 50px;
+    flex-grow: none;
   }
 }

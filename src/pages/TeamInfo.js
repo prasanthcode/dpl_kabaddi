@@ -21,71 +21,68 @@ export default function TeamInfo() {
       ) : (
         <>
           {players.length > 0 ? (
-            <>
+            <div className="teaminfo-list">
               <h2 className="teaminfo-title">Squad</h2>
+              <div className="teaminfo-items">
+                {players.map((player, index) => (
+                  <Link
+                    to={`/player/${player._id}`}
+                    style={{ textDecoration: "none", color: "white" }}
+                    key={player._id}
+                  >
+                    <div className="teaminfo-card">
+                      <div className="teaminfo-img-wrap">
+                        {/* Animate Image */}
+                        <motion.img
+                          src={
+                            player.profilePic === ""
+                              ? profilePic
+                              : player.profilePic
+                          }
+                          alt={player.name}
+                          initial={{ x: -30, opacity: 0 }}
+                          animate={{ x: 0, opacity: 1 }}
+                          transition={{
+                            duration: 0.5,
+                            ease: "easeOut",
+                            delay: index * 0.1,
+                          }}
+                        />
 
-              <div className="teaminfo-list">
-                <div className="teaminfo-items">
-                  {players.map((player, index) => (
-                    <Link
-                      to={`/player/${player._id}`}
-                      style={{ textDecoration: "none", color: "white" }}
-                      key={player._id}
-                    >
-                      <div className="teaminfo-card">
-                        <div className="teaminfo-img-wrap">
-                          {/* Animate Image */}
-                          <motion.img
-                            src={
-                              player.profilePic === ""
-                                ? profilePic
-                                : player.profilePic
-                            }
-                            alt={player.name}
-                            initial={{ x: -30, opacity: 0 }}
-                            animate={{ x: 0, opacity: 1 }}
-                            transition={{
-                              duration: 0.5,
-                              ease: "easeOut",
-                              delay: index * 0.1,
-                            }}
-                          />
+                        {/* Animate Player Name */}
+                        <motion.div
+                          className="teaminfo-name"
+                          initial={{ x: -30, opacity: 0 }}
+                          animate={{ x: 0, opacity: 1 }}
+                          transition={{
+                            duration: 0.5,
+                            ease: "easeOut",
+                            delay: index * 0.15,
+                          }}
+                        >
+                          <h3>
+                            {player.name} {player.order === 1 && `(C)`}
+                          </h3>
+                        </motion.div>
 
-                          {/* Animate Player Name */}
-                          <motion.div
-                            className="teaminfo-name"
-                            initial={{ x: -30, opacity: 0 }}
-                            animate={{ x: 0, opacity: 1 }}
-                            transition={{
-                              duration: 0.5,
-                              ease: "easeOut",
-                              delay: index * 0.15,
-                            }}
-                          >
-                            <h3>
-                              {player.name} {player.order === 1 && `(C)`}
-                            </h3>
-                          </motion.div>
-
-                          {/* Animate Arrow Icon */}
-                          <motion.div
-                            initial={{ x: -30, opacity: 0 }}
-                            animate={{ x: 0, opacity: 1 }}
-                            transition={{
-                              duration: 0.5,
-                              ease: "easeOut",
-                              delay: index * 0.2,
-                            }}
-                          >
-                            <FontAwesomeIcon icon={faArrowRight} size="lg" />
-                          </motion.div>
-                        </div>
+                        {/* Animate Arrow Icon */}
+                        <motion.div
+                          initial={{ x: -30, opacity: 0 }}
+                          animate={{ x: 0, opacity: 1 }}
+                          transition={{
+                            duration: 0.5,
+                            ease: "easeOut",
+                            delay: index * 0.2,
+                          }}
+                        >
+                          <FontAwesomeIcon icon={faArrowRight} size="lg" />
+                        </motion.div>
                       </div>
-                    </Link>
-                  ))}
-                </div>
+                    </div>
+                  </Link>
+                ))}
               </div>
-            </>
+            </div>
           ) : (
             <div className="teaminfo-empty">
               <h3>No players found for this team.</h3>
