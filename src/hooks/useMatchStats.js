@@ -87,11 +87,11 @@ export function useMatchStats(matchId) {
       const initial = await fetchStats();
 
       if (initial?.status === "Ongoing") {
-        unsubscribe = listenToMatch(matchId, async () => {
+        unsubscribe = listenToMatch(matchId, async (livedata) => {
           const res = await getMatchStats(matchId);
           normalizeData({
             stats: res.data,
-            lastAction: null,
+            lastAction: livedata.lastAction,
           });
         });
       }
