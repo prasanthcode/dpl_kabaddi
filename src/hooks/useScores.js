@@ -80,7 +80,6 @@ export function useScores(matchId) {
   const undoPlayerScore = async (data) => {
     // undo endpoint expects matchId + playerId (no points)
     const payload = { ...data };
-    console.log(payload);
     if ("points" in payload) delete payload.points;
     const res = await api.undoPlayerScore(payload);
     await refreshScores();
