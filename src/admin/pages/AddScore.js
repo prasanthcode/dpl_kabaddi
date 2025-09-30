@@ -10,6 +10,7 @@ import ScoreBoard from "../components/ScoreBoard";
 import UndoButton from "../components/UndoButton";
 import { useScores } from "../../hooks/useScores";
 import TimeSelection from "../components/TimeSelection";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 export default function AddScore() {
   const { matchId } = useParams();
@@ -143,63 +144,72 @@ export default function AddScore() {
     setBtnPosition({ top: 0, left: 0, visible: false, align: "right" });
   };
 
-  if (loading) return <p>Loading players...</p>;
+  if (loading) return <LoadingSpinner/>;
   if (error) return <p>Error: {error}</p>;
 
   return (
     <>
       <Box position="relative">
         {/* Teams & Players */}
-        <Box display="flex" justifyContent="center" gap={5}>
-          {[
-            {
-              players: players.teamAPlayers,
-              teamName: players.teamAName,
-              teamId: players.teamAId,
-            },
-            {
-              players: players.teamBPlayers,
-              teamName: players.teamBName,
-              teamId: players.teamBId,
-            },
-          ].map((team, teamIndex) => (
-            <PlayerSelector
-              key={team.teamId}
-              {...team}
-              selectedPlayer={selectedPlayer}
-              handlePlayerChange={handlePlayerChange}
-              teamIndex={teamIndex}
+        <div className="addscore_container">
+          <div className="teams_players_action">
+            <Box display="flex" justifyContent="center" gap={5}>
+              {[
+                {
+                  players: players.teamAPlayers,
+                  teamName: players.teamAName,
+                  teamId: players.teamAId,
+                },
+                {
+                  players: players.teamBPlayers,
+                  teamName: players.teamBName,
+                  teamId: players.teamBId,
+                },
+              ].map((team, teamIndex) => (
+                <PlayerSelector
+                  key={team.teamId}
+                  {...team}
+                  selectedPlayer={selectedPlayer}
+                  handlePlayerChange={handlePlayerChange}
+                  teamIndex={teamIndex}
+                />
+              ))}
+            </Box>
+
+            {/* Floating Action + Score Panel */}
+            {btnPosition.visible && (
+              <ActionScorePanel
+                btnPosition={btnPosition}
+                selectedAction={selectedAction}
+                setSelectedAction={setSelectedAction}
+                selectedScore={selectedScore}
+                setSelectedScore={setSelectedScore}
+                handleSubmit={handleSubmit}
+                scoreLoading={scoreLoading}
+                rd={rd}
+              />
+            )}
+          </div>
+          <div className="score_ht_undo">
+            {/* ScoreBoard */}
+            <ScoreBoard
+              score={score}
+              handleCloseSubmit={resetSelection}
+              teams={{ teamA: players.teamAName, teamB: players.teamBName }}
             />
-          ))}
-        </Box>
+            {/* Undo */}
+            <Box mt={1}>
+              <UndoButton
+                handleUndo={handleUndo}
+                lastAction={lastAction}
+                loading={undoLoading}
+              />
+            </Box>
 
-        {/* Floating Action + Score Panel */}
-        {btnPosition.visible && (
-          <ActionScorePanel
-            btnPosition={btnPosition}
-            selectedAction={selectedAction}
-            setSelectedAction={setSelectedAction}
-            selectedScore={selectedScore}
-            setSelectedScore={setSelectedScore}
-            handleSubmit={handleSubmit}
-            scoreLoading={scoreLoading}
-            rd={rd}
-          />
-        )}
-
-        {/* ScoreBoard */}
-        <ScoreBoard
-          score={score}
-          handleCloseSubmit={resetSelection}
-          teams={{ teamA: players.teamAName, teamB: players.teamBName }}
-        />
-        {/* Undo */}
-        <Box mt={1}>
-          <UndoButton handleUndo={handleUndo} lastAction={lastAction} loading={undoLoading}/>
-        </Box>
-
-        {/* Timer */}
-        <TimeSelection matchId={matchId} />
+            {/* Timer */}
+            <TimeSelection matchId={matchId} />
+          </div>
+        </div>
       </Box>
     </>
   );

@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 
 export default function LoadingSpinner() {
   return (
-    <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+    <Box display="flex" justifyContent="center" alignItems="center" minHeight="80vh">
       <CircularProgress />
     </Box>
   );

@@ -14,7 +14,13 @@ export default function AdminLayout() {
     "/admin/dashboard": "Dashboard",
   };
 
-  const title = routeTitles[location.pathname] || "Admin";
+  let title = "Admin";
+
+  if (routeTitles[location.pathname]) {
+    title = routeTitles[location.pathname];
+  } else if (location.pathname.startsWith("/admin/addscore/")) {
+    title = "Add Score";
+  }
 
   return (
     <div className="admin-root">
