@@ -304,6 +304,32 @@
   border-radius: 10px;
   animation: pulse 1.5s infinite ease-in-out;
 }
+.points-container {
+  margin: 8px 0;
+}
+
+.raid-title {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.points-scroll {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding: 4px;
+  max-width: 55%;
+}
+
+.point-badge {
+  flex-shrink: 0;
+  background-color: #014793;
+  color: white;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  white-space: nowrap;
+}
 
 @keyframes pulse {
   0% {
@@ -362,5 +388,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  .points-scroll {
+    max-width: 75%;
   }
 }
