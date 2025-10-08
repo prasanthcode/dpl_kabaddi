@@ -77,23 +77,6 @@ export default function TeamStats({ teamId }) {
           </>
         )}
       </div>
-
-      {/* <div className="teamstats-highlight">
-        <h3>Highest Margin Win</h3>
-        <div className="match-card">
-          <div className="team">
-            <img src={stats.highestMarginWinMatch.teamA.logo} alt={stats.highestMarginWinMatch.teamA.name} />
-            <p>{stats.highestMarginWinMatch.teamA.name}</p>
-          </div>
-          <div className="score">
-            {stats.highestMarginWinMatch.teamAScore} : {stats.highestMarginWinMatch.teamBScore}
-          </div>
-          <div className="team">
-            <img src={stats.highestMarginWinMatch.teamB.logo} alt={stats.highestMarginWinMatch.teamB.name} />
-            <p>{stats.highestMarginWinMatch.teamB.name}</p>
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 }
