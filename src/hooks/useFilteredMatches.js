@@ -9,6 +9,9 @@ export function useFilteredMatches(url, limit) {
   useEffect(() => {
     let unsubscribe = null;
 
+    setLoading(true);
+    setMatches([]);
+
     const fetchData = async () => {
       try {
         const response = await getMatches(url, limit);
@@ -21,6 +24,7 @@ export function useFilteredMatches(url, limit) {
           });
         }
       } catch (err) {
+        console.error("Error fetching matches:", err);
         setMatches([]);
       } finally {
         setLoading(false);
