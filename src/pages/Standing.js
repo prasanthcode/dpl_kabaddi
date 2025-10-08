@@ -23,14 +23,17 @@ export default function Standing() {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <TableContainer component={Paper} sx={{ maxWidth: 1200, margin: "0 auto" }}>
+        <TableContainer
+          component={Paper}
+          sx={{ maxWidth: 1200, margin: "0 auto" }}
+        >
           <Table
             sx={{
               minWidth: 400,
               "& .MuiTableCell-root": {
                 fontSize: { xs: "12px", sm: "14px", md: "16px" },
                 padding: { xs: "10px 5px", sm: "20px 10px", md: "25px 15px" },
-                textAlign: "left",
+                textAlign: "center",
                 fontWeight: 500,
               },
             }}
@@ -47,17 +50,18 @@ export default function Standing() {
               }}
             >
               <TableRow>
-                <TableCell sx={{ width: { xs: "10px", md: "10px" } }}>Po</TableCell>
-                <TableCell align="right"sx={{ width: { xs: "10px", md: "10px" } }}></TableCell>
-                <TableCell align="right" sx={{ width: { xs: "40px", md: "80px" } }}>
+                <TableCell>Po</TableCell>
+                <TableCell></TableCell>
+                <TableCell sx={{ textAlign: "left !important" }}>
                   Team
                 </TableCell>
-                <TableCell align="right">P</TableCell>
-                <TableCell align="right">W</TableCell>
-                <TableCell align="right">L</TableCell>
-                <TableCell align="right">T</TableCell>
-                <TableCell align="right">Pts</TableCell>
-                <TableCell align="right">Pd</TableCell>
+                <TableCell>P</TableCell>
+                <TableCell>W</TableCell>
+                <TableCell>L</TableCell>
+                <TableCell>T</TableCell>
+                <TableCell>Pd</TableCell>
+                <TableCell>Form</TableCell> {/* New column */}
+                <TableCell>Pts</TableCell>
               </TableRow>
             </TableHead>
             <TableBody
@@ -70,38 +74,87 @@ export default function Standing() {
                 <TableRow
                   key={row.teamId}
                   sx={{
-                    backgroundColor: row.qualifier === false ? "rgb(255, 210, 210)" : "",
+                    backgroundColor:
+                      row.qualifier === false ? "rgb(255, 210, 210)" : "",
                     "&:hover": { backgroundColor: "rgba(255, 235, 59, 0.2)" },
                   }}
                 >
-                  <TableCell>{row.qualifier === true ? `Q${index + 1}` : index + 1}</TableCell>
-                  <TableCell align="right">
-                    <img src={row.logo} alt="" style={{width:"30px",borderRadius:"50%"}}/></TableCell>
-                  
-                  <TableCell align="right">
+                  <TableCell>
+                    {row.qualifier === true ? `Q${index + 1}` : index + 1}
+                  </TableCell>
+                  <TableCell>
+                    <img
+                      src={row.logo}
+                      alt=""
+                      style={{ width: "30px", borderRadius: "50%" }}
+                    />
+                  </TableCell>
+                  <TableCell sx={{ textAlign: "left !important" }}>
                     <Link
                       to={`/team/${row.teamId}`}
                       style={{ textDecoration: "none", color: "inherit" }}
                     >
                       {row.teamName}
-                      <span
-                        style={{
-                          fontWeight: "bold",
-                          color: "orange",
-                          marginLeft: "5px",
-                        }}
-                      >
-                        {row.finalWinner === true ? "🏆 Winner" : ""}
-                      </span>
+                      {row.finalWinner && (
+                        <span
+                          style={{
+                            fontWeight: "bold",
+                            color: "orange",
+                            marginLeft: "5px",
+                          }}
+                        >
+                          🏆 Winner
+                        </span>
+                      )}
                     </Link>
                   </TableCell>
-
                   <TableCell align="right">{row.matchesPlayed}</TableCell>
                   <TableCell align="right">{row.wins}</TableCell>
                   <TableCell align="right">{row.losses}</TableCell>
                   <TableCell align="right">{row.ties}</TableCell>
-                  <TableCell align="right">{row.points}</TableCell>
                   <TableCell align="right">{row.pointsDifference}</TableCell>
+                  <TableCell align="center">
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        gap: "4px",
+                      }}
+                    >
+                      {row.lastThreeMatches &&
+                      row.lastThreeMatches.length > 0 ? (
+                        row.lastThreeMatches.map((result, idx) => {
+                          let bgColor;
+                          if (result === "W") bgColor = "green";
+                          else if (result === "L") bgColor = "red";
+                          else if (result === "T") bgColor = "gray";
+
+                          return (
+                            <span
+                              key={idx}
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                width: "20px",
+                                height: "20px",
+                                borderRadius: "50%",
+                                backgroundColor: bgColor,
+                                color: "white",
+                                fontSize: "12px",
+                                fontWeight: "bold",
+                              }}
+                            >
+                              {result}
+                            </span>
+                          );
+                        })
+                      ) : (
+                        <span>-</span>
+                      )}
+                    </div>
+                  </TableCell>
+                  <TableCell align="right">{row.points}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
