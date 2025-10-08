@@ -59,18 +59,20 @@ export default function LineUp({ stats, matchId }) {
               {/* Expand raid points */}
               {openPlayers.has(`${raider.id}-raid`) && (
                 <div className="points-container">
-                  Raid Sequence
+                  <div className="raid-title">Raid Sequence</div>
                   {pointsLoading && !pointSequences[`${raider.id}-raid`] ? (
                     <span>Loading points...</span>
                   ) : pointSequences[`${raider.id}-raid`]?.points?.length >
                     0 ? (
-                    pointSequences[`${raider.id}-raid`].points.map(
-                      (pt, idx) => (
-                        <span key={idx} className="point-badge">
-                          {pt}
-                        </span>
-                      )
-                    )
+                    <div className="points-scroll">
+                      {pointSequences[`${raider.id}-raid`].points.map(
+                        (pt, idx) => (
+                          <span key={idx} className="point-badge">
+                            {pt}
+                          </span>
+                        )
+                      )}
+                    </div>
                   ) : (
                     <p>No raid points data</p>
                   )}
