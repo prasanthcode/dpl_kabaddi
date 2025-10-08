@@ -27,7 +27,7 @@ const profiles = [
   },
   {
     name: "Naveen Yamala",
-    role: "Sports-Tech Coordinator | Live Score Updation & QA",
+    role: "QA | Testing & Score Management",
     image:
       "https://res.cloudinary.com/dzwksifmb/image/upload/c_crop,w_1200,h_1200,ar_1:1,g_auto/v1742537900/Nazooo_rwdlag.jpg",
     social: {
@@ -58,7 +58,7 @@ const Footer = () => {
   return (
     <Box
       sx={{
-        bgcolor: "#0b1120", 
+        bgcolor: "#0b1120",
         py: 6,
         color: "white",
         textAlign: "center",
@@ -84,7 +84,7 @@ const Footer = () => {
           direction={{ xs: "column", sm: "row" }}
           spacing={3}
           justifyContent="center"
-          alignItems="stretch"
+          alignItems={{ xs: "center", sm: "stretch" }}
           flexWrap="wrap"
         >
           {profiles.map((profile, index) => (
@@ -94,6 +94,7 @@ const Footer = () => {
                 flex: 1,
                 minWidth: 250,
                 maxWidth: 300,
+                width: { xs: "90%", sm: 250, md: 300 },
                 bgcolor: "rgba(255,255,255,0.05)",
                 backdropFilter: "blur(10px)",
                 border: "1px solid rgba(255,255,255,0.1)",
