@@ -88,7 +88,6 @@ function LeaderboardSection({ category, title }) {
         marginBottom: "30px",
         border: "1px solid #5c5c5c",
         borderRadius: "20px",
-        // margin: "10px 10px",
       }}
     >
       <h4
@@ -111,7 +110,7 @@ function LeaderboardSection({ category, title }) {
       >
         {loading ? (
           <p style={{ textAlign: "center" }}></p>
-        ) : // <LoadingSpinner/>
+        ) : 
         error ? (
           <div style={{ textAlign: "center", color: "red" }}>{error}</div>
         ) : (
@@ -145,7 +144,7 @@ function LeaderboardSection({ category, title }) {
                 {columns.map((col) => (
                   <TableCell
                     key={col.dataKey}
-                    align="left"
+                    align="center"
                     sx={{
                       color: "var(--text-light)",
                       borderColor: "#373f4e",
@@ -199,7 +198,7 @@ function LeaderboardSection({ category, title }) {
   );
 }
 
-// Main Component
+
 export default function PlayersStats() {
   const categories = [
     { key: "top10RaidPoints", title: "Player Raid Points" },

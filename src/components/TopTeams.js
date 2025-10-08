@@ -9,8 +9,8 @@ import Paper from "@mui/material/Paper";
 import { TableVirtuoso } from "react-virtuoso";
 import { useInView } from "react-intersection-observer";
 import { getTopTeams } from "../services/statsApi";
+import { Link } from "react-router-dom";
 
-// Pick correct column label depending on stat
 const getColumns = (categoryKey) => {
   let pointsLabel = "Points";
   if (categoryKey === "totalRaids") pointsLabel = "Total Raids";
@@ -30,7 +30,6 @@ const getColumns = (categoryKey) => {
   ];
 };
 
-// Virtuoso Table Components
 const VirtuosoTableComponents = {
   Scroller: React.forwardRef((props, ref) => (
     <TableContainer component={Paper} {...props} ref={ref} />
@@ -143,18 +142,44 @@ function TeamLeaderboardSection({ category, title }) {
                       color: "var(--text-light)",
                       borderColor: "#373f4e",
                       backgroundColor: "var(--primary-dark)",
+                      verticalAlign: "middle",
                     }}
                   >
                     {col.dataKey === "logo" ? (
-                      <img
-                        src={row.logo}
-                        alt={row.name}
+                      <Link
+                        to={`/team/${row._id}`}
                         style={{
-                          width: 40,
-                          height: 40,
-                          borderRadius: "50%",
+                          textDecoration: "none",
+                          display: "inline-block",
+                          color: "inherit",
                         }}
-                      />
+                      >
+                        <img
+                          src={
+                            row.logo ||
+                            `${process.env.REACT_APP_CLOUDINARY_FILE_BASE_URL}default-logo.png`
+                          }
+                          alt={row.name}
+                          style={{
+                            width: 40,
+                            height: 40,
+                            borderRadius: "50%",
+                            objectFit: "cover",
+                            verticalAlign: "middle",
+                          }}
+                        />
+                      </Link>
+                    ) : col.dataKey === "name" ? (
+                      <Link
+                        to={`/team/${row._id}`}
+                        style={{
+                          textDecoration: "none",
+                          color: "var(--text-light)",
+                          fontWeight: 500,
+                        }}
+                      >
+                        {row.name}
+                      </Link>
                     ) : typeof row[col.dataKey] === "number" ? (
                       row[col.dataKey].toLocaleString(undefined, {
                         maximumFractionDigits: 2,
@@ -173,7 +198,6 @@ function TeamLeaderboardSection({ category, title }) {
   );
 }
 
-// Main Component
 export default function TeamsStats() {
   const categories = [
     { key: "totalPoints", title: "Team Total Points" },
