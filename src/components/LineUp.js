@@ -107,36 +107,9 @@ export default function LineUp({ stats, matchId }) {
                   <span>{defender.name}</span>
                 </div>
                 <span style={{ display: "flex", alignItems: "center" }}>
-                  {openPlayers.has(`${defender.id}-defense`) ? (
-                    <ArrowDropUpIcon />
-                  ) : (
-                    <ArrowDropDownIcon />
-                  )}
                   {defender.totalDefensePoints}
                 </span>
               </div>
-
-              {/* Expand defense points */}
-              {openPlayers.has(`${defender.id}-defense`) && (
-                <div className="points-container">
-                  Defense Sequence
-                  {pointsLoading &&
-                  !pointSequences[`${defender.id}-defense`] ? (
-                    <span>Loading points...</span>
-                  ) : pointSequences[`${defender.id}-defense`]?.points?.length >
-                    0 ? (
-                    pointSequences[`${defender.id}-defense`].points.map(
-                      (pt, idx) => (
-                        <span key={idx} className="point-badge">
-                          {pt}
-                        </span>
-                      )
-                    )
-                  ) : (
-                    <p>No defense points data</p>
-                  )}
-                </div>
-              )}
             </div>
           ))
         ) : (
