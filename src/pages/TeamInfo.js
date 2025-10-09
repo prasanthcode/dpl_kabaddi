@@ -49,9 +49,9 @@ export default function TeamInfo() {
                           }}
                         />
 
-                        {/* Animate Player Name */}
+                        {/* Merged Player Name + Arrow */}
                         <motion.div
-                          className="teaminfo-name"
+                          className="teaminfo-details"
                           initial={{ x: -30, opacity: 0 }}
                           animate={{ x: 0, opacity: 1 }}
                           transition={{
@@ -63,18 +63,6 @@ export default function TeamInfo() {
                           <h3>
                             {player.name} {player.order === 1 && `(C)`}
                           </h3>
-                        </motion.div>
-
-                        {/* Animate Arrow Icon */}
-                        <motion.div
-                          initial={{ x: -30, opacity: 0 }}
-                          animate={{ x: 0, opacity: 1 }}
-                          transition={{
-                            duration: 0.5,
-                            ease: "easeOut",
-                            delay: index * 0.2,
-                          }}
-                        >
                           <FontAwesomeIcon icon={faArrowRight} size="lg" />
                         </motion.div>
                       </div>
