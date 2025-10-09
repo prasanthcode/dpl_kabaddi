@@ -55,13 +55,13 @@ export default function Standing() {
                 <TableCell sx={{ textAlign: "left !important" }}>
                   Team
                 </TableCell>
-                <TableCell>P</TableCell>
+                <TableCell>Po</TableCell>
                 <TableCell>W</TableCell>
                 <TableCell>L</TableCell>
                 <TableCell>T</TableCell>
                 <TableCell>Pd</TableCell>
-                <TableCell>Form</TableCell> {/* New column */}
                 <TableCell>Pts</TableCell>
+                <TableCell>Form</TableCell> {/* New column */}
               </TableRow>
             </TableHead>
             <TableBody
@@ -89,7 +89,9 @@ export default function Standing() {
                       style={{ width: "30px", borderRadius: "50%" }}
                     />
                   </TableCell>
-                  <TableCell sx={{ textAlign: "left !important" }}>
+                  <TableCell
+                    sx={{ textAlign: "left !important", width: "50px" }}
+                  >
                     <Link
                       to={`/team/${row.teamId}`}
                       style={{ textDecoration: "none", color: "inherit" }}
@@ -103,7 +105,7 @@ export default function Standing() {
                             marginLeft: "5px",
                           }}
                         >
-                          🏆 Winner
+                          <br /> 🏆 Winner
                         </span>
                       )}
                     </Link>
@@ -113,12 +115,18 @@ export default function Standing() {
                   <TableCell align="right">{row.losses}</TableCell>
                   <TableCell align="right">{row.ties}</TableCell>
                   <TableCell align="right">{row.pointsDifference}</TableCell>
+                  <TableCell align="right">{row.points}</TableCell>
                   <TableCell align="center">
                     <div
                       style={{
                         display: "flex",
-                        justifyContent: "center",
-                        gap: "4px",
+                        justifyContent: "flex-start",
+                        alignItems: "center",
+                        padding:"10px",
+                        gap: "6px",
+                        overflowX: "auto", // 🔹 horizontal scroll
+                        maxWidth: "100px", // 🔹 fixed width area
+                        margin: "0 auto", // center inside cell
                       }}
                     >
                       {row.lastThreeMatches &&
@@ -136,13 +144,14 @@ export default function Standing() {
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
-                                width: "20px",
-                                height: "20px",
+                                minWidth: "24px",
+                                height: "24px",
                                 borderRadius: "50%",
                                 backgroundColor: bgColor,
                                 color: "white",
                                 fontSize: "12px",
                                 fontWeight: "bold",
+                                flexShrink: 0, // prevent shrinking during scroll
                               }}
                             >
                               {result}
@@ -154,7 +163,6 @@ export default function Standing() {
                       )}
                     </div>
                   </TableCell>
-                  <TableCell align="right">{row.points}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
