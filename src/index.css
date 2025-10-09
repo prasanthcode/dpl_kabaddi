@@ -486,8 +486,19 @@ body {
     background-position: 200% 0;
   }
 }
-
+.playoff-image {
+  width: 100%;
+}
+.playoff-image-container {
+  padding: 0 20px;
+}
 @media (min-width: 768px) {
+  .playoff-image-container {
+    text-align: center;
+  }
+  .playoff-image {
+    width: 30%;
+  }
   .gallery {
     display: flex;
     flex-direction: row;
