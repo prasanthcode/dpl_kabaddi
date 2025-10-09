@@ -58,20 +58,13 @@ export default function TeamStats({ teamId }) {
           <span>Total High 5s</span> {stats.high5s}
         </div>
         <div>
-          <span>Avg Raid Points</span> {stats.avgRaid}
-        </div>
-        <div>
-          <span>Avg Defense Points</span> {stats.avgDefense}
-        </div>
-        <div>
-          <span>Avg Total Points</span> {stats.avgTotalPoints}
-        </div>
-
-        <div>
-          <span>Highest Win Margin</span> {stats.highestWinMargin}
+          <span>Total Super Raids</span> {stats.superRaids}
         </div>
         {stats.highestMarginWinMatch && (
           <>
+            <div>
+              <span>Highest Win Margin</span> {stats.highestWinMargin}
+            </div>
             <div>
               <div className="team">
                 <span className="vs">vs</span>
