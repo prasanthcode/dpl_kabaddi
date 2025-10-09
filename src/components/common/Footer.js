@@ -27,7 +27,7 @@ const profiles = [
   },
   {
     name: "Naveen Yamala",
-    role: "QA | Testing & Score Management",
+    role: "Quality Assurance | Testing & Score Management",
     image:
       "https://res.cloudinary.com/dzwksifmb/image/upload/c_crop,w_1200,h_1200,ar_1:1,g_auto/v1742537900/Nazooo_rwdlag.jpg",
     social: {
@@ -94,7 +94,7 @@ const Footer = () => {
                 flex: 1,
                 minWidth: 250,
                 maxWidth: 300,
-                width: { xs: "90%", sm: 250, md: 300 },
+                width: { xs: "80%", sm: 250, md: 300 },
                 bgcolor: "rgba(255,255,255,0.05)",
                 backdropFilter: "blur(10px)",
                 border: "1px solid rgba(255,255,255,0.1)",
