@@ -1,14 +1,15 @@
 .teams-card {
   padding-top: 20px;
-  background-color: var(--primary-color);
+  background-color: #c9c9c9;
+  color:black;
   position: relative;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .teams-card img {
   width: 100px;
   border-radius: 50%;
-  box-shadow: rgba(51, 53, 61, 0.8) 0px 19px 38px,
+  box-shadow: rgba(51, 53, 61, 0.2) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
@@ -37,7 +38,7 @@
   font-size: 15px;
   margin-top: 5px;
   text-align: center;
-  color: var(--text-inverted);
+  color: black;
 }
 
 .teams-skeleton-card {
@@ -79,9 +80,7 @@
 }
 
 .teams-card {
-  background-color: var(--primary-color);
   position: relative;
-  border-radius: 10px;
   padding: 20px;
   text-align: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -95,7 +94,7 @@
 .teams-card img {
   width: 100px;
   border-radius: 50%;
-  box-shadow: rgba(51, 53, 61, 0.8) 0px 19px 38px,
+  box-shadow: rgba(51, 53, 61, 0.2) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
@@ -122,13 +121,12 @@
   font-size: 15px;
   margin-top: 5px;
   text-align: center;
-  color: var(--text-inverted);
 }
 
 .teams-skeleton-card {
-  background-color: rgb(8, 43, 109);
+  background-color: #c9c9c9;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .teams-skeleton-img-wrap {

@@ -11,23 +11,23 @@ const TeamSkeleton = () => {
           circle
           width={80}
           height={80}
-          baseColor="rgb(6, 35, 90)"
-          highlightColor="rgb(12, 55, 130)"
+          baseColor="#e8e8e8ff"
+          highlightColor="rgba(154, 154, 154, 1)"
         />
         <div className="teams-skeleton-name">
           <Skeleton
             width={300}
             height={10}
-            baseColor="rgb(6, 35, 90)"
-            highlightColor="rgb(12, 55, 130)"
+            baseColor="#e8e8e8ff"
+            highlightColor="rgba(154, 154, 154, 1)"
           />
         </div>
         <div className="teams-skeleton-short">
           <Skeleton
             width={20}
             height={10}
-            baseColor="rgb(6, 35, 90)"
-            highlightColor="rgb(12, 55, 130)"
+            baseColor="#e8e8e8ff"
+            highlightColor="rgba(154, 154, 154, 1)"
           />
         </div>
       </div>

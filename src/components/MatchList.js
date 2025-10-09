@@ -79,8 +79,8 @@ const MatchList = ({ matches = [], status, isHomePage }) => {
           onClick={toggleDropdown}
           style={{
             padding: "10px",
-            backgroundColor: "var(--primary-color)",
-            color: "white",
+            backgroundColor: "#c9c9c9",
+            color: "black",
             cursor: "pointer",
             borderRadius: "4px",
             userSelect: "none",
@@ -99,8 +99,8 @@ const MatchList = ({ matches = [], status, isHomePage }) => {
               top: "100%",
               left: 0,
               right: 0,
-              backgroundColor: "var(--primary-color)",
-              color: "white",
+              backgroundColor: "#c9c9c9",
+              color: "black",
               borderRadius: "4px",
               marginTop: "4px",
               zIndex: 1000,
@@ -114,7 +114,7 @@ const MatchList = ({ matches = [], status, isHomePage }) => {
                 padding: "10px",
                 cursor: "pointer",
                 backgroundColor:
-                  selectedTeam === "" ? "#10226cff" : "transparent",
+                  selectedTeam === "" ? "#edededff" : "transparent",
               }}
             >
               All Teams
@@ -128,8 +128,8 @@ const MatchList = ({ matches = [], status, isHomePage }) => {
                   padding: "10px",
                   cursor: "pointer",
                   backgroundColor:
-                    selectedTeam === team ? "#10226cff" : "transparent",
-                  "&:hover": { backgroundColor: "#10226cff" },
+                    selectedTeam === team ? "#edededff" : "transparent",
+                  "&:hover": { backgroundColor: "#edededff" },
                 }}
               >
                 {team}

@@ -13,7 +13,7 @@ export default function Teams() {
   return (
     <div className="teams-container">
       {loading
-        ? Array.from({ length: 6 }).map((_, index) => (
+        ? Array.from({ length: 4 }).map((_, index) => (
             <TeamSkeleton key={index} />
           ))
         : teams.map((team, index) => (

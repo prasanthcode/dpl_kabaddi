@@ -11,8 +11,8 @@ const MatchListSkeleton = ({ isHomePage }) => {
           <Skeleton
             height={30}
             width={200}
-            baseColor="rgb(6, 35, 90)"
-            highlightColor="rgb(12, 55, 130)"
+            baseColor="#a0a0a0ff"
+            highlightColor="white"
             style={{ marginBottom: "20px" }}
           />
           {[...Array(isHomePage ? 1 : 2)].map((_, idx) => (
@@ -22,8 +22,8 @@ const MatchListSkeleton = ({ isHomePage }) => {
                   <Skeleton
                     width={100}
                     height={20}
-                    baseColor="rgb(6, 35, 90)"
-                    highlightColor="rgb(12, 55, 130)"
+                    baseColor="#a0a0a0ff"
+                    highlightColor="white"
                   />
                 </h4>
 
@@ -33,36 +33,36 @@ const MatchListSkeleton = ({ isHomePage }) => {
                       circle
                       width={80}
                       height={80}
-                      baseColor="rgb(6, 35, 90)"
-                      highlightColor="rgb(12, 55, 130)"
+                      baseColor="#a0a0a0ff"
+                      highlightColor="white"
                     />
                     <Skeleton
                       width={100}
                       height={10}
-                      baseColor="rgb(6, 35, 90)"
-                      highlightColor="rgb(12, 55, 130)"
+                      baseColor="#a0a0a0ff"
+                      highlightColor="white"
                       style={{ marginTop: "10px" }}
                     />
                   </div>
                   <Skeleton
                     width={50}
                     height={20}
-                    baseColor="rgb(6, 35, 90)"
-                    highlightColor="rgb(12, 55, 130)"
+                    baseColor="#a0a0a0ff"
+                    highlightColor="white"
                   />
                   <div className="matches-img-wrap matches-skeleton-img">
                     <Skeleton
                       circle
                       width={80}
                       height={80}
-                      baseColor="rgb(6, 35, 90)"
-                      highlightColor="rgb(12, 55, 130)"
+                      baseColor="#a0a0a0ff"
+                      highlightColor="white"
                     />
                     <Skeleton
                       width={100}
                       height={10}
-                      baseColor="rgb(6, 35, 90)"
-                      highlightColor="rgb(12, 55, 130)"
+                      baseColor="#a0a0a0ff"
+                      highlightColor="white"
                       style={{ marginTop: "10px" }}
                     />
                   </div>

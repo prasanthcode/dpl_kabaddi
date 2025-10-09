@@ -84,13 +84,15 @@ function TeamLeaderboardSection({ category, title }) {
         marginBottom: "30px",
         border: "1px solid #5c5c5c",
         borderRadius: "20px",
+        backgroundColor: "#c9c9c9",
+        color: "black",
       }}
     >
       <h4
         style={{
           textAlign: "left",
           margin: "10px 0 0 10px",
-          color: "var(--text-light)",
+          color: "black",
         }}
       >
         {title}
@@ -100,8 +102,8 @@ function TeamLeaderboardSection({ category, title }) {
           height: "40vh",
           width: "100%",
           margin: "20px auto",
-          backgroundColor: "var(--primary-dark)",
-          color: "var(--text-light)",
+          backgroundColor: "#c9c9c9",
+          color: "black",
         }}
       >
         {loading ? (
@@ -110,7 +112,7 @@ function TeamLeaderboardSection({ category, title }) {
           <div style={{ textAlign: "center", color: "red" }}>{error}</div>
         ) : (
           <TableVirtuoso
-            sx={{ backgroundColor: "var(--primary-dark)" }}
+            sx={{ backgroundColor: "#c9c9c9" }}
             data={teams}
             components={VirtuosoTableComponents}
             fixedHeaderContent={() => (
@@ -122,9 +124,9 @@ function TeamLeaderboardSection({ category, title }) {
                     align="center"
                     style={{ width: col.width }}
                     sx={{
-                      color: "var(--text-light)",
+                      color: "black",
                       border: "none",
-                      backgroundColor: "var(--primary-dark)",
+                      backgroundColor: "#c9c9c9",
                     }}
                   >
                     {col.label}
@@ -139,9 +141,9 @@ function TeamLeaderboardSection({ category, title }) {
                     key={col.dataKey}
                     align="center"
                     sx={{
-                      color: "var(--text-light)",
+                      color: "black",
                       borderColor: "#373f4e",
-                      backgroundColor: "var(--primary-dark)",
+                      backgroundColor: "#c9c9c9",
                       verticalAlign: "middle",
                     }}
                   >
@@ -174,7 +176,7 @@ function TeamLeaderboardSection({ category, title }) {
                         to={`/team/${row._id}`}
                         style={{
                           textDecoration: "none",
-                          color: "var(--text-light)",
+                          color: "black",
                           fontWeight: 500,
                         }}
                       >

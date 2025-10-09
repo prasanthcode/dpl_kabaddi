@@ -10,6 +10,7 @@ import { TableVirtuoso } from "react-virtuoso";
 import { Link } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 import { getPlayerStats } from "../services/statsApi";
+import { color } from "framer-motion";
 
 const getColumns = (categoryKey) => {
   let pointsLabel = "Points";
@@ -86,15 +87,16 @@ function LeaderboardSection({ category, title }) {
       ref={ref}
       style={{
         marginBottom: "30px",
-        border: "1px solid #5c5c5c",
-        borderRadius: "20px",
+        // border: "1px solid #212121ff",
+        borderRadius: "10px",
+        backgroundColor: "#c9c9c9",
       }}
     >
       <h4
         style={{
           textAlign: "left",
           margin: "10px 0 0 10px",
-          color: "var(--text-light)",
+          color: "black",
         }}
       >
         {title}
@@ -104,18 +106,17 @@ function LeaderboardSection({ category, title }) {
           height: "50vh",
           width: "100%",
           margin: "20px auto",
-          backgroundColor: "var(--primary-dark)",
-          color: "var(--text-light)",
+          backgroundColor: "#c9c9c9",
+          color: "black",
         }}
       >
         {loading ? (
-          <p style={{ textAlign: "center" }}></p>
-        ) : 
-        error ? (
+          <p style={{ textAlign: "center" }}>Loading...</p>
+        ) : error ? (
           <div style={{ textAlign: "center", color: "red" }}>{error}</div>
         ) : (
           <TableVirtuoso
-            sx={{ backgroundColor: "var(--primary-dark)" }}
+            sx={{ backgroundColor: "#c9c9c9" }}
             data={sortedData}
             components={VirtuosoTableComponents}
             fixedHeaderContent={() => (
@@ -127,9 +128,9 @@ function LeaderboardSection({ category, title }) {
                     align="left"
                     style={{ width: col.width }}
                     sx={{
-                      color: "var(--text-light)",
+                      color: "black",
                       border: "none",
-                      backgroundColor: "var(--primary-dark)",
+                      backgroundColor: "#c9c9c9",
                       padding: "0",
                       textAlign: "center",
                     }}
@@ -146,7 +147,7 @@ function LeaderboardSection({ category, title }) {
                     key={col.dataKey}
                     align="center"
                     sx={{
-                      color: "var(--text-light)",
+                      color: "black",
                       borderColor: "#373f4e",
                     }}
                   >
@@ -154,7 +155,7 @@ function LeaderboardSection({ category, title }) {
                       <Link
                         style={{
                           textDecoration: "none",
-                          color: "var(--text-light)",
+                          color: "black",
                         }}
                         to={`/player/${row.playerId}`}
                       >
@@ -176,7 +177,7 @@ function LeaderboardSection({ category, title }) {
                         <Link
                           style={{
                             textDecoration: "none",
-                            color: "var(--text-light)",
+                            color: "black",
                           }}
                           to={`/player/${row.playerId}`}
                         >
@@ -197,7 +198,6 @@ function LeaderboardSection({ category, title }) {
     </div>
   );
 }
-
 
 export default function PlayersStats() {
   const categories = [

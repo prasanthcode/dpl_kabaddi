@@ -74,7 +74,7 @@ body {
   padding: 15px;
   box-sizing: border-box;
   /* background-color: rgb(8, 43, 109); */
-  background-color: var(--primary-color);
+  background-color: var(--background-color);
 
   align-items: center;
   display: flex;

@@ -5,7 +5,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--primary-color);
+  background-color: #0a335d;
   flex-wrap: wrap;
 }
 
@@ -45,10 +45,12 @@
 }
 
 .matches-single {
-  background-color: var(--primary-color);
+  background-color: #c9c9c9;
+  /* background-color: var(--primary-color); */
   position: relative;
   padding: 5px;
   border-radius: 8px;
+  color: black;
   box-shadow: 0 4px 10px var(--shadow-color);
 }
 
@@ -76,7 +78,7 @@
 .matches-img-wrap img {
   width: 70px;
   border-radius: 50%;
-  box-shadow: rgba(51, 53, 61, 0.8) 0px 19px 38px,
+  box-shadow: rgba(51, 53, 61, 0.2) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
@@ -145,16 +147,18 @@
 }
 
 .matches-skeleton-container {
-  background-color: var(--primary-dark);
+    background-color: #c9c9c9;
+
 }
 
 .matches-skeleton-group {
-  background-color: var(--primary-color);
+    background-color: #c9c9c9;
+
   margin-bottom: 20px;
 }
 
 .matches-skeleton-single {
-  background-color: rgb(8, 43, 109);
+  background-color: rgb(208, 208, 208);
   margin: 20px 0;
   padding: 20px 10px;
 }
@@ -171,11 +175,11 @@
   align-items: center;
 }
 .winner {
-  color: #ffd9a0;
+  color: #c27501;
 }
 
 .loser {
-  color: #cce5ff;
+  color: #024ea0;
 }
 @media (min-width: 768px) {
   .matches-buttons a {
