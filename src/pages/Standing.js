@@ -55,7 +55,7 @@ export default function Standing() {
                 <TableCell sx={{ textAlign: "left !important" }}>
                   Team
                 </TableCell>
-                <TableCell>Po</TableCell>
+                <TableCell>P</TableCell>
                 <TableCell>W</TableCell>
                 <TableCell>L</TableCell>
                 <TableCell>T</TableCell>
