@@ -62,7 +62,7 @@ export default function TeamDialog({
               <img
                 src={preview}
                 alt="Logo Preview"
-                style={{ width: 80, height: 80, borderRadius: "50%" }}
+                style={{ height: 250 }}
               />
             </Box>
           )}

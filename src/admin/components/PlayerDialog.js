@@ -82,7 +82,7 @@ export default function PlayerDialog({
               <img
                 src={preview}
                 alt="Profile Preview"
-                style={{ width: 80, height: 80, borderRadius: "50%" }}
+                style={{ height: 250}}
               />
             </Box>
           )}

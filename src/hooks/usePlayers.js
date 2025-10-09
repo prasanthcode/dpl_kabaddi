@@ -31,7 +31,7 @@ export function usePlayers(teamId = null) {
 
   const updatePlayer = async (id, playerData) => {
     const res = await api.updatePlayer(id, playerData);
-    setPlayers((prev) => prev.map((p) => (p._id === id ? res.data : p)));
+    await loadPlayers();
     return res.data;
   };
 

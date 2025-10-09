@@ -19,7 +19,7 @@ export default function Dashboard() {
   const isLoading = matchesLoading || teamsLoading || playersLoading;
 
   return (
-    <>
+    <div className="dashboard-page">
       <div style={{ marginBottom: 12 }}>
         <h2 style={{ color: "black" }}>Welcome, Admin</h2>
         <p style={{ marginTop: 6, color: "#6b7280" }}>Overview of the league</p>
@@ -35,6 +35,6 @@ export default function Dashboard() {
         />
       </div>
       <button onClick={refetch}>Refresh Live Users</button>
-    </>
+    </div>
   );
 }

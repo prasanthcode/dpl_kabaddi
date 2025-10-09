@@ -5,6 +5,7 @@ import { Button } from "@mui/material";
 import PlayerDialog from "../components/PlayerDialog"; // new
 import { usePlayers } from "../../hooks/usePlayers";
 import { useTeams } from "../../hooks/useTeams";
+import { toast } from "react-toastify";
 
 export default function Players() {
   const {
@@ -33,8 +34,10 @@ export default function Players() {
     if (window.confirm(`Are you sure you want to delete "${row.name}"?`)) {
       try {
         await deletePlayer(row._id);
+        toast.success("Player deleted successfully!");
       } catch {
-        alert("Failed to delete player");
+        // alert("Failed to delete player");
+        toast.error("Failed to delete player");
       }
     }
   };
@@ -50,8 +53,10 @@ export default function Players() {
 
       if (editId) {
         await updatePlayer(editId, formData);
+        toast.success("Player updated successfully!");
       } else {
         await addPlayer(formData);
+        toast.success("Player added successfully!");
       }
 
       setForm({ name: "", team: "", profilePic: null });
@@ -60,6 +65,7 @@ export default function Players() {
       setOpenForm(false);
     } catch (err) {
       console.error("Failed to save player", err);
+      toast.error("Failed to save player");
     } finally {
       setSaving(false);
     }

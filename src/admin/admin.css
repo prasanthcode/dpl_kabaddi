@@ -112,7 +112,13 @@
 .stats-row{
     flex-direction: column;
   }
-
+.dashboard-page button{
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #0f1724;
+  color: white;
+}
 @media (min-width: 900px) {
   .admin-sidebar {
     position: relative;
@@ -142,6 +148,9 @@
   }
   .score_ht_undo{
     text-align: center;
+  }
+  .stats-row{
+    flex-direction: row;
   }
   
 }

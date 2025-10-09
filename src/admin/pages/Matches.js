@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SportsScoreIcon from "@mui/icons-material/SportsScore";
+import { toast } from "react-toastify";
 
 export default function Matches() {
   const navigate = useNavigate();
@@ -106,8 +107,9 @@ export default function Matches() {
     ) {
       try {
         await deleteMatch(row._id);
+        toast.success("Match deleted successfully!");
       } catch {
-        alert("Failed to delete match");
+        toast.error("Failed to delete match");
       }
     }
   };
@@ -123,9 +125,11 @@ export default function Matches() {
         date: form.date,
         status: form.status,
       });
+      toast.success("Match updated successfully!");
       setEditMatch(false);
     } catch (err) {
       console.error("Failed to update match", err);
+      toast.error("Failed to update match");
     } finally {
       setSaving(false);
     }
@@ -135,7 +139,8 @@ export default function Matches() {
 
   const handleAddSave = async () => {
     if (form.teamA === form.teamB) {
-      alert("Team A and Team B cannot be the same.");
+      // alert("Team A and Team B cannot be the same.");
+      toast.error("Team A and Team B cannot be the same.");
       return;
     }
     setSaving(true);
@@ -146,9 +151,11 @@ export default function Matches() {
         matchType: form.matchType,
         date: form.date,
       });
+      toast.success("Match added successfully!");
       setForm({ teamA: "", teamB: "", matchType: "", date: "" });
       setAddDialog(false);
     } catch (err) {
+      toast.error("Failed to add match");
       console.error("Failed to add match", err);
     } finally {
       setSaving(false);
@@ -210,7 +217,6 @@ export default function Matches() {
                   <Typography variant="body2" color="text.secondary">
                     Status: {match.status}
                   </Typography>
-
                   <Box mt={1}>
                     <Button
                       size="small"

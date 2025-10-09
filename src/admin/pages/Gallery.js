@@ -4,6 +4,8 @@ import GalleryDialog from "../components/GalleryDialog";
 import "../admin.css";
 import { Button } from "@mui/material";
 import { useGallery } from "../../hooks/useGallery";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Gallery() {
   const { loading, galleries, addGallery, deleteGallery, updateGallery } =
@@ -14,7 +16,6 @@ export default function Gallery() {
   const [preview, setPreview] = useState(null);
   const [saving, setSaving] = useState(false);
   const [editId, setEditId] = useState(null);
-
   const handleEdit = (row) => {
     setForm({ caption: row.caption, type: row.type, file: null });
     setPreview(row.url || null);
@@ -26,8 +27,9 @@ export default function Gallery() {
     if (window.confirm(`Delete this post?`)) {
       try {
         await deleteGallery(row._id);
+        toast.success("Gallery post deleted successfully!");
       } catch {
-        alert("Failed to delete gallery post");
+        toast.error("Failed to delete gallery post");
       }
     }
   };
@@ -48,8 +50,10 @@ export default function Gallery() {
 
       if (editId) {
         await updateGallery(editId, formData);
+        toast.success("Gallery post updated successfully!");
       } else {
         await addGallery(formData);
+        toast.success("Gallery post added successfully!");
       }
 
       setForm({ caption: "", type: "other", file: null, url: "" });
@@ -58,6 +62,7 @@ export default function Gallery() {
       setOpenForm(false);
     } catch (err) {
       console.error("Failed to save gallery", err);
+      toast.error("Failed to save gallery post!");
     } finally {
       setSaving(false);
     }
@@ -93,8 +98,6 @@ export default function Gallery() {
 
       <DataTable
         columns={[
-          { field: "caption", headerName: "Caption" },
-          { field: "type", headerName: "Type" },
           {
             field: "url",
             headerName: "Image",
@@ -109,6 +112,8 @@ export default function Gallery() {
                 "No Image"
               ),
           },
+          { field: "caption", headerName: "Caption" },
+          { field: "type", headerName: "Type" },
         ]}
         rows={loading ? [] : galleries}
         onEdit={handleEdit}

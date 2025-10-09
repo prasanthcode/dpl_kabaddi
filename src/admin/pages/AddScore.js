@@ -11,6 +11,7 @@ import UndoButton from "../components/UndoButton";
 import { useScores } from "../../hooks/useScores";
 import TimeSelection from "../components/TimeSelection";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import { toast } from "react-toastify";
 
 export default function AddScore() {
   const { matchId } = useParams();
@@ -99,6 +100,7 @@ export default function AddScore() {
           name: teamName,
           points: selectedScore,
         });
+        toast.success("Team score added successfully!");
       } else {
         await addPlayerScore({
           matchId,
@@ -114,8 +116,10 @@ export default function AddScore() {
           points: selectedScore,
           type: selectedAction === "R" ? "raid" : "defense",
         });
+        toast.success("Player score added successfully!");
       }
     } catch (err) {
+      toast.error("Error submitting score");
       console.error("Error submitting score:", err);
     } finally {
       setScoreLoading(false);
@@ -129,9 +133,11 @@ export default function AddScore() {
     setUndoLoading(true);
     try {
       await undoLastAction();
+      toast.success("Last action undone successfully!");
       setLastAction(null); // Clear after undo
     } catch (err) {
       console.error("Undo failed:", err);
+      toast.error("Failed to undo last action");
     } finally {
       setUndoLoading(false);
     }

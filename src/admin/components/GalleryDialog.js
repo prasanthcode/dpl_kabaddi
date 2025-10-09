@@ -97,7 +97,7 @@ export default function GalleryDialog({
               <img
                 src={preview}
                 alt="Preview"
-                style={{ height: 120, borderRadius: 8 }}
+                style={{ height: 250, borderRadius: 8 }}
               />
             </Box>
           )}

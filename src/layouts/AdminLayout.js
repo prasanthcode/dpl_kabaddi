@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import AdminSidebar from "../admin/components/AdminSidebar";
 import AdminNavbar from "../admin/components/AdminNavbar";
+import { ToastContainer } from "react-toastify";
 
 export default function AdminLayout() {
   const location = useLocation();
@@ -37,6 +38,16 @@ export default function AdminLayout() {
         <div className="admin-content">
           <Outlet />
         </div>
+        <ToastContainer
+          position="top-right"
+          autoClose={2500}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          pauseOnHover
+          draggable
+          theme="colored"
+        />
       </div>
     </div>
   );

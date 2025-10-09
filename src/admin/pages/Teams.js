@@ -4,6 +4,7 @@ import TeamDialog from "../components/TeamDialog";
 import "../admin.css";
 import { Button } from "@mui/material";
 import { useTeams } from "../../hooks/useTeams";
+import { toast } from "react-toastify";
 
 export default function Teams() {
   const { loading, teams, addTeam, deleteTeam, updateTeam } = useTeams();
@@ -25,8 +26,10 @@ export default function Teams() {
     if (window.confirm(`Are you sure you want to delete "${row.name}"?`)) {
       try {
         await deleteTeam(row._id);
+        toast.success("Team deleted successfully!");
       } catch {
-        alert("Failed to delete team");
+        // alert("Failed to delete team");
+        toast.error("Failed to delete team");
       }
     }
   };
@@ -41,8 +44,10 @@ export default function Teams() {
 
       if (editId) {
         await updateTeam(editId, formData);
+        toast.success("Team updated successfully!");
       } else {
         await addTeam(formData);
+        toast.success("Team added successfully!");
       }
 
       setForm({ name: "", logo: null });
@@ -50,6 +55,7 @@ export default function Teams() {
       setEditId(null);
       setOpenForm(false);
     } catch (err) {
+      toast.error("Failed to save team");
       console.error("Failed to save team", err);
     } finally {
       setSaving(false);
