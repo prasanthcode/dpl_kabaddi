@@ -97,7 +97,7 @@ function TeamLeaderboardSection({ category, title }) {
       </h4>
       <Paper
         style={{
-          height: "50vh",
+          height: "40vh",
           width: "100%",
           margin: "20px auto",
           backgroundColor: "var(--primary-dark)",
