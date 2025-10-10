@@ -21,6 +21,7 @@ import AdminLayout from "./layouts/AdminLayout";
 import Gallery from "./admin/pages/Gallery";
 import NotFound from "./pages/NotFound";
 import TopStats from "./pages/TopStats";
+import ScrollReset from "./components/ScrollReset";
 function App() {
   useEffect(() => {
     initGA(); 
@@ -28,6 +29,7 @@ function App() {
   return (
     <Router>
       <PageTracker />
+       <ScrollReset />
       <Routes>
         {/* ---------------- PUBLIC LAYOUT ---------------- */}
         <Route element={<PublicLayout />}>
