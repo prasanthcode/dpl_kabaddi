@@ -49,9 +49,9 @@
 }
 
 .match_type {
-  background-color: #f79627;
+  background-color: #da7b0e;
   width: 40%;
-  margin: 0 auto 20px auto;
+  margin: 0 auto;
   border-radius: 5px;
   font-weight: 600;
   padding: 5px 0;
@@ -70,8 +70,8 @@
 }
 
 .match_team_img img {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   margin-bottom: 5px;
   object-fit: cover;
@@ -89,18 +89,18 @@
 }
 .match_teamA_score,
 .match_teamB_score {
-  font-size: 24px;
+  font-size: 30px;
   font-weight: 600;
   margin-top: 5px;
   position: absolute;
 }
 .match_teamA_score {
-  left: 35%;
-  top: 10%;
+  left: 30%;
+  top: 15%;
 }
 .match_teamB_score {
-  right: 35%;
-  top: 10%;
+  right: 30%;
+  top: 15%;
 }
 .matches-time {
   padding: 10px;
@@ -117,7 +117,7 @@
 
 .match_result {
   font-weight: 300;
-  width: 50%;
+  width: 60%;
   margin: 0 auto;
   font-size: 16px;
   margin-top: 60px;
@@ -233,6 +233,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0 10px;
+  border-radius: 5px;
   padding: 10px 20px;
   color: black;
   background-color: white;
@@ -307,12 +309,8 @@
   animation: pulse 1.5s infinite ease-in-out;
 }
 .points-container {
-  margin: 8px 0;
-}
-
-.raid-title {
-  font-weight: bold;
-  margin-bottom: 4px;
+  margin: 5px 10px;
+  border-radius: 5px;
 }
 
 .points-scroll {

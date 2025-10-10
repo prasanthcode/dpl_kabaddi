@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useMatches } from "../hooks/useMatches";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import Heading from "./Heading";
 export default function LineUp({ stats, matchId }) {
   const { pointSequences, getPlayerPointsOfMatch, pointsLoading } =
     useMatches(matchId);
@@ -27,7 +28,8 @@ export default function LineUp({ stats, matchId }) {
     <div className="match_lineup">
       {/* Raiders */}
       <div className="top_players">
-        <h3>Top Raiders</h3>
+        {/* <h3>Top Raiders</h3> */}
+        <Heading text={"Top Raiders"} />
         {stats.topRaiders?.length > 0 ? (
           stats.topRaiders.map((raider) => (
             <div
@@ -87,7 +89,8 @@ export default function LineUp({ stats, matchId }) {
 
       {/* Defenders */}
       <div className="top_players">
-        <h3>Top Defenders</h3>
+        <Heading text={"Top Defenders"} />
+
         {stats.topDefenders?.length > 0 ? (
           stats.topDefenders.map((defender) => (
             <div

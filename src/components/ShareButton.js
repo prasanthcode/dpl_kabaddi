@@ -6,15 +6,10 @@ import {
   MenuItem,
   ListItemIcon,
   ListItemText,
-  Divider,
-  Box,
-  Typography,
 } from "@mui/material";
 import ShareIcon from "@mui/icons-material/Share";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import CloseIcon from "@mui/icons-material/Close";
 
 const ShareButton = ({
   url = window.location.href,
@@ -47,11 +42,6 @@ const ShareButton = ({
       `${title} ${url}`
     )}`;
     window.open(whatsappUrl, "_blank");
-    handleClose();
-  };
-
-  const handleInstagram = () => {
-    window.open("https://www.instagram.com/", "_blank");
     handleClose();
   };
 
@@ -106,33 +96,6 @@ const ShareButton = ({
           </ListItemIcon>
           <ListItemText primary="WhatsApp" />
         </MenuItem>
-
-        <MenuItem onClick={handleInstagram}>
-          <ListItemIcon>
-            <InstagramIcon
-              fontSize="small"
-              sx={{ color: "#E4405F" }}
-            />
-          </ListItemIcon>
-          <ListItemText primary="Instagram" />
-        </MenuItem>
-
-        <Divider sx={{ borderColor: "rgba(255,255,255,0.1)" }} />
-
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            p: 1,
-            cursor: "pointer",
-            "&:hover": { color: "#f44336" },
-          }}
-          onClick={handleClose}
-        >
-          <CloseIcon fontSize="small" sx={{ mr: 0.5 }} />
-          <Typography variant="body2">Close</Typography>
-        </Box>
       </Menu>
     </>
   );
