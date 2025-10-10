@@ -24,58 +24,45 @@ export default function TopStats() {
         sx={{
           padding: "4px",
           margin: "10px",
-          backgroundColor: "#f5f5f5",
+          borderRadius: "12px",
+          background: "rgba(255,255,255,0.1)",
+          backdropFilter: "blur(8px)",
+          WebkitBackdropFilter: "blur(8px)",
+          boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
           display: "inline-flex",
         }}
       >
-        <ToggleButton
-          value="players"
-          aria-label="players stats"
-          sx={{
-            textTransform: "none",
-            fontWeight: 600,
-
-            px: 3,
-            py: 1,
-            "&.Mui-selected": {
-              backgroundColor: "var(--primary-light)",
-              color: "#fff",
-            },
-            "&.Mui-selected:hover": {
-              backgroundColor: "#2461acff",
-            },
-            "&:not(.Mui-selected)": {
-              backgroundColor: "#fff",
-              color: "#000",
-            },
-          }}
-        >
-          Player
-        </ToggleButton>
-        <ToggleButton
-          value="teams"
-          aria-label="teams stats"
-          sx={{
-            textTransform: "none",
-            fontWeight: 600,
-
-            px: 3,
-            py: 1,
-            "&.Mui-selected": {
-              backgroundColor: "var(--primary-light)",
-              color: "#fff",
-            },
-            "&.Mui-selected:hover": {
-              backgroundColor: "#2461acff",
-            },
-            "&:not(.Mui-selected)": {
-              backgroundColor: "#fff",
-              color: "#000",
-            },
-          }}
-        >
-          Team
-        </ToggleButton>
+        {["players", "teams"].map((val) => (
+          <ToggleButton
+            key={val}
+            value={val}
+            aria-label={`${val} stats`}
+            sx={{
+              textTransform: "none",
+              fontWeight: 600,
+              px: 3,
+              py: 1,
+              borderRadius: "10px",
+              "&.Mui-selected": {
+                background: "rgba(36,97,172,0.8)", // semi-transparent selected
+                color: "#fff",
+                boxShadow: "0 4px 15px rgba(36,97,172,0.4)",
+              },
+              "&.Mui-selected:hover": {
+                background: "rgba(36,97,172,1)",
+              },
+              "&:not(.Mui-selected)": {
+                background: "rgba(255,255,255,0.2)",
+                color: "#fff",
+                "&:hover": {
+                  background: "rgba(255,255,255,0.3)",
+                },
+              },
+            }}
+          >
+            {val === "players" ? "Player" : "Team"}
+          </ToggleButton>
+        ))}
       </ToggleButtonGroup>
 
       {view === "players" ? <PlayersStats /> : <TeamsStats />}

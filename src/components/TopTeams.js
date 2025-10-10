@@ -81,18 +81,14 @@ function TeamLeaderboardSection({ category, title }) {
       className="leaderboard_section"
       ref={ref}
       style={{
-        marginBottom: "30px",
-        border: "1px solid #5c5c5c",
-        borderRadius: "20px",
-        backgroundColor: "#c9c9c9",
-        color: "black",
+        padding: "10px",
       }}
     >
       <h4
         style={{
           textAlign: "left",
           margin: "10px 0 0 10px",
-          color: "black",
+          color: "white",
         }}
       >
         {title}
@@ -102,8 +98,13 @@ function TeamLeaderboardSection({ category, title }) {
           height: "40vh",
           width: "100%",
           margin: "20px auto",
-          backgroundColor: "#c9c9c9",
-          color: "black",
+          background: "rgba(255,255,255,0.1)",
+          backdropFilter: "blur(10px)",
+          WebkitBackdropFilter: "blur(10px)",
+          borderRadius: "12px",
+          border: "1px solid rgba(255,255,255,0.2)",
+          boxShadow: "0 4px 30px rgba(0,0,0,0.2)",
+          color: "white",
         }}
       >
         {loading ? (
@@ -112,7 +113,7 @@ function TeamLeaderboardSection({ category, title }) {
           <div style={{ textAlign: "center", color: "red" }}>{error}</div>
         ) : (
           <TableVirtuoso
-            sx={{ backgroundColor: "#c9c9c9" }}
+            sx={{ background: "transparent" }}
             data={teams}
             components={VirtuosoTableComponents}
             fixedHeaderContent={() => (
@@ -122,11 +123,12 @@ function TeamLeaderboardSection({ category, title }) {
                     key={col.dataKey}
                     variant="head"
                     align="center"
-                    style={{ width: col.width }}
                     sx={{
-                      color: "black",
+                      color: "white",
                       border: "none",
-                      backgroundColor: "#c9c9c9",
+                      background: "rgba(120, 120, 120, 1)",
+                      fontWeight: 600,
+                      padding: "8px",
                     }}
                   >
                     {col.label}
@@ -141,10 +143,9 @@ function TeamLeaderboardSection({ category, title }) {
                     key={col.dataKey}
                     align="center"
                     sx={{
-                      color: "black",
-                      borderColor: "#373f4e",
-                      backgroundColor: "#c9c9c9",
-                      verticalAlign: "middle",
+                      color: "white",
+                      border: "none",
+                      padding: "8px",
                     }}
                   >
                     {col.dataKey === "logo" ? (
@@ -153,7 +154,6 @@ function TeamLeaderboardSection({ category, title }) {
                         style={{
                           textDecoration: "none",
                           display: "inline-block",
-                          color: "inherit",
                         }}
                       >
                         <img
@@ -167,7 +167,7 @@ function TeamLeaderboardSection({ category, title }) {
                             height: 40,
                             borderRadius: "50%",
                             objectFit: "cover",
-                            verticalAlign: "middle",
+                            border: "1px solid rgba(255,255,255,0.3)",
                           }}
                         />
                       </Link>
@@ -176,7 +176,7 @@ function TeamLeaderboardSection({ category, title }) {
                         to={`/team/${row._id}`}
                         style={{
                           textDecoration: "none",
-                          color: "black",
+                          color: "white",
                           fontWeight: 500,
                         }}
                       >

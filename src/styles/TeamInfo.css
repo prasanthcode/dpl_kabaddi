@@ -23,13 +23,17 @@
 }
 
 .teaminfo-card {
-  background-color: #c9c9c9;
-  color: black;
-  margin: 10px 0;
-  padding: 20px;
-  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.1); /* semi-transparent glass */
+  color: white; /* better contrast for glass */
+  /* margin: 10px 0; */
+  padding: 10px 20px;
+  border-radius: 12px; /* smoother corners for glass */
   position: relative;
-  transition: transform 0.2s, box-shadow 0.2s;
+  backdrop-filter: blur(10px); /* glass blur */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* subtle border */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* soft shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
 .teaminfo-card:hover {
@@ -152,15 +156,17 @@
   margin: 8px 0;
   width: 100%;
 }
-
 .teamstats-card {
-  color: #021124;
-  background-color: #c9c9c9;
-  border: 1px solid rgb(255, 255, 255);
-  border-radius: 6px;
+  color: white;
+  background: rgba(90, 91, 94, 0.3); /* soft background for the card */
+  border-radius: 12px;
   padding: 10px;
   max-width: 600px;
   margin: auto;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
 }
 
 .teamstats-header {
@@ -174,6 +180,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .teamstats-header h2 {
@@ -182,10 +189,48 @@
   margin: 0;
 }
 
+/* Horizontal scroll container */
+.teamstats-scroll {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scrollbar-width: thin;
+}
+
+.teamstats-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.teamstats-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.teamstats-section {
+  min-width: 200px;
+  background: rgba(255, 255, 255, 0.1); /* frosted glass */
+  border-radius: 12px;
+  padding: 15px;
+  flex-shrink: 0;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.teamstats-section h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
 .teamstats-grid div {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid rgb(1, 13, 42);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   padding: 10px 5px;
   align-items: center;
 }
@@ -194,6 +239,7 @@
   font-weight: 600;
 }
 
+/* Match card styles */
 .match-card {
   display: flex;
   align-items: center;
@@ -229,8 +275,11 @@
   position: absolute;
   top: 125%;
   left: 50%;
-  background-color: #c9c9c9;
+  /* background-color: rgba(255, 255, 255, 0.1); */
+  padding: 2px 6px;
+  border-radius: 6px;
   transform: translate(-50%, -50%);
+  font-weight: 600;
 }
 
 @media (min-width: 768px) {

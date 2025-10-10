@@ -86,28 +86,31 @@ function LeaderboardSection({ category, title }) {
       className="leaderboard_section"
       ref={ref}
       style={{
-        marginBottom: "30px",
-        // border: "1px solid #212121ff",
-        borderRadius: "10px",
-        backgroundColor: "#c9c9c9",
+        padding: "10px",
       }}
     >
       <h4
         style={{
           textAlign: "left",
           margin: "10px 0 0 10px",
-          color: "black",
+          color: "white",
         }}
       >
         {title}
       </h4>
+
       <Paper
         style={{
           height: "50vh",
           width: "100%",
           margin: "20px auto",
-          backgroundColor: "#c9c9c9",
-          color: "black",
+          background: "rgba(255,255,255,0.1)",
+          backdropFilter: "blur(10px)",
+          WebkitBackdropFilter: "blur(10px)",
+          borderRadius: "12px",
+          border: "1px solid rgba(255,255,255,0.2)",
+          boxShadow: "0 4px 30px rgba(0,0,0,0.2)",
+          color: "white",
         }}
       >
         {loading ? (
@@ -116,7 +119,7 @@ function LeaderboardSection({ category, title }) {
           <div style={{ textAlign: "center", color: "red" }}>{error}</div>
         ) : (
           <TableVirtuoso
-            sx={{ backgroundColor: "#c9c9c9" }}
+            sx={{ background: "transparent" }}
             data={sortedData}
             components={VirtuosoTableComponents}
             fixedHeaderContent={() => (
@@ -125,14 +128,14 @@ function LeaderboardSection({ category, title }) {
                   <TableCell
                     key={col.dataKey}
                     variant="head"
-                    align="left"
-                    style={{ width: col.width }}
+                    align="center"
                     sx={{
-                      color: "black",
+                      color: "white",
                       border: "none",
-                      backgroundColor: "#c9c9c9",
-                      padding: "0",
+                      background: "rgba(131, 131, 131, 1)",
+                      padding: "8px",
                       textAlign: "center",
+                      fontWeight: 600,
                     }}
                   >
                     {col.label}
@@ -147,15 +150,16 @@ function LeaderboardSection({ category, title }) {
                     key={col.dataKey}
                     align="center"
                     sx={{
-                      color: "black",
-                      borderColor: "#373f4e",
+                      color: "white",
+                      border: "none",
+                      padding: "8px",
                     }}
                   >
                     {col.dataKey === "profilePic" ? (
                       <Link
                         style={{
                           textDecoration: "none",
-                          color: "black",
+                          color: "white",
                         }}
                         to={`/player/${row.playerId}`}
                       >
@@ -169,6 +173,7 @@ function LeaderboardSection({ category, title }) {
                             width: 40,
                             height: 40,
                             borderRadius: "50%",
+                            border: "1px solid rgba(255,255,255,0.3)",
                           }}
                         />
                       </Link>
@@ -177,13 +182,13 @@ function LeaderboardSection({ category, title }) {
                         <Link
                           style={{
                             textDecoration: "none",
-                            color: "black",
+                            color: "white",
                           }}
                           to={`/player/${row.playerId}`}
                         >
                           {row[col.dataKey]}
                         </Link>
-                        {row.points === topScore ? "🔥" : ""}
+                        {row.points === topScore ? " 🔥" : ""}
                       </>
                     ) : (
                       row[col.dataKey]

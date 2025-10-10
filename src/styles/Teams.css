@@ -1,9 +1,14 @@
 .teams-card {
   padding-top: 20px;
-  background-color: #c9c9c9;
-  color:black;
+  background: rgba(255, 255, 255, 0.1); /* semi-transparent */
+  color: white; /* glass usually works better with light text */
   position: relative;
-  border-radius: 5px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px); /* the main glass effect */
+  -webkit-backdrop-filter: blur(10px); /* for Safari */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* soft border */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* subtle shadow */
+  transition: all 0.3s ease; /* optional hover smoothness */
 }
 
 .teams-card img {
@@ -38,7 +43,7 @@
   font-size: 15px;
   margin-top: 5px;
   text-align: center;
-  color: black;
+  color: rgb(255, 255, 255);
 }
 
 .teams-skeleton-card {
