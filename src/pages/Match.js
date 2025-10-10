@@ -44,7 +44,7 @@ export default function Match() {
               ) : matches?.matchType ? (
                 matches.matchType
               ) : (
-                matches?.matchNumber && `Match - #${matches.matchNumber}`
+                matches?.matchNumber && `Match - ${matches.matchNumber}`
               )}
             </h5>
 
