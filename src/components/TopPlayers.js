@@ -10,7 +10,6 @@ import { TableVirtuoso } from "react-virtuoso";
 import { Link } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 import { getPlayerStats } from "../services/statsApi";
-import { color } from "framer-motion";
 
 const getColumns = (categoryKey) => {
   let pointsLabel = "Points";

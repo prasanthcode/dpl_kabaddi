@@ -6,15 +6,15 @@ import "../styles/Matches.css";
 const MatchListSkeleton = ({ isHomePage }) => {
   return (
     <div className="matches-container matches-skeleton-container">
+      <Skeleton
+        height={30}
+        width={200}
+        baseColor="#a0a0a0ff"
+        highlightColor="white"
+        style={{ marginBottom: "20px" }}
+      />
       {[...Array(isHomePage ? 1 : 3)].map((_, index) => (
         <div className="matches-skeleton-group" key={index}>
-          <Skeleton
-            height={30}
-            width={200}
-            baseColor="#a0a0a0ff"
-            highlightColor="white"
-            style={{ marginBottom: "20px" }}
-          />
           {[...Array(isHomePage ? 1 : 2)].map((_, idx) => (
             <div className="matches-single-wrapper" key={idx}>
               <div className="matches-single matches-skeleton-single">

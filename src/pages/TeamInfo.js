@@ -1,7 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import profilePic from "../assets/pngegg (30).png";
-import TeamInfoSkeleton from "../components/TeamInfoSkeleton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { usePlayers } from "../hooks/usePlayers";
@@ -17,7 +16,7 @@ export default function TeamInfo() {
       <TeamStats teamId={id} />
 
       {loading ? (
-        <TeamInfoSkeleton />
+        <></>
       ) : (
         <>
           {players.length > 0 ? (

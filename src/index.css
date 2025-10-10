@@ -77,12 +77,17 @@ body {
   width: 100%;
   padding: 15px 20px;
   box-sizing: border-box;
-  background-color: var(--background-color); /* navbar bg */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 1000; /* stay above all content */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* optional shadow */
+  z-index: 1000;
+
+  /* Glassmorphism effect */
+  background: rgba(2, 1, 14, 0.1); /* semi-transparent */
+  backdrop-filter: blur(10px); /* blur behind */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* subtle border */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); /* soft shadow */
 }
 
 .g_container {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DataTable from "../components/DataTable";
 import GalleryDialog from "../components/GalleryDialog";
 import "../admin.css";
-import { Button, Box, Typography, Stack } from "@mui/material";
+import { Button, Box, Typography } from "@mui/material";
 import { useGallery } from "../../hooks/useGallery";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

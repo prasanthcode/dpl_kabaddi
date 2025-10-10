@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import TeamSkeleton from "../components/TeamSkeleton";
 import { useTeams } from "../context/TeamContext";
 import "../styles/Teams.css";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 export default function Teams() {
   const { teams, loading } = useTeams();
@@ -13,9 +13,7 @@ export default function Teams() {
   return (
     <div className="teams-container">
       {loading
-        ? Array.from({ length: 4 }).map((_, index) => (
-            <TeamSkeleton key={index} />
-          ))
+        ? <LoadingSpinner/>
         : teams.map((team, index) => (
             <Link
               to={`/team/${team._id}`}

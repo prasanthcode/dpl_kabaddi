@@ -8,7 +8,6 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  MenuItem,
 } from "@mui/material";
 
 export default function GalleryDialog({
@@ -30,11 +29,6 @@ export default function GalleryDialog({
     }
   };
 
-  const handleUrlChange = (e) => {
-    const url = e.target.value;
-    setForm({ ...form, url, file: null });
-    setPreview(url);
-  };
 
   return (
     <Dialog
