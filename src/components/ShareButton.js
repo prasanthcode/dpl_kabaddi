@@ -6,11 +6,14 @@ import {
   MenuItem,
   ListItemIcon,
   ListItemText,
+  Divider,
+  Box,
+  Typography,
 } from "@mui/material";
 import ShareIcon from "@mui/icons-material/Share";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
 import CloseIcon from "@mui/icons-material/Close";
 
 const ShareButton = ({
@@ -20,31 +23,35 @@ const ShareButton = ({
   color = "default",
 }) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [copied, setCopied] = useState(false);
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => setAnchorEl(event.currentTarget);
-  const handleClose = () => setAnchorEl(null);
+  const handleClose = () => {
+    setCopied(false);
+    setAnchorEl(null);
+  };
 
   const handleCopyLink = async () => {
     try {
       await navigator.clipboard.writeText(url);
-      alert("Link copied to clipboard!");
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     } catch {
-      alert("Failed to copy link.");
-    } finally {
-      handleClose();
+      setCopied(false);
     }
   };
 
   const handleWhatsApp = () => {
-    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(title + " " + url)}`;
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(
+      `${title} ${url}`
+    )}`;
     window.open(whatsappUrl, "_blank");
     handleClose();
   };
 
-  const handleFacebook = () => {
-    const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-    window.open(fbUrl, "_blank");
+  const handleInstagram = () => {
+    window.open("https://www.instagram.com/", "_blank");
     handleClose();
   };
 
@@ -71,32 +78,61 @@ const ShareButton = ({
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
-        PaperProps={{ sx: { minWidth: 180 } }}
+        PaperProps={{
+          sx: {
+            minWidth: 200,
+            borderRadius: 3,
+            p: 0.5,
+            background: "#0b1120",
+            color: "white",
+          },
+        }}
       >
         <MenuItem onClick={handleCopyLink}>
           <ListItemIcon>
-            <ContentCopyIcon fontSize="small" />
+            <ContentCopyIcon fontSize="small" sx={{ color: "white" }} />
           </ListItemIcon>
-          <ListItemText>Copy Link</ListItemText>
+          <ListItemText
+            primary={copied ? "Copied ✓" : "Copy Link"}
+            primaryTypographyProps={{
+              sx: { color: copied ? "#4caf50" : "white" },
+            }}
+          />
         </MenuItem>
+
         <MenuItem onClick={handleWhatsApp}>
           <ListItemIcon>
             <WhatsAppIcon fontSize="small" sx={{ color: "#25D366" }} />
           </ListItemIcon>
-          <ListItemText>WhatsApp</ListItemText>
+          <ListItemText primary="WhatsApp" />
         </MenuItem>
-        <MenuItem onClick={handleFacebook}>
+
+        <MenuItem onClick={handleInstagram}>
           <ListItemIcon>
-            <FacebookIcon fontSize="small" sx={{ color: "#1877F2" }} />
+            <InstagramIcon
+              fontSize="small"
+              sx={{ color: "#E4405F" }}
+            />
           </ListItemIcon>
-          <ListItemText>Facebook</ListItemText>
+          <ListItemText primary="Instagram" />
         </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <CloseIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText>Close</ListItemText>
-        </MenuItem>
+
+        <Divider sx={{ borderColor: "rgba(255,255,255,0.1)" }} />
+
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            p: 1,
+            cursor: "pointer",
+            "&:hover": { color: "#f44336" },
+          }}
+          onClick={handleClose}
+        >
+          <CloseIcon fontSize="small" sx={{ mr: 0.5 }} />
+          <Typography variant="body2">Close</Typography>
+        </Box>
       </Menu>
     </>
   );
