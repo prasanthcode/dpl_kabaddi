@@ -1,7 +1,7 @@
 /* ===== Root Layout ===== */
-body {
+/* body {
   padding: 0;
-}
+} */
 .admin-root {
   display: flex;
   height: 100vh;
