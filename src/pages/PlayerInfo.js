@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { usePlayerInfo } from "../hooks/usePlayerInfo";
+import MatchCard from "../components/MatchCard";
+import ShareButton from "../components/ShareButton";
 
 export default function PlayerInfo() {
   const { playerId } = useParams();
@@ -47,16 +49,16 @@ export default function PlayerInfo() {
             />
           </div>
           <h3>{player.name}</h3>
+          <ShareButton />
         </div>
       </div>
 
       {!hasPlayed ? (
         <div className="not_played">
-          <h2 style={{color:"#abababff"}}>Not yet played</h2>
+          <h2 style={{ color: "#abababff" }}>Not yet played</h2>
         </div>
       ) : (
         <>
-          <h2>Player Stats</h2>
           <div className="total_player_stats">
             {player.totalStats.totalRaidPoints > 0 && (
               <div className="stat_type">
@@ -96,7 +98,6 @@ export default function PlayerInfo() {
             )}
           </div>
 
-          <h2>Player Stats By Match</h2>
           <div className="by_match">
             {player.matchStats.map((match) => {
               if (
@@ -112,50 +113,45 @@ export default function PlayerInfo() {
 
               return (
                 <div key={match.matchId} className="total_player_stats">
-                  <div className="opponent">
-                    <img src={player.team.logo} alt={player.team.logo} />
-                    <span>VS</span>
-                    <img
-                      src={match.opponentTeam.logo}
-                      alt={match.opponentTeam.name}
-                    />
+                  <MatchCard match={match} />
+                  <div className="stat_type_container">
+                    {match.raidPoints > 0 && (
+                      <div className="stat_type">
+                        <h1>{match.raidPoints}</h1>
+                        <span>Raid Points</span>
+                      </div>
+                    )}
+                    {match.defensePoints > 0 && (
+                      <div className="stat_type">
+                        <h1>{match.defensePoints}</h1>
+                        <span>Tackle Points</span>
+                      </div>
+                    )}
+                    {match.totalPoints > 0 && (
+                      <div className="stat_type">
+                        <h1>{match.totalPoints}</h1>
+                        <span>Total Points</span>
+                      </div>
+                    )}
+                    {match.super10 > 0 && (
+                      <div className="stat_type">
+                        <h1>{match.super10}</h1>
+                        <span>Super 10</span>
+                      </div>
+                    )}
+                    {match.high5 > 0 && (
+                      <div className="stat_type">
+                        <h1>{match.high5}</h1>
+                        <span>High 5</span>
+                      </div>
+                    )}
+                    {match.superRaids > 0 && (
+                      <div className="stat_type">
+                        <h1>{match.superRaids}</h1>
+                        <span>Super Raids</span>
+                      </div>
+                    )}
                   </div>
-                  {match.raidPoints > 0 && (
-                    <div className="stat_type">
-                      <h1>{match.raidPoints}</h1>
-                      <span>Raid Points</span>
-                    </div>
-                  )}
-                  {match.defensePoints > 0 && (
-                    <div className="stat_type">
-                      <h1>{match.defensePoints}</h1>
-                      <span>Tackle Points</span>
-                    </div>
-                  )}
-                  {match.totalPoints > 0 && (
-                    <div className="stat_type">
-                      <h1>{match.totalPoints}</h1>
-                      <span>Total Points</span>
-                    </div>
-                  )}
-                  {match.super10 > 0 && (
-                    <div className="stat_type">
-                      <h1>{match.super10}</h1>
-                      <span>Super 10</span>
-                    </div>
-                  )}
-                  {match.high5 > 0 && (
-                    <div className="stat_type">
-                      <h1>{match.high5}</h1>
-                      <span>High 5</span>
-                    </div>
-                  )}
-                  {match.superRaids > 0 && (
-                    <div className="stat_type">
-                      <h1>{match.superRaids}</h1>
-                      <span>Super Raids</span>
-                    </div>
-                  )}
                 </div>
               );
             })}

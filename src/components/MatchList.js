@@ -2,6 +2,7 @@ import React, { useState, useMemo, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Matches.css";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import MatchCard from "./MatchCard";
 
 const MatchList = ({ matches = [], status, isHomePage }) => {
   const validMatches = useMemo(
@@ -65,79 +66,81 @@ const MatchList = ({ matches = [], status, isHomePage }) => {
       style={{ minHeight: !isHomePage ? "100vh" : "" }}
     >
       {/* Custom Dropdown */}
-      {!isHomePage&&<div
-        className="custom-dropdown"
-        ref={dropdownRef}
-        style={{
-          marginBottom: "20px",
-          position: "relative",
-          width: "250px",
-        }}
-      >
+      {!isHomePage && (
         <div
-          className="dropdown-selected"
-          onClick={toggleDropdown}
+          className="custom-dropdown"
+          ref={dropdownRef}
           style={{
-            padding: "10px",
-            backgroundColor: "#c9c9c9",
-            color: "black",
-            cursor: "pointer",
-            borderRadius: "4px",
-            userSelect: "none",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
+            marginBottom: "20px",
+            position: "relative",
+            width: "250px",
           }}
         >
-          {selectedTeam || "All Teams"} <ArrowDropDownIcon />
-        </div>
-        {dropdownOpen && (
           <div
-            className="dropdown-options"
+            className="dropdown-selected"
+            onClick={toggleDropdown}
             style={{
-              position: "absolute",
-              top: "100%",
-              left: 0,
-              right: 0,
+              padding: "10px",
               backgroundColor: "#c9c9c9",
               color: "black",
+              cursor: "pointer",
               borderRadius: "4px",
-              marginTop: "4px",
-              zIndex: 1000,
-              boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
+              userSelect: "none",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
             }}
           >
+            {selectedTeam || "All Teams"} <ArrowDropDownIcon />
+          </div>
+          {dropdownOpen && (
             <div
-              className="dropdown-option"
-              onClick={() => handleTeamSelect("")}
+              className="dropdown-options"
               style={{
-                padding: "10px",
-                cursor: "pointer",
-                backgroundColor:
-                  selectedTeam === "" ? "#edededff" : "transparent",
+                position: "absolute",
+                top: "100%",
+                left: 0,
+                right: 0,
+                backgroundColor: "#c9c9c9",
+                color: "black",
+                borderRadius: "4px",
+                marginTop: "4px",
+                zIndex: 1000,
+                boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
               }}
             >
-              All Teams
-            </div>
-            {allTeams.map((team) => (
               <div
-                key={team}
                 className="dropdown-option"
-                onClick={() => handleTeamSelect(team)}
+                onClick={() => handleTeamSelect("")}
                 style={{
                   padding: "10px",
                   cursor: "pointer",
                   backgroundColor:
-                    selectedTeam === team ? "#edededff" : "transparent",
-                  "&:hover": { backgroundColor: "#edededff" },
+                    selectedTeam === "" ? "#edededff" : "transparent",
                 }}
               >
-                {team}
+                All Teams
               </div>
-            ))}
-          </div>
-        )}
-      </div>}
+              {allTeams.map((team) => (
+                <div
+                  key={team}
+                  className="dropdown-option"
+                  onClick={() => handleTeamSelect(team)}
+                  style={{
+                    padding: "10px",
+                    cursor: "pointer",
+                    backgroundColor:
+                      selectedTeam === team ? "#edededff" : "transparent",
+                    "&:hover": { backgroundColor: "#edededff" },
+                  }}
+                >
+                  {team}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Matches grouped by date */}
       {Object.entries(matchesByDate).map(([date, matches]) => (
@@ -168,75 +171,7 @@ const MatchList = ({ matches = [], status, isHomePage }) => {
                 }
                 style={{ textDecoration: "none", color: "white" }}
               >
-                <div className="matches-single">
-                  <h4>
-                    {match.matchType
-                      ? match.matchType
-                      : `Match ${match.matchNumber}`}
-                  </h4>
-
-                  <div className="matches-vs-container">
-                    <div className="matches-img-wrap">
-                      <img src={match.teamA.logo} alt="" />
-                      <div className="matches-team">
-                        <h3>{match.teamA.name}</h3>
-                        {match.status !== "Upcoming" && (
-                          <span
-                            className={`teama_score ${
-                              match.teamA.score > match.teamB.score
-                                ? "winner"
-                                : match.teamA.score < match.teamB.score
-                                ? "loser"
-                                : ""
-                            }`}
-                          >
-                            {match.teamA.score}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-
-                    <div
-                      className="matches-time"
-                      style={{
-                        borderColor:
-                          match.status === "Completed"
-                            ? "green"
-                            : match.halfTime && match.status === "Ongoing"
-                            ? "red"
-                            : "white",
-                      }}
-                    >
-                      {match.status === "Completed"
-                        ? "FT"
-                        : match.status === "Upcoming"
-                        ? "VS"
-                        : match.halfTime
-                        ? "HT"
-                        : "VS"}
-                    </div>
-
-                    <div className="matches-img-wrap">
-                      <img src={match.teamB.logo} alt="" />
-                      <div className="matches-team">
-                        {match.status !== "Upcoming" && (
-                          <span
-                            className={`teamb_score ${
-                              match.teamB.score > match.teamA.score
-                                ? "winner"
-                                : match.teamB.score < match.teamA.score
-                                ? "loser"
-                                : ""
-                            }`}
-                          >
-                            {match.teamB.score}
-                          </span>
-                        )}
-                        <h3>{match.teamB.name}</h3>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <MatchCard match={match} />
               </Link>
             </div>
           ))}
