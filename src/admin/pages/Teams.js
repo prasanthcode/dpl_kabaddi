@@ -28,7 +28,6 @@ export default function Teams() {
         await deleteTeam(row._id);
         toast.success("Team deleted successfully!");
       } catch {
-        // alert("Failed to delete team");
         toast.error("Failed to delete team");
       }
     }
@@ -36,6 +35,10 @@ export default function Teams() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!form.name.trim()) {
+      toast.error("Team name cannot be empty!");
+      return;
+    }
     setSaving(true);
     try {
       const formData = new FormData();

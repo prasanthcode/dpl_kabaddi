@@ -11,6 +11,7 @@ export default function AdminLayout() {
   const routeTitles = {
     "/admin/matches": "Matches",
     "/admin/players": "Players",
+    "/admin/gallery": "Gallery",
     "/admin/teams": "Teams",
     "/admin/dashboard": "Dashboard",
   };

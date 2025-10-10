@@ -44,6 +44,10 @@ export default function Players() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!form.name.trim()) {
+      toast.error("Player name cannot be empty!");
+      return;
+    }
     setSaving(true);
     try {
       const formData = new FormData();

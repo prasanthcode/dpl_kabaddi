@@ -19,10 +19,18 @@ export default function MatchDialog({
   teams,
   saving,
   isEdit = false,
+  matches = [],
 }) {
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
+  const allMatchTypes = ["Qualifier 1", "Eliminator", "Final", "Qualifier 2"];
+
+  const usedTypes = matches.map((m) => m.matchType);
+  const availableMatchTypes = allMatchTypes.filter(
+    (type) => !usedTypes.includes(type) || type === form.matchType
+  );
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
@@ -37,6 +45,7 @@ export default function MatchDialog({
               value={form.matchNumber || ""}
               onChange={handleChange}
               fullWidth
+              disabled
             />
           )}
 
@@ -47,6 +56,7 @@ export default function MatchDialog({
             value={form.teamA}
             onChange={handleChange}
             fullWidth
+            disabled={isEdit}
           >
             {teams.map((t) => (
               <MenuItem key={t._id} value={t._id}>
@@ -62,6 +72,7 @@ export default function MatchDialog({
             value={form.teamB}
             onChange={handleChange}
             fullWidth
+            disabled={isEdit}
           >
             {teams.map((t) => (
               <MenuItem key={t._id} value={t._id}>
@@ -78,10 +89,11 @@ export default function MatchDialog({
             onChange={handleChange}
             fullWidth
           >
-            <MenuItem value="Qualifier 1">Qualifier 1</MenuItem>
-            <MenuItem value="Eliminator">Eliminator</MenuItem>
-            <MenuItem value="Final">Final</MenuItem>
-            <MenuItem value="Qualifier 2">Qualifier 2</MenuItem>
+            {availableMatchTypes.map((type) => (
+              <MenuItem key={type} value={type}>
+                {type}
+              </MenuItem>
+            ))}
           </TextField>
 
           <TextField

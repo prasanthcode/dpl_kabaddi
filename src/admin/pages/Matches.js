@@ -32,13 +32,11 @@ export default function Matches() {
     updateMatch,
     deleteMatch,
   } = useMatches();
-
   const { loading: teamsLoading, teams } = useTeams();
 
   const [editMatch, setEditMatch] = useState(null);
   const [addDialog, setAddDialog] = useState(false);
   const [saving, setSaving] = useState(false);
-
   const [form, setForm] = useState({
     teamA: "",
     teamB: "",
@@ -115,20 +113,21 @@ export default function Matches() {
   };
 
   const handleSave = async () => {
+    if (!form.teamA || !form.teamB || !form.date) {
+      toast.error("Please fill in all required fields!");
+      return;
+    }
+    if (form.teamA === form.teamB) {
+      toast.error("Team A and Team B cannot be the same.");
+      return;
+    }
     setSaving(true);
     try {
-      await updateMatch(form._id, {
-        matchNumber: form.matchNumber,
-        teamA: form.teamA,
-        teamB: form.teamB,
-        matchType: form.matchType,
-        date: form.date,
-        status: form.status,
-      });
+      await updateMatch(form._id, form);
       toast.success("Match updated successfully!");
       setEditMatch(false);
     } catch (err) {
-      console.error("Failed to update match", err);
+      console.error(err);
       toast.error("Failed to update match");
     } finally {
       setSaving(false);
@@ -138,25 +137,23 @@ export default function Matches() {
   const handleAdd = () => setAddDialog(true);
 
   const handleAddSave = async () => {
+    if (!form.teamA || !form.teamB || !form.date) {
+      toast.error("Please fill in all required fields!");
+      return;
+    }
     if (form.teamA === form.teamB) {
-      // alert("Team A and Team B cannot be the same.");
       toast.error("Team A and Team B cannot be the same.");
       return;
     }
     setSaving(true);
     try {
-      await addMatch({
-        teamA: form.teamA,
-        teamB: form.teamB,
-        matchType: form.matchType,
-        date: form.date,
-      });
+      await addMatch(form);
       toast.success("Match added successfully!");
       setForm({ teamA: "", teamB: "", matchType: "", date: "" });
       setAddDialog(false);
     } catch (err) {
+      console.error(err);
       toast.error("Failed to add match");
-      console.error("Failed to add match", err);
     } finally {
       setSaving(false);
     }
@@ -243,6 +240,7 @@ export default function Matches() {
         teams={teams}
         saving={saving}
         isEdit
+        matches={matches}
       />
 
       <MatchDialog
@@ -253,6 +251,7 @@ export default function Matches() {
         setForm={setForm}
         teams={teams}
         saving={saving}
+        matches={matches}
       />
     </>
   );

@@ -50,20 +50,58 @@ export default function TeamDialog({
             />
           </Box>
 
-          <Box mb={2}>
-            <Typography variant="body2" gutterBottom>
+          <Box
+            mb={2}
+            sx={{
+              border: "2px dashed #90caf9",
+              borderRadius: "12px",
+              p: 3,
+              textAlign: "center",
+              backgroundColor: "rgba(144, 202, 249, 0.05)",
+              transition: "0.3s",
+              "&:hover": {
+                backgroundColor: "rgba(144, 202, 249, 0.1)",
+                borderColor: "#42a5f5",
+              },
+            }}
+          >
+            <Typography
+              variant="body2"
+              gutterBottom
+              sx={{ fontWeight: 500, color: "#1976d2", mb: 1 }}
+            >
               Logo
             </Typography>
-            <input type="file" accept="image/*" onChange={handleFileChange} />
+
+            <label
+              htmlFor="image-upload"
+              style={{
+                display: "inline-block",
+                padding: "8px 16px",
+                borderRadius: "8px",
+                background: "linear-gradient(90deg, #1976d2, #42a5f5)",
+                color: "#fff",
+                cursor: "pointer",
+                fontWeight: 500,
+                fontSize: "0.9rem",
+                transition: "0.3s",
+              }}
+            >
+              Choose File
+            </label>
+
+            <input
+              id="image-upload"
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+              style={{ display: "none" }}
+            />
           </Box>
 
           {preview && (
             <Box mb={2} display="flex" justifyContent="center">
-              <img
-                src={preview}
-                alt="Logo Preview"
-                style={{ height: 250 }}
-              />
+              <img src={preview} alt="Logo Preview" style={{ height: 250 }} />
             </Box>
           )}
         </DialogContent>

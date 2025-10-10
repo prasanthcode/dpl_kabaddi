@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DataTable from "../components/DataTable";
 import GalleryDialog from "../components/GalleryDialog";
 import "../admin.css";
-import { Button } from "@mui/material";
+import { Button, Box, Typography, Stack } from "@mui/material";
 import { useGallery } from "../../hooks/useGallery";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,10 +12,11 @@ export default function Gallery() {
     useGallery();
 
   const [openForm, setOpenForm] = useState(false);
-  const [form, setForm] = useState({ caption: "", type: "other", file: null });
+  const [form, setForm] = useState({ caption: "", type: "", file: null });
   const [preview, setPreview] = useState(null);
   const [saving, setSaving] = useState(false);
   const [editId, setEditId] = useState(null);
+
   const handleEdit = (row) => {
     setForm({ caption: row.caption, type: row.type, file: null });
     setPreview(row.url || null);
@@ -27,7 +28,7 @@ export default function Gallery() {
     if (window.confirm(`Delete this post?`)) {
       try {
         await deleteGallery(row._id);
-        toast.success("Gallery post deleted successfully!");
+        toast.success(`${row.type} gallery image deleted successfully!`);
       } catch {
         toast.error("Failed to delete gallery post");
       }
@@ -36,16 +37,25 @@ export default function Gallery() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!form.caption.trim()) {
+      toast.error("Caption cannot be empty!");
+      return;
+    }
+
+    if (!form.type) {
+      toast.error("Please select a type!");
+      return;
+    }
+
     setSaving(true);
     try {
       const formData = new FormData();
-      formData.append("caption", form.caption);
+      formData.append("caption", form.caption.trim());
       formData.append("type", form.type);
 
       if (form.file) {
         formData.append("file", form.file);
-      } else if (form.url) {
-        formData.append("url", form.url);
       }
 
       if (editId) {
@@ -56,7 +66,7 @@ export default function Gallery() {
         toast.success("Gallery post added successfully!");
       }
 
-      setForm({ caption: "", type: "other", file: null, url: "" });
+      setForm({ caption: "", type: "", file: null });
       setPreview(null);
       setEditId(null);
       setOpenForm(false);
@@ -68,21 +78,84 @@ export default function Gallery() {
     }
   };
 
+  const galleryTypes = ["teams", "carousel", "post", "other"];
+
   return (
     <>
-      <Button
-        variant="contained"
-        color="primary"
-        style={{ marginBottom: "12px" }}
-        onClick={() => {
-          setForm({ caption: "", type: "other", file: null });
-          setPreview(null);
-          setEditId(null);
-          setOpenForm(true);
-        }}
-      >
-        + Add Gallery Post
-      </Button>
+      {/* <Stack direction="row" spacing={2} flexWrap="wrap" mb={3}>
+        {galleryTypes.map((type) => (
+          <Button
+            key={type}
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              setForm({ caption: "", type, file: null });
+              setPreview(null);
+              setEditId(null);
+              setOpenForm(true);
+            }}
+          >
+            + Add {type.charAt(0).toUpperCase() + type.slice(1)} Post
+          </Button>
+        ))}
+      </Stack> */}
+
+      {galleryTypes.map((type) => {
+        const filtered = (galleries || []).filter((g) => g.type === type);
+
+        return (
+          <Box key={type} mb={5}>
+            <Typography
+              variant="h6"
+              gutterBottom
+              sx={{
+                textTransform: "capitalize",
+                marginBottom: "8px",
+                color: "black",
+              }}
+            >
+              {type} Gallery
+            </Typography>
+            <Button
+              key={type}
+              variant="contained"
+              color="primary"
+              sx={{ mb: 2 }}
+              onClick={() => {
+                setForm({ caption: "", type, file: null });
+                setPreview(null);
+                setEditId(null);
+                setOpenForm(true);
+              }}
+            >
+              + Add {type.charAt(0).toUpperCase() + type.slice(1)}
+            </Button>
+            <DataTable
+              columns={[
+                {
+                  field: "url",
+                  headerName: "Image",
+                  render: (row) =>
+                    row.url ? (
+                      <img
+                        src={row.url}
+                        alt="gallery"
+                        style={{ height: 60, borderRadius: 8 }}
+                      />
+                    ) : (
+                      "No Image"
+                    ),
+                },
+                { field: "caption", headerName: "Caption" },
+              ]}
+              rows={loading ? [] : filtered}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+              loading={loading}
+            />
+          </Box>
+        );
+      })}
 
       <GalleryDialog
         open={openForm}
@@ -94,31 +167,6 @@ export default function Gallery() {
         setPreview={setPreview}
         editId={editId}
         saving={saving}
-      />
-
-      <DataTable
-        columns={[
-          {
-            field: "url",
-            headerName: "Image",
-            render: (row) =>
-              row.url ? (
-                <img
-                  src={row.url}
-                  alt="gallery"
-                  style={{ height: 60, borderRadius: 8 }}
-                />
-              ) : (
-                "No Image"
-              ),
-          },
-          { field: "caption", headerName: "Caption" },
-          { field: "type", headerName: "Type" },
-        ]}
-        rows={loading ? [] : galleries}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
-        loading={loading}
       />
     </>
   );
