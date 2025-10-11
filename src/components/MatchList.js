@@ -4,7 +4,7 @@ import "../styles/Matches.css";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import MatchCard from "./MatchCard";
 
-const MatchList = ({ matches = [], status, isHomePage }) => {
+const MatchList = ({ matches = [], isHomePage }) => {
   const validMatches = useMemo(
     () => (Array.isArray(matches) ? matches : []),
     [matches]
@@ -30,7 +30,6 @@ const MatchList = ({ matches = [], status, isHomePage }) => {
     setDropdownOpen(false);
   };
 
-  // Close dropdown if clicked outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {

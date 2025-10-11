@@ -2,17 +2,24 @@ import { Link, useLocation } from "react-router-dom";
 import MatchList from "../components/MatchList";
 import MatchListSkeleton from "../components/MatchListSkeleton";
 import { useFilteredMatches } from "../hooks/useFilteredMatches";
-import { useLiveMatchConnection } from "../hooks/useLiveMatchConnection";
+import useLiveMatchesCheck from "../hooks/useLiveMatchesCheck";
 import "../styles/Matches.css";
 
-export default function Matches({ url = "live", limit = null }) {
+export default function Matches() {
   const location = useLocation();
   const path = location.pathname;
   const isHomePage = path === "/";
-  const { matches, loading } = useFilteredMatches(url, limit);
 
-  const hasLiveMatch = matches.some((m) => m.status === "Ongoing");
-  useLiveMatchConnection(hasLiveMatch);
+  const { showLive, isChecking } = useLiveMatchesCheck();
+
+  const url = isHomePage
+    ? showLive
+      ? "live"
+      : "completed"
+    : path.replace("/", "");
+  const limit = isHomePage ? (showLive ? null : 1) : null;
+
+  const { matches, loading } = useFilteredMatches(url, limit);
 
   return (
     <div className="matches-page">
@@ -33,8 +40,8 @@ export default function Matches({ url = "live", limit = null }) {
         </div>
       )}
 
-      {loading ? (
-        <MatchListSkeleton isHomePage={isHomePage} />
+      {loading || isChecking ? (
+        <MatchListSkeleton isHomePage={isHomePage || url === "live"} />
       ) : matches.length === 0 ? (
         <p
           className="matches-empty-message"
@@ -48,7 +55,7 @@ export default function Matches({ url = "live", limit = null }) {
           No {url} Matches
         </p>
       ) : (
-        <MatchList matches={matches} status={url} isHomePage={isHomePage} />
+        <MatchList matches={matches} isHomePage={isHomePage} />
       )}
     </div>
   );
