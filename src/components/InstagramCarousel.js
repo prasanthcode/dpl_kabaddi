@@ -1,27 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Slider from "react-slick";
 import { Box, Typography, IconButton } from "@mui/material";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { fetchCarouselGalleries } from "../services/galleryApi";
+import { useGallery } from "../context/GalleryContext";
 
 export default function InstagramCarousel() {
-  const [images, setImages] = useState([]);
-  const [sliderRef, setSliderRef] = useState(null);
-
-  useEffect(() => {
-    const fetchCarousel = async () => {
-      try {
-        const res = await fetchCarouselGalleries();
-        setImages(res.data);
-      } catch (err) {
-        console.error("Error fetching carousel gallery:", err);
-      }
-    };
-
-    fetchCarousel();
-  }, []);
+  const { carouselGalleries } = useGallery();
+  const [sliderRef, setSliderRef] = React.useState(null);
 
   const settings = {
     dots: true,
@@ -31,7 +18,7 @@ export default function InstagramCarousel() {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
-    arrows: false, // we'll use custom arrows instead
+    arrows: false,
   };
 
   return (
@@ -48,7 +35,6 @@ export default function InstagramCarousel() {
         position: "relative",
       }}
     >
-      {/* Header */}
       <Box
         sx={{
           display: "flex",
@@ -64,21 +50,13 @@ export default function InstagramCarousel() {
         </Typography>
       </Box>
 
-      {/* Carousel */}
-      {images.length > 0 ? (
+      {carouselGalleries.length > 0 ? (
         <Box sx={{ position: "relative" }}>
           <Slider ref={setSliderRef} {...settings}>
-            {images.map((item, index) => (
-              <Box
-                key={index}
-                sx={{
-                  width: "100%",
-                  height: 430,
-                  position: "relative",
-                }}
-              >
+            {carouselGalleries.map((item, index) => (
+              <Box key={index} sx={{ width: "100%", height: 430 }}>
                 <img
-                  src={`${item.url}?w=350&h=400&fit=crop`}
+                  src={item.url}
                   alt={item.caption || `Slide ${index}`}
                   style={{
                     width: "100%",
@@ -90,8 +68,6 @@ export default function InstagramCarousel() {
               </Box>
             ))}
           </Slider>
-
-          {/* Custom arrows */}
           <IconButton
             onClick={() => sliderRef?.slickPrev()}
             sx={{
@@ -101,12 +77,10 @@ export default function InstagramCarousel() {
               transform: "translateY(-50%)",
               color: "white",
               "&:hover": { bgcolor: "rgba(0,0,0,0.6)" },
-              zIndex: 2,
             }}
           >
             <ArrowBackIos sx={{ fontSize: 20 }} />
           </IconButton>
-
           <IconButton
             onClick={() => sliderRef?.slickNext()}
             sx={{
@@ -116,7 +90,6 @@ export default function InstagramCarousel() {
               transform: "translateY(-50%)",
               color: "white",
               "&:hover": { bgcolor: "rgba(0,0,0,0.6)" },
-              zIndex: 2,
             }}
           >
             <ArrowForwardIos sx={{ fontSize: 20 }} />
