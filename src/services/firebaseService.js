@@ -38,7 +38,7 @@ export const listenToLiveMatches = (callback) => {
 
       const liveMatches = Object.entries(data)
         .map(([id, raw]) => normalizeMatch(id, raw))
-        .filter((m) => m.status === "Ongoing" || m.status === "LIVE");
+        // .filter((m) => m.status === "Ongoing" || m.status === "LIVE");
 
       callback(liveMatches);
     } else {

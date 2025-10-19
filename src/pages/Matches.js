@@ -21,6 +21,9 @@ export default function Matches() {
 
   const { matches, loading } = useFilteredMatches(url, limit);
 
+  // unified loading phase
+  const isLoading = loading || isChecking || matches === null;
+
   return (
     <div className="matches-page">
       {!isHomePage && (
@@ -40,8 +43,8 @@ export default function Matches() {
         </div>
       )}
 
-      {loading || isChecking ? (
-        <MatchListSkeleton isHomePage={isHomePage || url === "live"} />
+      {isLoading ? (
+        <MatchListSkeleton isHomePage={isHomePage} />
       ) : matches.length === 0 ? (
         <p
           className="matches-empty-message"

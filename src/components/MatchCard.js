@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../styles/Matches.css"; 
+import "../styles/Matches.css";
 
 const MatchCard = ({ match }) => {
   const getMatchLink = () => {
@@ -8,7 +8,6 @@ const MatchCard = ({ match }) => {
     if (match.status === "Completed") return `/recent/${match.matchId}`;
     return `/live/${match.matchId}`;
   };
-console.log(match)
   const matchLink = getMatchLink();
 
   const cardContent = (
@@ -87,10 +86,7 @@ console.log(match)
   return (
     <div className="matches-single-wrapper">
       {matchLink ? (
-        <Link
-          to={matchLink}
-          style={{ textDecoration: "none", color: "white" }}
-        >
+        <Link to={matchLink} style={{ textDecoration: "none", color: "white" }}>
           {cardContent}
         </Link>
       ) : (
