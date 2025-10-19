@@ -7,7 +7,6 @@ export default function Search() {
   const [query, setQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState(query);
   const [results, setResults] = useState({ players: [], teams: [] });
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -24,7 +23,6 @@ export default function Search() {
     }
 
     const fetchResults = async () => {
-      setLoading(true);
       try {
         const res = await getSearchResults(debouncedQuery);
         const players = res.data?.players || [];
@@ -33,8 +31,6 @@ export default function Search() {
       } catch (err) {
         console.error(err);
         setResults({ players: [], teams: [] });
-      } finally {
-        setLoading(false);
       }
     };
 

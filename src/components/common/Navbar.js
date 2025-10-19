@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHome,
-  faBars,
-  faTimes,
-  faSearch,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBars, faTimes, faUser } from "@fortawesome/free-solid-svg-icons";
 import useLiveMatchesCheck from "../../hooks/useLiveMatchesCheck";
 import "../../styles/Navbar.css";
 import Search from "../../pages/Search";
@@ -85,10 +79,6 @@ export default function Navbar() {
 
       {/* Sidebar */}
       <div className={`sidebar ${sidebarOpen ? "open" : ""}`}>
-        {/* <Link to="/" onClick={() => setSidebarOpen(false)}>
-          {" "}
-          <FontAwesomeIcon icon={faHome} />
-        </Link> */}
         <Link
           to={showLive ? "/live" : "/completed"}
           onClick={() => setSidebarOpen(false)}
