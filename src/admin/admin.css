@@ -1,10 +1,9 @@
 /* ===== Root Layout ===== */
-/* body {
-  padding: 0;
-} */
+
 .admin-root {
   display: flex;
   height: 100vh;
+  margin-top: -50px;
   font-family: Inter, Roboto, Arial, sans-serif;
   background: #f5f7fa;
 }
