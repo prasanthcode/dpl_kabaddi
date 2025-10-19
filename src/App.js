@@ -24,12 +24,12 @@ import TopStats from "./pages/TopStats";
 import ScrollReset from "./components/ScrollReset";
 function App() {
   useEffect(() => {
-    initGA(); 
+    initGA();
   }, []);
   return (
     <Router>
       <PageTracker />
-       <ScrollReset />
+      <ScrollReset />
       <Routes>
         {/* ---------------- PUBLIC LAYOUT ---------------- */}
         <Route element={<PublicLayout />}>
